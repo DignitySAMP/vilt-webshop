@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
             $category = $categories->random();
             $supplier = $suppliers->random();
             return Item::create([
-                'category_id' => $category->id,
+                'item_category_id' => $category->id,
                 'supplier_id' => $supplier->id,
                 'name' => ucfirst($faker->word()) . ' ' . $index,
                 'description' => $faker->sentence(),

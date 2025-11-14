@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
-
-const form = useForm({});
+import { Head, Link, usePage } from "@inertiajs/vue3";
 </script>
 
 <template>
@@ -46,7 +44,7 @@ const form = useForm({});
 
                     <Link
                         :href="route('logout')"
-                        method="POST"
+                        method="post"
                         class="w-fit rounded-md border-stone-700 bg-stone-800 px-4 py-2 text-stone-200 transition duration-300 hover:bg-stone-700"
                         view-transition
                     >
