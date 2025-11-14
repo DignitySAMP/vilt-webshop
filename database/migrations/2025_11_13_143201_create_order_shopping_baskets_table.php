@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('order_shopping_baskets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignId(Order::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

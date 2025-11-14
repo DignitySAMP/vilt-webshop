@@ -10,7 +10,7 @@ class SupplierOrderItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['supplier_order_id', 'item_id'];
+    protected $fillable = ['supplier_order_id', 'item_id', 'amount'];
     public function order(): BelongsTo {
         return $this->belongsTo(SupplierOrder::class);
     }

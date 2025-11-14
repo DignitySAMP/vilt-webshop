@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(ItemCategory::class)->constrained()->cascadeOnDelete();
-            $table->foreignId(Supplier::class)->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('item_categories')->cascadeOnDelete();
+            $table->foreignIdFor(Supplier::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
             $table->string('image'); // need to symlink storage, and have this link to the direct link

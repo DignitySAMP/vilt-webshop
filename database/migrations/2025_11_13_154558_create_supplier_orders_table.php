@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('supplier_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(SupplierAddress::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(SupplierAddress::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

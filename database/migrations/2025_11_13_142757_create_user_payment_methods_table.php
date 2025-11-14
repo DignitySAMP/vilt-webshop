@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('user_payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('type');
             $table->string('identifier'); // card number, paypal email, ...

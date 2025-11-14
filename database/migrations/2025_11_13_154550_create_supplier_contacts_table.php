@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('supplier_contacts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(Supplier::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Supplier::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('role');
             $table->string('email');

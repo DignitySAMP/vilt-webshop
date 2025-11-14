@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
 use App\Models\Item;
+use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignId(Item::class)->constrained()->nullOnDelete();
+            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Item::class)->constrained()->nullOnDelete();
             $table->integer('amount');
             $table->double('price');
             

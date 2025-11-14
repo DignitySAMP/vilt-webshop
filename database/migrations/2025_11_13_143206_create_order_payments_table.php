@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('order_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(Order::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
             $table->string('method');
             $table->double('amount');
             $table->timestamps();

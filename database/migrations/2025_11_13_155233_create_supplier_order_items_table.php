@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('supplier_order_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(SupplierOrder::class)->constrained()->cascadeOnDelete();
-            $table->foreignId(Item::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(SupplierOrder::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Item::class)->constrained()->cascadeOnDelete();
             $table->integer('amount');
             $table->timestamps();
         });
