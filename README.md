@@ -1,4 +1,4 @@
-# VILT stack with Fortify preinstalled
+# VILT stack (TypeScript) with Fortify preinstalled
 
 <p>
   <img src="https://img.shields.io/badge/Laravel-12.^-FF2D20?style=flat&logo=laravel&logoColor=white" alt="Laravel">
@@ -12,6 +12,8 @@
 ## What is it?
 
 This is an extension to the [vilt stack starter kit](https://github.com/DignitySAMP/vilt-stack) that I maintain with Laravel Fortify preinstalled as well as using the recommended methodology for form control and Vue components and layouts, remniscent of the old Vue Breeze starterkit.
+
+> This version includes TypeScript, contrary to the [original repository](https://github.com/DignitySAMP/vilt-stack-fortify) which contains JavaScript.
 
 What's included (out of the box):
  - Registration
