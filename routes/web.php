@@ -8,6 +8,11 @@ Route::get('/', function (): mixed {
 })->name('home');
 
 
+Route::get('/template', function (): mixed {
+    return Inertia::render('Template');
+})->name('template');
+
+
 Route::get('/user/two-faction-setup', function() {
 
     return Inertia::render( 'auth/TwoFactorSetup', [

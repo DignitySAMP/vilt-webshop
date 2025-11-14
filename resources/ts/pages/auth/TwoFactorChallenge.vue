@@ -3,11 +3,20 @@
         <div class="flex flex-col gap-2 text-gray-700">
             <span class="text-lg font-semibold">Two factor authentication</span>
 
-            <p class="text-sm text-gray-600">Please confirm access to your account by entering the authentication code provided by your app.</p>
+            <p class="text-sm text-gray-600">
+                Please confirm access to your account by entering the
+                authentication code provided by your app.
+            </p>
 
-            <form @submit.prevent="submitCode" v-if="!recoveryMode" class="flex flex-col gap-2">
+            <form
+                @submit.prevent="submitCode"
+                v-if="!recoveryMode"
+                class="flex flex-col gap-2"
+            >
                 <div class="flex flex-col gap-2">
-                    <label for="code" class="block text-sm text-gray-700">Authentication Code</label>
+                    <label for="code" class="block text-sm text-gray-700"
+                        >Authentication Code</label
+                    >
                     <input
                         type="text"
                         name="code"
@@ -17,7 +26,11 @@
                         autocomplete="new-password"
                         class="rounded border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-gray-600 focus:outline-none"
                     />
-                    <span v-if="form.errors.code" v-html="form.errors.code" class="text-sm text-red-600"></span>
+                    <span
+                        v-if="form.errors.code"
+                        v-html="form.errors.code"
+                        class="text-sm text-red-600"
+                    ></span>
                 </div>
 
                 <button
@@ -28,12 +41,25 @@
                     Log In
                 </button>
 
-                <p class="cursor-pointer text-sm text-gray-600 hover:underline" @click="recoveryMode = true">Use a recovery code instead</p>
+                <p
+                    class="cursor-pointer text-sm text-gray-600 hover:underline"
+                    @click="recoveryMode = true"
+                >
+                    Use a recovery code instead
+                </p>
             </form>
 
-            <form @submit.prevent="submitRecoveryCode" v-else class="flex flex-col gap-2">
+            <form
+                @submit.prevent="submitRecoveryCode"
+                v-else
+                class="flex flex-col gap-2"
+            >
                 <div class="flex flex-col gap-2">
-                    <label for="recovery_code" class="block text-sm text-gray-700">Recovery Code</label>
+                    <label
+                        for="recovery_code"
+                        class="block text-sm text-gray-700"
+                        >Recovery Code</label
+                    >
                     <input
                         id="recovery_code"
                         type="text"
@@ -42,7 +68,11 @@
                         autofocus
                         class="rounded border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-gray-600 focus:outline-none"
                     />
-                    <span v-if="form.errors.recovery_code" v-html="form.errors.recovery_code" class="text-sm text-red-600"></span>
+                    <span
+                        v-if="form.errors.recovery_code"
+                        v-html="form.errors.recovery_code"
+                        class="text-sm text-red-600"
+                    ></span>
                 </div>
 
                 <button
@@ -53,33 +83,38 @@
                     Log In
                 </button>
 
-                <p class="cursor-pointer text-sm text-gray-600 hover:underline" @click="recoveryMode = false">Use an authentication code instead</p>
+                <p
+                    class="cursor-pointer text-sm text-gray-600 hover:underline"
+                    @click="recoveryMode = false"
+                >
+                    Use an authentication code instead
+                </p>
             </form>
         </div>
     </AppLayout>
 </template>
 
 <script setup lang="ts">
-import AppLayout from '@/layout/AppLayout.vue';
-import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import AppLayout from "@/layout/AppLayout.vue";
+import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 const recoveryMode = ref(false);
 
 const form = useForm({
-    code: '',
-    recovery_code: '',
+    code: "",
+    recovery_code: "",
 });
 
 const submitCode = () => {
-    form.post(route('two-factor.login'), {
-        onFinish: () => form.reset('code'),
+    form.post(route("two-factor.login"), {
+        onFinish: () => form.reset("code"),
     });
 };
 
 const submitRecoveryCode = () => {
-    form.post(route('two-factor.login'), {
-        onFinish: () => form.reset('recovery_code'),
+    form.post(route("two-factor.login"), {
+        onFinish: () => form.reset("recovery_code"),
     });
 };
 </script>

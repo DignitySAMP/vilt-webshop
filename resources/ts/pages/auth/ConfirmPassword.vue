@@ -2,12 +2,15 @@
     <AppLayout>
         <div class="flex flex-col gap-2">
             <span class="text-sm">
-                In order to access this part of the application, you must confirm your password. Please enter it in the field below and submit in
-                order to procees.
+                In order to access this part of the application, you must
+                confirm your password. Please enter it in the field below and
+                submit in order to procees.
             </span>
 
             <div class="flex flex-col gap-2">
-                <label for="password" class="text-sm text-gray-700">Password Confirmation</label>
+                <label for="password" class="text-sm text-gray-700"
+                    >Password Confirmation</label
+                >
                 <input
                     type="password"
                     name="password"
@@ -15,7 +18,11 @@
                     v-model="form.password"
                     class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
                 />
-                <span v-if="form.errors.password" v-html="form.errors.password" class="text-sm text-red-700" />
+                <span
+                    v-if="form.errors.password"
+                    v-html="form.errors.password"
+                    class="text-sm text-red-700"
+                />
             </div>
 
             <div class="flex w-full">
@@ -32,17 +39,17 @@
     </AppLayout>
 </template>
 <script setup lang="ts">
-import AppLayout from '@/layout/AppLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import AppLayout from "@/layout/AppLayout.vue";
+import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-    password: '',
+    password: "",
 });
 
 const submit = () => {
-    form.post(route('password.confirm.store'), {
+    form.post(route("password.confirm.store"), {
         preserveScroll: true,
-        onSuccess: () => form.reset('password'),
+        onSuccess: () => form.reset("password"),
         onError: (error) => console.error(error),
         onFinish: () => form.reset(),
     });

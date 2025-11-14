@@ -1,11 +1,22 @@
 <template>
     <AppLayout>
-        <div v-if="usePage().props.mfa_enabled" class="flex flex-col gap-4 text-gray-700">
-            <span v-if="confirmed" class="rounded border border-green-300 bg-green-100 px-4 py-2 text-sm text-green-800">
+        <div
+            v-if="usePage().props.mfa_enabled"
+            class="flex flex-col gap-4 text-gray-700"
+        >
+            <span
+                v-if="confirmed"
+                class="rounded border border-green-300 bg-green-100 px-4 py-2 text-sm text-green-800"
+            >
                 You have enabled two factor authentication.
             </span>
 
-            <button @click="submitDisable" class="flex w-full rounded bg-red-600 px-4 py-2 text-white hover:bg-red-500">Disable 2FA</button>
+            <button
+                @click="submitDisable"
+                class="flex w-full rounded bg-red-600 px-4 py-2 text-white hover:bg-red-500"
+            >
+                Disable 2FA
+            </button>
         </div>
         <div v-else class="flex flex-col gap-4 text-gray-700">
             <button
@@ -30,7 +41,11 @@
                         autocomplete="new-password"
                         class="rounded border border-gray-300 px-4 py-2 focus:ring-2 focus:ring-gray-600 focus:outline-none"
                     />
-                    <span v-if="form.errors.code" v-html="form.errors.code" class="text-sm text-red-600"></span>
+                    <span
+                        v-if="form.errors.code"
+                        v-html="form.errors.code"
+                        class="text-sm text-red-600"
+                    ></span>
                 </div>
 
                 <button
@@ -64,25 +79,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
-import AppLayout from '@/layout/AppLayout.vue';
-import { useForm, usePage } from '@inertiajs/vue3';
-import axios from 'axios';
+import AppLayout from "@/layout/AppLayout.vue";
+import { useForm, usePage } from "@inertiajs/vue3";
+import axios from "axios";
 
 const form = useForm<
     {
         code: string;
     } & Record<string, string | string[]>
 >({
-    code: '',
+    code: "",
 });
 
 const qrCode = ref(null);
 const recoveryCodes = ref([]);
 
 const submitEnable = () => {
-    form.post(route('two-factor.enable'), {
+    form.post(route("two-factor.enable"), {
         preserveScroll: true,
         onSuccess: async () => {
             await fetch2FAQRCode();
@@ -95,7 +110,7 @@ const submitEnable = () => {
 
 const confirmed = ref(false);
 const submitConfirm = () => {
-    form.post(route('two-factor.confirm'), {
+    form.post(route("two-factor.confirm"), {
         preserveScroll: true,
         onSuccess: async () => {
             confirmed.value = true;
@@ -108,7 +123,7 @@ const submitConfirm = () => {
 
 const fetch2FAQRCode = async () => {
     try {
-        const response = await axios.get(route('two-factor.qr-code'));
+        const response = await axios.get(route("two-factor.qr-code"));
         qrCode.value = response.data.svg;
     } catch (error) {
         console.error(error);
@@ -117,7 +132,7 @@ const fetch2FAQRCode = async () => {
 
 const fetch2FARecoveryCodes = async () => {
     try {
-        const response = await axios.get(route('two-factor.recovery-codes'));
+        const response = await axios.get(route("two-factor.recovery-codes"));
         recoveryCodes.value = response.data;
     } catch (error) {
         console.error(error);
@@ -125,7 +140,7 @@ const fetch2FARecoveryCodes = async () => {
 };
 
 const submitDisable = () => {
-    form.delete(route('two-factor.disable'), {
+    form.delete(route("two-factor.disable"), {
         preserveScroll: true,
         onSuccess: () => {
             qrCode.value = null;

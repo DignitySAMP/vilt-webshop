@@ -2,7 +2,9 @@
     <AppLayout>
         <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-2">
-                <label for="email" class="text-sm text-gray-700">Email address</label>
+                <label for="email" class="text-sm text-gray-700"
+                    >Email address</label
+                >
                 <input
                     type="email"
                     name="email"
@@ -11,11 +13,17 @@
                     autocomplete="email"
                     class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
                 />
-                <span v-if="form.errors.email" v-html="form.errors.email" class="text-sm text-red-700" />
+                <span
+                    v-if="form.errors.email"
+                    v-html="form.errors.email"
+                    class="text-sm text-red-700"
+                />
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password" class="text-sm text-gray-700">Password</label>
+                <label for="password" class="text-sm text-gray-700"
+                    >Password</label
+                >
                 <input
                     type="password"
                     name="password"
@@ -24,11 +32,17 @@
                     autocomplete="new-password"
                     class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
                 />
-                <span v-if="form.errors.password" v-html="form.errors.password" class="text-sm text-red-700" />
+                <span
+                    v-if="form.errors.password"
+                    v-html="form.errors.password"
+                    class="text-sm text-red-700"
+                />
             </div>
 
             <div class="flex flex-col gap-2">
-                <label for="password_confirmation" class="text-sm text-gray-700">Password Confirmation</label>
+                <label for="password_confirmation" class="text-sm text-gray-700"
+                    >Password Confirmation</label
+                >
                 <input
                     type="password"
                     name="password_confirmation"
@@ -36,7 +50,11 @@
                     v-model="form.password_confirmation"
                     class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
                 />
-                <span v-if="form.errors.password_confirmation" v-html="form.errors.password_confirmation" class="text-sm text-red-700" />
+                <span
+                    v-if="form.errors.password_confirmation"
+                    v-html="form.errors.password_confirmation"
+                    class="text-sm text-red-700"
+                />
             </div>
 
             <div class="flex w-full">
@@ -53,8 +71,8 @@
     </AppLayout>
 </template>
 <script setup lang="ts">
-import AppLayout from '@/layout/AppLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import AppLayout from "@/layout/AppLayout.vue";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     token: {
@@ -69,14 +87,14 @@ const props = defineProps({
 
 const form = useForm({
     email: props.email,
-    password: '',
-    password_confirmation: '',
+    password: "",
+    password_confirmation: "",
 });
 
 const submit = () => {
-    form.post(route('login.store'), {
+    form.post(route("login.store"), {
         preserveScroll: true,
-        onSuccess: () => form.reset('password'),
+        onSuccess: () => form.reset("password"),
         onError: (error) => console.error(error),
         onFinish: () => form.reset(),
     });
