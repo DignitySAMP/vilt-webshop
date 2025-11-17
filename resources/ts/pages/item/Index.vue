@@ -1,13 +1,14 @@
 <template>
     <AppAdminLayout title="Product Management">
         <template v-slot:header>
-            <button
+            <Link
+                :href="route('item.create')"
                 class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
             >
                 <IconCreate />
 
                 Add Product
-            </button>
+            </Link>
         </template>
 
         <template v-slot:body>
@@ -150,7 +151,7 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { usePage, router } from "@inertiajs/vue3";
+import { usePage, router, Link } from "@inertiajs/vue3";
 import { onMounted, ref } from "vue";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
@@ -178,7 +179,7 @@ const products: Item[] = usePage<PageProps>().props.items.data;
 const categories: ItemCategory[] = usePage<PageProps>().props.categories;
 
 // search queries
-const categoryQuery = ref(categories[0].id);
+const categoryQuery = ref(1);
 const searchQuery = ref("");
 
 const onSearch = () => {

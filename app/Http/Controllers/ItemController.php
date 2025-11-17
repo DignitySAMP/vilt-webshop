@@ -14,16 +14,16 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        
+        $category = $request->query('category') ?? 1;
 
-        $items = $this->buildCollectionFromSearch($request->query('category'), $request->query('search'));
+        $items = $this->buildCollectionFromSearch($category, $request->query('search'));
         $categories = ItemCategory::all();
 
         return Inertia::render('item/Index', [
             'items' => $items,
             'categories' => $categories,
             'filter' => [
-                'category' => $request->query('category'), 
+                'category' => $category, 
                 'search' => $request->query('search')
             ]
         ]);
@@ -49,7 +49,7 @@ class ItemController extends Controller
     public function create()
     {
         $categories = ItemCategory::all();
-        
+
         return Inertia::render('item/Create', [
             'categories' => $categories
         ]);
