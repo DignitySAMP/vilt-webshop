@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,3 +20,7 @@ Route::get('/user/two-faction-setup', function() {
         'mfa_enabled' => Auth::user()->two_factor_confirmed_at !== null
     ]);
 })->middleware(['auth', 'verified', 'password.confirm'])->name('two-factor.setup');
+
+
+
+Route::resource('item', ItemController::class);

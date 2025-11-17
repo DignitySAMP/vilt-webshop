@@ -11,7 +11,7 @@ class Item extends Model
     use HasFactory;
     protected $fillable = ['category_id', 'supplier_id', 'name', 'description', 'image', 'price', 'stock'];
 
-    public function category(): BelongsTo {
+    public function item_category(): BelongsTo {
         return $this->belongsTo(ItemCategory::class);
     }
     public function supplier(): BelongsTo {

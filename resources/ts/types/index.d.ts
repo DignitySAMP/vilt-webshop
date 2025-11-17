@@ -81,7 +81,8 @@ export interface OrderPayment {
 
 export interface Item {
     id: number;
-    item_category_id: ItemCategory;
+    item_category_id: number,
+    item_category: ItemCategory;
     supplier_id: Supplier;
     name: string;
     description: string;
