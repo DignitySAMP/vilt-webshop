@@ -3,7 +3,7 @@
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="px-6 py-4">
             <div class="flex items-center justify-between">
-                <div>
+                <div v-if="props.show_title">
                     <h1 class="text-2xl font-bold text-slate-900">
                         {{ pageProps.name ?? 'Laravel' }}
                     </h1>
@@ -12,7 +12,7 @@
                     </p>
                 </div>
                 
-                <div>
+                <div :class="props.show_title ? 'w-fit' : 'w-full'">
                     <slot name="header"/>
                 </div>
             </div>
@@ -38,7 +38,12 @@
 
     const pageProps = usePage<PageProps>().props;
 
-    const props = defineProps<{
-        title: string
-    }>();
+    interface LocalProps {
+        title: string;
+        show_title?: boolean;
+    }
+
+    const props = withDefaults(defineProps<LocalProps>(), {
+        show_title: true
+    });
 </script>

@@ -23,4 +23,4 @@ Route::get('/user/two-faction-setup', function() {
 
 
 
-Route::resource('item', ItemController::class);
+Route::resource('item', ItemController::class)->except(['show']);

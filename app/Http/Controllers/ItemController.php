@@ -48,21 +48,17 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $categories = ItemCategory::all();
+        
+        return Inertia::render('item/Create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Item $item)
     {
         //
     }
