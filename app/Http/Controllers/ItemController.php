@@ -68,7 +68,12 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        $categories = ItemCategory::all();
+
+        return Inertia::render('item/Edit', [
+            'categories' => $categories,
+            'item' => $item
+        ]);
     }
 
     /**
