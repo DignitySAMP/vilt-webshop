@@ -12,10 +12,10 @@ export interface PaginationData<T = any> {
     from: number;
     last_page: number;
     links: Array<LinkProps>;
-    next_page_url: string;
+    next_page_url?: string | null;
     path: string;
-    prev_page: number;
-    prev_page_url: string;
+    prev_page?: number | null;
+    prev_page_url?: string | null;
     to: number;
     total: number;
 }
