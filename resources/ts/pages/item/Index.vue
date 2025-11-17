@@ -126,14 +126,16 @@
                                         class="flex items-center justify-end gap-2"
                                     >
                                         <Link
-                                            :href="route('item.edit', product.id)"
+                                            :href="
+                                                route('item.edit', product.id)
+                                            "
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
                                             <IconEdit />
                                         </Link>
 
                                         <div class="text-left">
-                                            <ItemDelete v-bind="product"/>
+                                            <ItemDelete v-bind="product" />
                                         </div>
                                     </div>
                                 </td>
@@ -157,7 +159,7 @@ import { onMounted, ref } from "vue";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import AppPagination from "@/components/AppPagination.vue";
 
-import ItemDelete from '@/pages/item/Delete.vue';
+import ItemDelete from "@/pages/item/Delete.vue";
 
 import IconEdit from "@/icons/IconEdit.vue";
 import IconCreate from "@/icons/IconCreate.vue";

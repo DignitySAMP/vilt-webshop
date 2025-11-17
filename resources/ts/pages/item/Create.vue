@@ -130,7 +130,10 @@
                                     v-else-if="!form.image"
                                     class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
                                 >
-                                    <span class="text-slate-400" v-html="form.name[0] ?? '?'"/>
+                                    <span
+                                        class="text-slate-400"
+                                        v-html="form.name[0] ?? '?'"
+                                    />
                                 </div>
                                 <div class="flex flex-col gap-1">
                                     <div class="flex items-center gap-2">
