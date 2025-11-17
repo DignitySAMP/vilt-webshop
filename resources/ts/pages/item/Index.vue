@@ -131,11 +131,10 @@
                                         >
                                             <IconEdit />
                                         </Link>
-                                        <button
-                                            class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                                        >
-                                            <IconDelete />
-                                        </button>
+
+                                        <div class="text-left">
+                                            <ItemDelete v-bind="product"/>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -158,8 +157,9 @@ import { onMounted, ref } from "vue";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import AppPagination from "@/components/AppPagination.vue";
 
+import ItemDelete from '@/pages/item/Delete.vue';
+
 import IconEdit from "@/icons/IconEdit.vue";
-import IconDelete from "@/icons/IconDelete.vue";
 import IconCreate from "@/icons/IconCreate.vue";
 import IconSearch from "@/icons/IconSearch.vue";
 
