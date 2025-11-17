@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 </form>
-                <div>
+                <article>
                     <h3 class="text-lg font-semibold text-slate-900 mb-4">
                         Preview
                     </h3>
@@ -182,7 +182,7 @@
                                 :src="previewImage"
                                 class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
                             />
-                            <div
+                            <figure
                                 v-else-if="!form.image"
                                 class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
                             >
@@ -190,7 +190,7 @@
                                     class="text-slate-400"
                                     v-html="form.name[0] ?? '?'"
                                 />
-                            </div>
+                            </figure>
                             <div class="flex flex-col gap-1">
                                 <div class="flex items-center gap-2">
                                     <h4
@@ -214,13 +214,13 @@
                                         v-html="`${form.stock} in stock`"
                                     />
                                 </div>
-                                <div class="text-xl font-bold text-slate-900">
+                                <span class="text-xl font-bold text-slate-900">
                                     ${{ form.price.toFixed(2) }}
-                                </div>
+                                </span>
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </template>
     </AppAdminLayout>
