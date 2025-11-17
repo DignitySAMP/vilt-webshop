@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="mt-4 text-sm text-slate-600">
-            Showing {{ to }} of {{ total }} results
+            Showing {{ to ?? "0" }} of {{ total ?? "0" }} results
         </div>
     </div>
 </template>

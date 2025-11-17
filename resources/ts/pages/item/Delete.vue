@@ -31,6 +31,7 @@
             </div>
 
             <button
+                @click="submit"
                 class="px-4 py-2 rounded-lg shadow-md w-full bg-red-600 text-white hover:bg-red-700"
             >
                 Delete {{ props.name }}
@@ -40,6 +41,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 import AppModal from "@/components/AppModal.vue";
 import IconDelete from "@/icons/IconDelete.vue";
@@ -48,4 +50,18 @@ const showDeleteModal = ref<boolean>(false);
 
 import { Item } from "@/types";
 const props = defineProps<Item>();
+
+const form = useForm({});
+const submit = () => {
+    form.delete(route("item.destroy", props.id), {
+        preserveScroll: true,
+        onError: (error: any) => {
+            console.error(error);
+        },
+        onFinish: () => {
+            form.reset();
+            showDeleteModal.value = false;
+        },
+    });
+};
 </script>

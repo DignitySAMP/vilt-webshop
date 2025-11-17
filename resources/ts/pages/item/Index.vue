@@ -78,7 +78,16 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200">
+                            <tr v-if="products.length < 1" class="p-2">
+                                <td
+                                    colspan="5"
+                                    class="px-6 py-4 text-center text-slate-400"
+                                >
+                                    <span> There are no items. </span>
+                                </td>
+                            </tr>
                             <tr
+                                v-else
                                 v-for="product in products"
                                 :key="product.id"
                                 class="hover:bg-slate-50 transition-colors"

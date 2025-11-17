@@ -155,6 +155,10 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        // TODO: add authorization (spatie roles?)
+        $item->delete();
+
+        return Inertia::location(route('item.index')); // TODO: sync flash message
+
     }
 }
