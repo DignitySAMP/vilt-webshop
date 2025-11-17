@@ -48,16 +48,23 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function contacts(): HasMany {
+    public function contacts(): HasMany
+    {
         return $this->hasMany(UserContact::class);
     }
-    public function addresses(): HasMany {
+
+    public function addresses(): HasMany
+    {
         return $this->hasMany(UserAddress::class);
     }
-    public function payment_methods(): HasMany {
+
+    public function payment_methods(): HasMany
+    {
         return $this->hasMany(UserPaymentMethod::class);
     }
-    public function orders(): HasMany {
+
+    public function orders(): HasMany
+    {
         return $this->hasMany(Order::class);
     }
 }

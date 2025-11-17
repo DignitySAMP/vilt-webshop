@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class OrderPayment extends Model
 {
     use HasFactory;
+
     protected $fillable = ['order_id', 'method', 'amount'];
 
-    public function order(): BelongsTo {
+    public function order(): BelongsTo
+    {
         return $this->belongsTo(Order::class);
     }
 }

@@ -12,7 +12,8 @@ class UserContact extends Model
 
     protected $fillable = ['user_id', 'name', 'role', 'email', 'phone'];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 }

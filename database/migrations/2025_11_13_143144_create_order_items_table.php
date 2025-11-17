@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Item::class)->constrained()->nullOnDelete();
             $table->integer('amount');
             $table->double('price');
-            
+
             $table->timestamps();
         });
     }

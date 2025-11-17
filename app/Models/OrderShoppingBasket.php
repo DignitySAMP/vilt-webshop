@@ -9,11 +9,13 @@ class OrderShoppingBasket extends Model
 {
     protected $fillable = ['user_id', 'order_id'];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function order(): BelongsTo {
+    public function order(): BelongsTo
+    {
         return $this->belongsTo(Order::class);
     }
 }

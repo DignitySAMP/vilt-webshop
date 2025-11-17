@@ -11,20 +11,26 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Order extends Model
 {
     use HasFactory;
+
     protected $fillable = ['user_id', 'status'];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
-    public function items(): HasMany {
+
+    public function items(): HasMany
+    {
         return $this->hasMany(OrderItem::class);
     }
 
-    public function payments(): HasMany {
+    public function payments(): HasMany
+    {
         return $this->hasMany(OrderPayment::class);
     }
 
-    public function shoppingBasket(): HasOne {
+    public function shoppingBasket(): HasOne
+    {
         return $this->hasOne(OrderShoppingBasket::class);
     }
 }

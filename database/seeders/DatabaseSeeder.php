@@ -6,16 +6,11 @@ use App\Models\Item;
 use App\Models\ItemCategory;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\OrderPayment;
 use App\Models\Supplier;
 use App\Models\SupplierAddress;
-use App\Models\SupplierContact;
 use App\Models\SupplierOrder;
 use App\Models\SupplierOrderItem;
 use App\Models\User;
-use App\Models\UserAddress;
-use App\Models\UserContact;
-use App\Models\UserPaymentMethod;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -104,6 +99,7 @@ class DatabaseSeeder extends Seeder
                     'phone' => $faker->phoneNumber(),
                 ]);
             }
+
             return $supplier;
         });
 
@@ -111,12 +107,13 @@ class DatabaseSeeder extends Seeder
         $items = collect(range(1, $itemTotal))->map(function (int $index) use ($faker, $categories, $suppliers) {
             $category = $categories->random();
             $supplier = $suppliers->random();
+
             return Item::create([
                 'item_category_id' => $category->id,
                 'supplier_id' => $supplier->id,
-                'name' => ucfirst($faker->word()) . ' ' . $index,
+                'name' => ucfirst($faker->word()).' '.$index,
                 'description' => $faker->sentence(),
-                'image' => 'https://picsum.photos/seed/' . uniqid('', true) . '/600/400',
+                'image' => 'https://picsum.photos/seed/'.uniqid('', true).'/600/400',
                 'price' => $faker->randomFloat(2, 5, 500),
                 'stock' => random_int(0, 200),
             ]);
@@ -159,7 +156,7 @@ class DatabaseSeeder extends Seeder
                 return;
             }
             $address = SupplierAddress::create([
-                'name' => $supplier->name . ' Warehouse',
+                'name' => $supplier->name.' Warehouse',
                 'street' => $faker->streetName(),
                 'number' => (string) $faker->buildingNumber(),
                 'city' => $faker->city(),

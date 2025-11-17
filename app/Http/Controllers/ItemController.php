@@ -6,9 +6,8 @@ use App\Models\Item;
 use App\Models\ItemCategory;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ItemController extends Controller
 {
@@ -26,23 +25,24 @@ class ItemController extends Controller
             'items' => $items,
             'categories' => $categories,
             'filter' => [
-                'category' => $category, 
-                'search' => $request->query('search')
-            ]
+                'category' => $category,
+                'search' => $request->query('search'),
+            ],
         ]);
     }
 
-    private function buildCollectionFromSearch($category, $search) {
+    private function buildCollectionFromSearch($category, $search)
+    {
         $query = Item::with(['item_category', 'supplier']);
-        
-        if(isset($category) || isset($search)) {
-            $query->where(function($q) use ($search) {
+
+        if (isset($category) || isset($search)) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%");
             })
-            ->where('item_category_id', $category);
+                ->where('item_category_id', $category);
         }
-        
+
         return $query->orderByDesc('created_at')->paginate(10)->withQueryString();
     }
 
@@ -53,7 +53,7 @@ class ItemController extends Controller
     {
         return Inertia::render('item/Create', [
             'categories' => ItemCategory::all(),
-            'suppliers' => Supplier::all()
+            'suppliers' => Supplier::all(),
         ]);
     }
 
@@ -69,7 +69,7 @@ class ItemController extends Controller
             'description' => 'required|min:8',
             'image' => 'required|file|image|max:1500',
             'price' => 'required|integer|min:0',
-            'stock' => 'required|integer|min:0'
+            'stock' => 'required|integer|min:0',
         ]);
 
         $item_category = ItemCategory::findOrFail($validate['category']);
@@ -82,20 +82,19 @@ class ItemController extends Controller
             'supplier_id' => $supplier->id,
             'description' => $validate['description'],
             'price' => $validate['price'],
-            'stock' => $validate['stock']
+            'stock' => $validate['stock'],
         ]);
-
 
         $extension = $request->file('image')->getClientOriginalExtension();
         $imagePath = $request->file('image')->storeAs(
-            path: 'items/' . $item->id,
-            name: 'image.' . $extension,
+            path: 'items/'.$item->id,
+            name: 'image.'.$extension,
             options: 'public'
         );
 
         $item->update(['image' => $imagePath]);
 
-        return redirect()->route('item.index')->with('message', "Item has been successfully created.");
+        return redirect()->route('item.index')->with('message', 'Item has been successfully created.');
     }
 
     /**
@@ -103,11 +102,10 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-
         return Inertia::render('item/Edit', [
             'categories' => ItemCategory::all(),
             'suppliers' => Supplier::all(),
-            'item' => $item
+            'item' => $item,
         ]);
     }
 
@@ -123,7 +121,7 @@ class ItemController extends Controller
             'description' => 'required|min:8',
             'image' => 'nullable|file|image|max:1500',
             'price' => 'required|integer|min:0',
-            'stock' => 'required|integer|min:0'
+            'stock' => 'required|integer|min:0',
         ]);
 
         $item_category = ItemCategory::findOrFail($validate['category']);
@@ -133,8 +131,8 @@ class ItemController extends Controller
         if ($request->hasFile('image')) { // replace image only if new image got passed
             $extension = $request->file('image')->getClientOriginalExtension();
             $imagePath = $request->file('image')->storeAs(
-                path: 'items/' . $item->id,
-                name: 'image.' . $extension,
+                path: 'items/'.$item->id,
+                name: 'image.'.$extension,
                 options: 'public'
             );
         }
@@ -146,10 +144,10 @@ class ItemController extends Controller
             'supplier_id' => $supplier->id,
             'description' => $validate['description'],
             'price' => $validate['price'],
-            'stock' => $validate['stock']
+            'stock' => $validate['stock'],
         ]);
 
-        return redirect()->route('item.index')->with('message', "Item has been updated.");
+        return redirect()->route('item.index')->with('message', 'Item has been updated.');
     }
 
     /**

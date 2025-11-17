@@ -39,9 +39,9 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'app' => [
-                'name' => env('APP_NAME')
+                'name' => env('APP_NAME'),
             ],
-            'auth' => Auth::check() ? Auth::user() : null
+            'auth' => Auth::check() ? Auth::user() : null,
             //
         ];
     }
