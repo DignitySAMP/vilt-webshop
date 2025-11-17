@@ -188,7 +188,7 @@ interface FormProps {
 
 const form = useForm<FormProps>({
     name: "",
-    category: usePage<PageProps>().props.categories[0].id,
+    category: usePage<PageProps>().props.categories[0].id ?? 1,
     price: 0,
     stock: 0,
     image: "",

@@ -184,11 +184,11 @@ const searchQuery = ref("");
 const onSearch = () => {
     router.get(
         route("item.index"),
-        {
+        { // data
             search: searchQuery.value,
             category: categoryQuery.value,
         },
-        {
+        { // options
             replace: true,
         },
     );
