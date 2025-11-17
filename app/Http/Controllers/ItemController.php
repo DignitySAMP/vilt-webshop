@@ -103,10 +103,10 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        $categories = ItemCategory::all();
 
         return Inertia::render('item/Edit', [
-            'categories' => $categories,
+            'categories' => ItemCategory::all(),
+            'suppliers' => Supplier::all(),
             'item' => $item
         ]);
     }
@@ -116,7 +116,40 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $validate = $request->validate([
+            'name' => 'required|max:64',
+            'category' => 'required|exists:item_categories,id',
+            'supplier' => 'required|exists:suppliers,id',
+            'description' => 'required|min:8',
+            'image' => 'nullable|file|image|max:1500',
+            'price' => 'required|integer|min:0',
+            'stock' => 'required|integer|min:0'
+        ]);
+
+        $item_category = ItemCategory::findOrFail($validate['category']);
+        $supplier = Supplier::findOrFail($validate['supplier']);
+
+        $imagePath = $item->image_url; // store original image
+        if ($request->hasFile('image')) { // replace image only if new image got passed
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $imagePath = $request->file('image')->storeAs(
+                path: 'items/' . $item->id,
+                name: 'image.' . $extension,
+                options: 'public'
+            );
+        }
+
+        $item->update([
+            'name' => $validate['name'],
+            'item_category_id' => $item_category->id,
+            'image' => $imagePath,
+            'supplier_id' => $supplier->id,
+            'description' => $validate['description'],
+            'price' => $validate['price'],
+            'stock' => $validate['stock']
+        ]);
+
+        return redirect()->route('item.index')->with('message', "Item has been updated.");
     }
 
     /**
