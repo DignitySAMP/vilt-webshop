@@ -21,4 +21,6 @@ export interface PaginationData<T = any> {
 }
 
 // type without the data array for pagination component
-export type PaginationMeta = Omit<PaginationData, 'data'> & { data: Array<any> };
+export type PaginationMeta = Omit<PaginationData, "data"> & {
+    data: Array<any>;
+};
