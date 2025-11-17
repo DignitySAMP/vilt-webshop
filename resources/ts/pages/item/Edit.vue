@@ -32,7 +32,8 @@
         </template>
 
         <template v-slot:body>
-            <form @submit.prevent
+            <form
+                @submit.prevent
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <div class="space-y-6">
@@ -65,7 +66,7 @@
                             {{ form.errors.description }}
                         </span>
                     </div>
-                    <div class="grid grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 gap-6">
                         <div>
                             <label
                                 class="block text-sm font-medium text-slate-700 mb-2"
@@ -86,8 +87,8 @@
                                 </option>
                             </select>
                             <span v-if="form.errors.category">
-                            {{ form.errors.category }}
-                        </span>
+                                {{ form.errors.category }}
+                            </span>
                         </div>
                         <div>
                             <label
@@ -127,8 +128,8 @@
                                 placeholder="0.00"
                             />
                             <span v-if="form.errors.price">
-                            {{ form.errors.price }}
-                        </span>
+                                {{ form.errors.price }}
+                            </span>
                         </div>
 
                         <div>
@@ -143,28 +144,27 @@
                                 placeholder="0"
                             />
                             <span v-if="form.errors.stock">
-                            {{ form.errors.stock }}
-                        </span>
+                                {{ form.errors.stock }}
+                            </span>
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-slate-700 mb-2"
+                                >Product Icon</label
+                            >
+                            <input
+                                type="file"
+                                @input="handleFileSelect($event)"
+                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
+                                placeholder="Click to upload an image..."
+                            />
+                            <span v-if="form.errors.image">
+                                {{ form.errors.image }}
+                            </span>
                         </div>
                     </div>
 
                     <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Product Icon</label
-                        >
-                        <input
-                            type="file"
-                            @input="handleFileSelect($event)"
-                            class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Click to upload an image..."
-                        />
-                        <span v-if="form.errors.image">
-                            {{ form.errors.image }}
-                        </span>
-                    </div>
-
-                    <div class="pt-6 border-t border-slate-200">
                         <h3 class="text-lg font-semibold text-slate-900 mb-4">
                             Preview
                         </h3>
@@ -238,7 +238,7 @@ import IconSave from "@/icons/IconSave.vue";
 import { ItemCategory, Item, Supplier } from "@/types";
 interface PageProps extends Record<string, unknown> {
     categories: ItemCategory[];
-    suppliers: Supplier[],
+    suppliers: Supplier[];
     item: Item;
 }
 
@@ -256,7 +256,7 @@ interface FormProps {
 }
 
 const form = useForm<FormProps>({
-    _method: 'patch' as any, // ignore in ts, will force useForm as patch anyway...
+    _method: "patch" as any, // ignore in ts, will force useForm as patch anyway...
     name: itemProp.name,
     description: itemProp.description,
     category: itemProp.item_category_id,
@@ -269,9 +269,7 @@ const form = useForm<FormProps>({
 const image_preview = ref(itemProp.image_url);
 
 const submit = () => {
-    form.post(route("item.update", 
-        itemProp.id
-    ), {
+    form.post(route("item.update", itemProp.id), {
         preserveScroll: true,
         forceFormData: true,
         onError: (error: any) => {
@@ -279,7 +277,6 @@ const submit = () => {
         },
     });
 };
-
 
 const handleFileSelect = (event: Event) => {
     const file = (event.target as HTMLInputElement).files?.[0] || null;
@@ -292,6 +289,4 @@ const handleFileSelect = (event: Event) => {
         image_preview.value = null;
     }
 };
-
-
 </script>

@@ -67,7 +67,7 @@
                         </span>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 gap-6 mb-4">
                         <div>
                             <label
                                 class="block text-sm font-medium text-slate-700 mb-2"
@@ -151,26 +151,25 @@
                                 {{ form.errors.stock }}
                             </span>
                         </div>
-                    </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-slate-700 mb-2"
+                                >Product Icon</label
+                            >
+                            <input
+                                type="file"
+                                @input="handleFileSelect($event)"
+                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
+                                placeholder="Click to upload an image..."
+                            />
 
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Product Icon</label
-                        >
-                        <input
-                            type="file"
-                            @input="handleFileSelect($event)"
-                            class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Click to upload an image..."
-                        />
-
-                        <span v-if="form.errors.image">
-                            {{ form.errors.image }}
-                        </span>
+                            <span v-if="form.errors.image">
+                                {{ form.errors.image }}
+                            </span>
+                        </div>
                     </div>
                 </form>
-                <div class="pt-6 border-t border-slate-200">
+                <div>
                     <h3 class="text-lg font-semibold text-slate-900 mb-4">
                         Preview
                     </h3>
@@ -249,7 +248,7 @@ interface FormProps {
     image: File | null;
 }
 
-const previewImage = ref<string|null>("");
+const previewImage = ref<string | null>("");
 const form = useForm<FormProps>({
     name: "",
     description: "",
