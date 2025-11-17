@@ -93,41 +93,40 @@
                 </div>
             </div>
 
-            <div class="mt-4 text-sm text-slate-600">
-                Showing {{ filteredProducts.length }} of {{ products.length }} products
-            </div>
-
+            <AppPagination class="mt-4" v-bind="usePage<PageProps>().props.items"/>
         </template>
     </AppAdminLayout>
 
 </template>
 <script setup lang="ts">
 import { usePage, router } from '@inertiajs/vue3';
-import AppAdminLayout from '@/layout/AppAdminLayout.vue';
-
-import { Item, ItemCategory } from '@/types';
 import { onMounted, ref } from 'vue';
+
+import AppAdminLayout from '@/layout/AppAdminLayout.vue';
+import AppPagination from '@/components/AppPagination.vue';
+
 import IconEdit from '@/icons/IconEdit.vue';
 import IconDelete from '@/icons/IconDelete.vue';
 import IconCreate from '@/icons/IconCreate.vue';
 import IconSearch from '@/icons/IconSearch.vue';
 
-
+// props
+import { Item, ItemCategory } from '@/types';
+import type { PaginationData } from '@/types/pagination';
 interface PageProps extends Record<string, unknown> {
-    items: {
-        data: Item[],
-    },
+    items: PaginationData<Item>;
     categories: ItemCategory[],
     filter: {
         category: number,
         search: string
     }
-}
+};
 
+// data
 const products: Item[] = usePage<PageProps>().props.items.data;
 const categories: ItemCategory[] = usePage<PageProps>().props.categories;
 
-const filteredProducts: any = products;
+// search queries
 const categoryQuery = ref(categories[0].id);
 const searchQuery = ref("");
 
