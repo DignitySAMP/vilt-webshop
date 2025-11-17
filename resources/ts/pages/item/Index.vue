@@ -125,11 +125,12 @@
                                     <div
                                         class="flex items-center justify-end gap-2"
                                     >
-                                        <button
+                                        <Link
+                                            :href="route('item.edit', product.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
                                             <IconEdit />
-                                        </button>
+                                        </Link>
                                         <button
                                             class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                                         >
@@ -185,11 +186,13 @@ const searchQuery = ref("");
 const onSearch = () => {
     router.get(
         route("item.index"),
-        { // data
+        {
+            // data
             search: searchQuery.value,
             category: categoryQuery.value,
         },
-        { // options
+        {
+            // options
             replace: true,
         },
     );
