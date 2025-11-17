@@ -86,8 +86,6 @@
                                 >
                                     {{ category.name }}
                                 </option>
-                                <option value="clothing">Clothing</option>
-                                <option value="home">Home & Living</option>
                             </select>
 
                             <span v-if="form.errors.category">
@@ -113,8 +111,6 @@
                                 >
                                     {{ supplier.name }}
                                 </option>
-                                <option value="clothing">Clothing</option>
-                                <option value="home">Home & Living</option>
                             </select>
 
                             <span v-if="form.errors.category">
@@ -165,7 +161,6 @@
                         <input
                             type="file"
                             @input="handleFileSelect($event)"
-                            maxlength="1"
                             class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
                             placeholder="Click to upload an image..."
                         />
