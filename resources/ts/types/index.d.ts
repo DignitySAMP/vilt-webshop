@@ -83,10 +83,12 @@ export interface Item {
     id: number;
     item_category_id: number;
     item_category: ItemCategory;
-    supplier_id: Supplier;
+    supplier_id: nunber;
+    supplier: Supplier;
     name: string;
     description: string;
     image: string;
+    image_url: string;
     price: number; // must be double; TODO: js has a limitation on float/double types; make sure this is infered properly
     stock: number;
     created_at: string;

@@ -86,7 +86,7 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <img
-                                            :src="product.image"
+                                            :src="product.image_url"
                                             class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl"
                                         />
                                         <div class="font-medium text-slate-900">
