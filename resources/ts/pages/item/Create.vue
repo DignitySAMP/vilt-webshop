@@ -121,18 +121,25 @@
                             class="bg-slate-50 rounded-lg p-4 border border-slate-200"
                         >
                             <div class="flex items-center gap-4">
+                                <img
+                                    v-if="form.image"
+                                    :src="form.image"
+                                    class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
+                                />
                                 <div
-                                    class="w-20 h-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
+                                    v-else-if="!form.image"
+                                    class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
                                 >
-                                    {{ form.image }}
+                                    <span class="text-slate-400" v-html="form.name[0] ?? '?'"/>
                                 </div>
-                                <div>
-                                    <h4
-                                        class="font-semibold text-slate-900 text-lg"
-                                    >
-                                        {{ form.name || "Product Name" }}
-                                    </h4>
-                                    <div class="flex items-center gap-3 mt-1">
+                                <div class="flex flex-col gap-1">
+                                    <div class="flex items-center gap-2">
+                                        <h4
+                                            class="font-semibold text-slate-900 text-lg"
+                                        >
+                                            {{ form.name || "Product Name" }}
+                                        </h4>
+
                                         <span
                                             class="text-sm text-slate-600 capitalize"
                                             v-html="
@@ -144,16 +151,16 @@
                                             "
                                         />
                                         <span
-                                            class="text-slate-300"
+                                            class="text-slate-400"
                                             v-html="'•'"
                                         />
                                         <span
                                             class="text-sm text-slate-600"
-                                            v-html="`{{ form.stock }} in stock`"
+                                            v-html="`${form.stock} in stock`"
                                         />
                                     </div>
                                     <div
-                                        class="text-xl font-bold text-slate-900 mt-2"
+                                        class="text-xl font-bold text-slate-900"
                                     >
                                         ${{ form.price.toFixed(2) }}
                                     </div>
