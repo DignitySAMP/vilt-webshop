@@ -56,8 +56,66 @@ class SupplierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Supplier $supplier)
+    public function show(Request $request, Supplier $supplier)
     {
+        // sort order based on query
+        $orderSortDate = $request->input('order_sort_date', 'by_newest_create');
+        $supplier->load(['orders' => function ($query) use ($orderSortDate) {
+            switch ($orderSortDate) {
+                case 'by_oldest_create':
+                    $query->oldest('created_at');
+                    break;
+                
+                case 'by_newest_create':
+                    $query->latest('created_at');
+                    break;
+                
+                case 'by_oldest_update':
+                    $query->oldest('updated_at');
+                    break;
+                
+                case 'by_newest_update':
+                    $query->latest('updated_at');
+                    break;
+                
+                case 'no_updates': // orders where updated_at equals created_at (never updated)
+                    $query->whereColumn('updated_at', '=', 'created_at')
+                            ->latest('created_at');
+                    break;
+                
+                case 'oldest_update': // orders that have been updated, sorted by oldest update
+                    $query->whereColumn('updated_at', '!=', 'created_at')
+                            ->oldest('updated_at');
+                    break;
+                
+                case 'newest_update': // orders that have been updated, sorted by newest update
+                    $query->whereColumn('updated_at', '!=', 'created_at')
+                            ->latest('updated_at');
+                    break;
+                
+                default:
+                    $query->latest('created_at');
+                    break;
+            }
+            
+            $query->limit(10);
+        }]);
+    
+        return Inertia::render('supplier/Show', [
+            'supplier' => [
+                'id' => $supplier->id,
+                'name' => $supplier->name,
+                'description' => $supplier->description,
+                'updated_at' => $supplier->updated_at,
+                'created_at' => $supplier->created_at,
+                'contacts' => $supplier->contacts,
+                'addresses' => $supplier->addresses,
+                'orders' => $supplier->orders,
+            ],
+            'filters' => [
+                'order_sort_date' => $orderSortDate,
+            ]
+        ]);
     }
 
     /**
