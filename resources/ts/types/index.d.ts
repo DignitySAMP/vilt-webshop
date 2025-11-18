@@ -109,9 +109,9 @@ export interface Supplier {
     name: string;
     description: string;
     pending_orders: number;
-    orders?: SupplierOrder,
-    contacts?: SupplierContacts,
-    addresses?: SupplierAddresses,
+    orders?: SupplierOrder;
+    contacts?: SupplierContacts;
+    addresses?: SupplierAddresses;
 
     created_at: string;
     updated_at: string;
@@ -142,7 +142,7 @@ export interface SupplierAddresses {
 export interface SupplierOrder {
     id: number;
     supplier_id: Supplier;
-    status: 'pending' | 'processing' | 'completed';
+    status: "pending" | "processing" | "completed";
     created_at: string;
     updated_at: string;
 }

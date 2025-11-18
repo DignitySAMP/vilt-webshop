@@ -104,7 +104,10 @@
                                     >
                                         <Link
                                             :href="
-                                                route('supplier.show', supplier.id)
+                                                route(
+                                                    'supplier.show',
+                                                    supplier.id,
+                                                )
                                             "
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
@@ -167,5 +170,5 @@ const onSearch = () => {
     );
 };
 
-onMounted(() => searchQuery.value = usePage<PageProps>().props.filter.search);
+onMounted(() => (searchQuery.value = usePage<PageProps>().props.filter.search));
 </script>

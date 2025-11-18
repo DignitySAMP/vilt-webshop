@@ -1,34 +1,32 @@
 <template>
     <AppAdminLayout>
         <template v-slot:header>
-
-                <div class="flex items-center gap-4">
-                    <Link
-                        :href="route('item.index')"
-                        class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
-                    >
-                        <IconBack />
-                    </Link>
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-900">
-                            Add New Product
-                        </h1>
-                        <p class="text-sm text-slate-500 mt-1">
-                            Create a new product listing
-                        </p>
-                    </div>
+            <div class="flex items-center gap-4">
+                <Link
+                    :href="route('item.index')"
+                    class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
+                >
+                    <IconBack />
+                </Link>
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900">
+                        Add New Product
+                    </h1>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Create a new product listing
+                    </p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button
-                        @click="submit"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                    >
-                        <IconCreate />
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    @click="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
+                >
+                    <IconCreate />
 
-                        Create Product
-                    </button>
-                </div>
-
+                    Create Product
+                </button>
+            </div>
         </template>
 
         <template v-slot:body>

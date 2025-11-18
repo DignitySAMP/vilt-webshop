@@ -167,7 +167,7 @@ class DatabaseSeeder extends Seeder
                     'country' => $faker->country(),
                 ]);
             }
-            
+
             foreach (range(1, 15) as $i) {
                 $statuses = ['pending', 'processing', 'completed'];
                 $supplierOrder = SupplierOrder::create([

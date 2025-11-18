@@ -1,34 +1,32 @@
 <template>
     <AppAdminLayout>
         <template v-slot:header>
-
-                <div class="flex items-center gap-4">
-                    <Link
-                        :href="route('category.index')"
-                        class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
-                    >
-                        <IconBack />
-                    </Link>
-                    <div>
-                        <h1 class="text-2xl font-bold text-slate-900">
-                            Modify Category
-                        </h1>
-                        <p class="text-sm text-slate-500 mt-1">
-                            Update existing category
-                        </p>
-                    </div>
+            <div class="flex items-center gap-4">
+                <Link
+                    :href="route('category.index')"
+                    class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
+                >
+                    <IconBack />
+                </Link>
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900">
+                        Modify Category
+                    </h1>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Update existing category
+                    </p>
                 </div>
-                <div class="flex items-center gap-3">
-                    <button
-                        @click="submit"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                    >
-                        <IconSave />
+            </div>
+            <div class="flex items-center gap-3">
+                <button
+                    @click="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
+                >
+                    <IconSave />
 
-                        Save Product
-                    </button>
-                </div>
-
+                    Save Product
+                </button>
+            </div>
         </template>
 
         <template v-slot:body>
