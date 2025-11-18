@@ -191,11 +191,6 @@ const collapsePriceRange = ref<boolean>(false);
 
 // trigger search emit for static element without listener
 watch(selectedCategory, () => {
-    console.log(
-        usePage<PageProps>().props.categories.find(
-            (cat) => cat.id == selectedCategory.value,
-        ),
-    );
     selectedMobileCategory.value = usePage<PageProps>().props.categories.find(
         (cat: ItemCategory) => cat.id == selectedCategory.value,
     );
