@@ -16,4 +16,18 @@ class Supplier extends Model
     {
         return $this->hasMany(SupplierContact::class);
     }
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(SupplierAddress::class);
+    } public function orders(): HasMany
+    {
+        return $this->hasMany(SupplierOrder::class);
+    }
+    protected $appends = ['pending_orders'];
+
+    public function getPendingOrdersAttribute()
+    {
+        return $this->orders()->count();
+    }
+    
 }

@@ -13,9 +13,9 @@ class SupplierOrder extends Model
 
     protected $fillable = ['supplier_address_id'];
 
-    public function address(): BelongsTo
+    public function supplier(): BelongsTo
     {
-        return $this->belongsTo(SupplierAddress::class, 'supplier_address_id');
+        return $this->belongsTo(Supplier::class);
     }
 
     public function items(): HasMany

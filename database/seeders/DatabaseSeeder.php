@@ -152,31 +152,39 @@ class DatabaseSeeder extends Seeder
         });
 
         $suppliers->each(function (Supplier $supplier) use ($faker, $items) {
-            if (! $faker->boolean(60)) {
+            if (! $faker->boolean(75)) {
                 return;
             }
-            $address = SupplierAddress::create([
-                'name' => $supplier->name.' Warehouse',
-                'street' => $faker->streetName(),
-                'number' => (string) $faker->buildingNumber(),
-                'city' => $faker->city(),
-                'postal' => $faker->postcode(),
-                'area' => $faker->state(),
-                'country' => $faker->country(),
-            ]);
-            $supplierOrder = SupplierOrder::create([
-                'supplier_address_id' => $address->id,
-            ]);
-            $selection = $items->random(random_int(1, 3));
-            if ($selection instanceof Item) {
-                $selection = collect([$selection]);
-            }
-            foreach ($selection as $item) {
-                SupplierOrderItem::create([
-                    'supplier_order_id' => $supplierOrder->id,
-                    'item_id' => $item->id,
-                    'amount' => random_int(5, 25),
+            foreach (range(1, 6) as $i) {
+                $address = SupplierAddress::create([
+                    'supplier_id' => $supplier->id,
+                    'name' => $supplier->name.' Warehouse',
+                    'street' => $faker->streetName(),
+                    'number' => (string) $faker->buildingNumber(),
+                    'city' => $faker->city(),
+                    'postal' => $faker->postcode(),
+                    'area' => $faker->state(),
+                    'country' => $faker->country(),
                 ]);
+            }
+            
+            foreach (range(1, 15) as $i) {
+                $statuses = ['pending', 'processing', 'completed'];
+                $supplierOrder = SupplierOrder::create([
+                    'supplier_id' => $supplier->id,
+                    'status' => $statuses[array_rand($statuses)],
+                ]);
+                $selection = $items->random(random_int(5, 15));
+                if ($selection instanceof Item) {
+                    $selection = collect([$selection]);
+                }
+                foreach ($selection as $item) {
+                    SupplierOrderItem::create([
+                        'supplier_order_id' => $supplierOrder->id,
+                        'item_id' => $item->id,
+                        'amount' => random_int(5, 25),
+                    ]);
+                }
             }
         });
     }
