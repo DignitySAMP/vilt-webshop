@@ -1,7 +1,7 @@
 <template>
     <AppAdminLayout>
         <template v-slot:header>
-            <div>
+            <div class="w-full flex flex-col justify-center items-center md:block">
                 <h1
                     class="text-2xl font-bold text-slate-900"
                     v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
@@ -10,7 +10,7 @@
             </div>
             <Link
                 :href="route('item.create')"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
+                class="min-w-40 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
             >
                 <IconCreate />
 
@@ -22,7 +22,7 @@
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6"
             >
-                <div class="p-4 flex gap-4 items-center">
+                <div class="p-4 flex flex-col md:flex-row gap-4 items-center">
                     <div class="flex relative w-full">
                         <IconSearch />
 
@@ -31,13 +31,13 @@
                             @change="onSearch"
                             type="text"
                             placeholder="Search products..."
-                            class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition-colors"
+                            class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
                         />
                     </div>
                     <select
                         v-model="categoryQuery"
                         @change="onSearch"
-                        class="px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition-colors"
+                        class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
                     >
                         <option
                             v-for="cat in categories"

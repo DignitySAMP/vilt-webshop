@@ -8,7 +8,7 @@
                 >
                     <IconBack />
                 </Link>
-                <div>
+                <div class="w-full flex flex-col justify-center items-center md:block">
                     <h1 class="text-2xl font-bold text-slate-900">
                         Modify Product
                     </h1>
@@ -20,7 +20,7 @@
             <div class="flex items-center gap-3">
                 <button
                     @click="submit"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
                 >
                     <IconSave />
 
@@ -64,7 +64,7 @@
                             {{ form.errors.description }}
                         </span>
                     </div>
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label
                                 class="block text-sm font-medium text-slate-700 mb-2"

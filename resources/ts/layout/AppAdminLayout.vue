@@ -1,7 +1,7 @@
 <template>
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="relative px-6 py-4 flex items-center gap-4">
-            <div class="flex w-full items-center justify-between">
+        <div class="relative px-6 py-4 flex flex-row items-end md:items-center gap-4">
+            <div class="flex flex-col gap-2 md:flex-row w-full md:items-center md:justify-between">
                 <slot name="header" />
             </div>
 
@@ -65,8 +65,8 @@ const menuItems: menuItemShim[] = [
     {
         name: "Supplier",
         icon: IconSupplier,
-        url: route("supplier.index"),
-    },
+        url: route("supplier.index")
+    }
 ];
 
 // TODO: Add click event that closes the dropdown when clicking outside of it

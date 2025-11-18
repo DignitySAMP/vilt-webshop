@@ -8,7 +8,7 @@
                 >
                     <IconBack />
                 </Link>
-                <div>
+                <div class="w-full flex flex-col justify-center items-center md:block">
                     <h1 class="text-2xl font-bold text-slate-900">
                         View Supplier
                     </h1>
@@ -21,7 +21,7 @@
                 <Link
                     as="button"
                     :href="route('supplier.edit', supplier.id)"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
                 >
                     <IconEdit />
 

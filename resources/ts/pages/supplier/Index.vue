@@ -1,7 +1,7 @@
 <template>
     <AppAdminLayout>
         <template v-slot:header>
-            <div>
+            <div class="w-full flex flex-col justify-center items-center md:block">
                 <h1
                     class="text-2xl font-bold text-slate-900"
                     v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
@@ -10,7 +10,7 @@
             </div>
             <Link
                 :href="route('item.create')"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
+                class="min-w-40 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
             >
                 <IconCreate />
 

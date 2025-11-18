@@ -8,7 +8,7 @@
 
     <AppModal :show="showDeleteModal" @close="showDeleteModal = false">
         <div class="flex flex-col gap-2">
-            <h1 class="text-lg font-bold text-slate-900">Delete Item</h1>
+            <h1 class="text-lg font-bold text-slate-900">Delete Category</h1>
 
             <p class="text-sm text-slate-500 mt-1">
                 If you wish to delete {{ props.name }}, please press the button
