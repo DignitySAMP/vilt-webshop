@@ -32,6 +32,11 @@
                         {{ cartItemCount }}
                     </span>
                 </div>
+                <button
+                    class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                >
+                    <IconAccount />
+                </button>
             </div>
         </div>
     </header>
@@ -40,6 +45,7 @@
 import { usePage } from "@inertiajs/vue3";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShoppingCart from "@/icons/IconShoppingCart.vue";
+import IconAccount from "@/icons/IconAccount.vue";
 
 interface PageProps extends Record<string, unknown> {
     app: {

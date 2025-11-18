@@ -27,7 +27,7 @@
                             class="flex-1 outline-none text-slate-700"
                         />
                         <span v-if="searchText" @click="resetTextSearch">
-                            x
+                            <IconClose />
                         </span>
                     </div>
                 </div>
@@ -62,6 +62,7 @@ import IconSearch from "@/icons/IconSearch.vue";
 import { ItemCategory, Item } from "@/types";
 import { ref } from "vue";
 import { router, usePage } from "@inertiajs/vue3";
+import IconClose from "@/icons/IconClose.vue";
 
 interface PageProps extends Record<string, unknown> {
     categories: ItemCategory[];
