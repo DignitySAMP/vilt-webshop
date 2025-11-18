@@ -25,7 +25,7 @@ class Item extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public function getImageUrlAttribute(): string
+    public function getImageUrlAttribute(): ?string
     {
         if (! $this->image) {
             return null;

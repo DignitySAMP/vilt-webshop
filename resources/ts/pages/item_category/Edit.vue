@@ -8,7 +8,9 @@
                 >
                     <IconBack />
                 </Link>
-                <div class="w-full flex flex-col justify-center items-center md:block">
+                <div
+                    class="w-full flex flex-col justify-center items-center md:block"
+                >
                     <h1 class="text-2xl font-bold text-slate-900">
                         Modify Category
                     </h1>

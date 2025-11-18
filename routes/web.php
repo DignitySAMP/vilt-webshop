@@ -1,18 +1,13 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function (): mixed {
-    return Inertia::render('Welcome');
-})->name('home');
-
-Route::get('/template', function (): mixed {
-    return Inertia::render('Template');
-})->name('template');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/user/two-faction-setup', function () {
 

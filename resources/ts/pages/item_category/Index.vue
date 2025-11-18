@@ -1,7 +1,9 @@
 <template>
     <AppAdminLayout>
         <template v-slot:header>
-            <div class="w-full flex flex-col justify-center items-center md:block">
+            <div
+                class="w-full flex flex-col justify-center items-center md:block"
+            >
                 <h1
                     class="text-2xl font-bold text-slate-900"
                     v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
@@ -24,7 +26,9 @@
             >
                 <div class="p-4 flex gap-4 items-center">
                     <div class="flex relative w-full">
-                        <IconSearch />
+                        <IconSearch
+                            class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
+                        />
 
                         <input
                             v-model="searchQuery"
