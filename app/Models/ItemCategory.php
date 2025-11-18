@@ -16,4 +16,10 @@ class ItemCategory extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+    protected $appends = ['item_count'];
+    public function getItemCountAttribute() {
+        return $this->items()->count();
+    }
+    
 }

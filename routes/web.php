@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,3 +21,5 @@ Route::get('/user/two-faction-setup', function () {
 })->middleware(['auth', 'verified', 'password.confirm'])->name('two-factor.setup');
 
 Route::resource('item', ItemController::class)->except(['show']);
+
+Route::resource('category', ItemCategoryController::class)->except(['show']);
