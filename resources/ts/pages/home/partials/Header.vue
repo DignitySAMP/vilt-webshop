@@ -32,17 +32,19 @@
                         {{ cartItemCount }}
                     </span>
                 </div>
-                <button
+                <Link
+                    :href="route('login')"
+                    as="button"
                     class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
                 >
                     <IconAccount />
-                </button>
+                </Link>
             </div>
         </div>
     </header>
 </template>
 <script setup lang="ts">
-import { usePage } from "@inertiajs/vue3";
+import { usePage, Link } from "@inertiajs/vue3";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShoppingCart from "@/icons/IconShoppingCart.vue";
 import IconAccount from "@/icons/IconAccount.vue";

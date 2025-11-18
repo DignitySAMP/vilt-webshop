@@ -52,7 +52,7 @@
                     type="button"
                     @click="submitConfirm"
                     :disabled="form.processing"
-                    class="w-full cursor-pointer rounded bg-gray-800 px-4 py-2 text-gray-50 outline-gray-600/50 transition duration-300 hover:bg-gray-600 focus:outline-4"
+                    class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
                 >
                     Confirm 2FA
                 </button>
@@ -103,7 +103,7 @@ const submitEnable = () => {
             await fetch2FAQRCode();
             await fetch2FARecoveryCodes();
         },
-        onError: (error) => console.error(error),
+        onError: (error: Array<string>) => console.error(error),
         onFinish: () => form.reset(),
     });
 };
@@ -116,7 +116,7 @@ const submitConfirm = () => {
             confirmed.value = true;
             await fetch2FARecoveryCodes(); // refresh codes after confirmation
         },
-        onError: (error) => console.error(error),
+        onError: (error: Array<string>) => console.error(error),
         onFinish: () => form.reset(),
     });
 };
