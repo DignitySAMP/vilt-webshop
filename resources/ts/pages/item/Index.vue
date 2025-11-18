@@ -2,12 +2,11 @@
     <AppAdminLayout>
         <template v-slot:header>
             <div>
-                <h1 class="text-2xl font-bold text-slate-900">
-                    {{ usePage<PageProps>().props.app.name ?? "Laravel" }}
-                </h1>
-                <p class="text-sm text-slate-500 mt-1">
-                    Product Management
-                </p>
+                <h1
+                    class="text-2xl font-bold text-slate-900"
+                    v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
+                />
+                <p class="text-sm text-slate-500 mt-1">Product Management</p>
             </div>
             <Link
                 :href="route('item.create')"

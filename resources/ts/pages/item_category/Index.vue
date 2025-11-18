@@ -2,12 +2,11 @@
     <AppAdminLayout>
         <template v-slot:header>
             <div>
-                <h1 class="text-2xl font-bold text-slate-900">
-                    {{ usePage<PageProps>().props.app.name ?? "Laravel" }}
-                </h1>
-                <p class="text-sm text-slate-500 mt-1">
-                    Product Management
-                </p>
+                <h1
+                    class="text-2xl font-bold text-slate-900"
+                    v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
+                />
+                <p class="text-sm text-slate-500 mt-1">Product Management</p>
             </div>
             <Link
                 :href="route('category.create')"
@@ -82,7 +81,7 @@
                                 :key="category.id"
                                 class="hover:bg-slate-50 transition-colors"
                             >
-                            <td class="px-6 py-4">
+                                <td class="px-6 py-4">
                                     <div class="flex items-center gap-3">
                                         <div class="font-medium text-slate-900">
                                             {{ category.name }}
@@ -103,14 +102,17 @@
                                         </div>
                                     </div>
                                 </td>
-                               
+
                                 <td class="px-6 py-4 text-right">
                                     <div
                                         class="flex items-center justify-end gap-2"
                                     >
                                         <Link
                                             :href="
-                                                route('category.edit', category.id)
+                                                route(
+                                                    'category.edit',
+                                                    category.id,
+                                                )
                                             "
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
@@ -167,7 +169,7 @@ const onSearch = () => {
         route("category.index"),
         {
             // data
-            search: searchQuery.value
+            search: searchQuery.value,
         },
         {
             // options
@@ -176,5 +178,5 @@ const onSearch = () => {
     );
 };
 
-onMounted(() => searchQuery.value = usePage<PageProps>().props.filter.search);
+onMounted(() => (searchQuery.value = usePage<PageProps>().props.filter.search));
 </script>
