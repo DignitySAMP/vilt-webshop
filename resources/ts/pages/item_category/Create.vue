@@ -1,5 +1,5 @@
 <template>
-    <AppAdminLayout title="Category Management" :show_title="false">
+    <AppAdminLayout>
         <template v-slot:header>
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
@@ -96,5 +96,4 @@ const submit = () => {
         },
     });
 };
-
 </script>

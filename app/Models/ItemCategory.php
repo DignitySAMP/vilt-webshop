@@ -18,8 +18,9 @@ class ItemCategory extends Model
     }
 
     protected $appends = ['item_count'];
-    public function getItemCountAttribute() {
+
+    public function getItemCountAttribute()
+    {
         return $this->items()->count();
     }
-    
 }

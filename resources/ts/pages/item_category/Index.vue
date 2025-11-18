@@ -1,6 +1,14 @@
 <template>
-    <AppAdminLayout title="Category Management">
+    <AppAdminLayout>
         <template v-slot:header>
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">
+                    {{ usePage<PageProps>().props.app.name ?? "Laravel" }}
+                </h1>
+                <p class="text-sm text-slate-500 mt-1">
+                    Product Management
+                </p>
+            </div>
             <Link
                 :href="route('category.create')"
                 class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"

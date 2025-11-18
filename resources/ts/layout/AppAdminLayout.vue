@@ -1,18 +1,31 @@
 <template>
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div v-if="props.show_title">
-                    <h1 class="text-2xl font-bold text-slate-900">
-                        {{ pageProps.name ?? "Laravel" }}
-                    </h1>
-                    <p class="text-sm text-slate-500 mt-1">
-                        {{ props.title }}
-                    </p>
-                </div>
+        <div class="relative px-6 py-4 flex items-center gap-4">
+            <div class="flex w-full items-center justify-between">
+                <slot name="header" />
+            </div>
 
-                <div :class="props.show_title ? 'w-fit' : 'w-full'">
-                    <slot name="header" />
+            <div
+                @click="collapseDropdown = !collapseDropdown"
+                class="relative w-fit bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors flex items-center gap-2 font-medium"
+            >
+                <IconBreadcrumbs />
+
+                <div
+                    v-if="collapseDropdown"
+                    class="absolute top-11 right-1 w-64 bg-white border border-gray-100 shadow-md rounded-lg px-4 py-2 flex flex-col gap-2 divide-y-2 divide-gray-100"
+                >
+                    <div v-for="item in menuItems" :key="item.name">
+                        <Link
+                            :href="item.url"
+                            class="flex w-full justify-between"
+                        >
+                            <component :is="item.icon" class="size-5" />
+                            <span>
+                                {{ item.name }}
+                            </span>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,22 +36,30 @@
     </div>
 </template>
 <script setup lang="ts">
-import { usePage } from "@inertiajs/vue3";
+import IconBreadcrumbs from "@/icons/IconBreadcrumbs.vue";
+import IconItem from "@/icons/IconItem.vue";
+import IconItemCategory from "@/icons/IconItemCategory.vue";
+import { type Component, ref } from "vue";
+import { Link } from "@inertiajs/vue3";
 
-interface PageProps extends Record<string, unknown> {
-    app?: {
-        name?: string;
-    };
+const collapseDropdown = ref<boolean>(false);
+
+interface menuItemShim {
+    name: string;
+    icon: Component;
+    url: string;
 }
 
-const pageProps = usePage<PageProps>().props;
-
-interface LocalProps {
-    title: string;
-    show_title?: boolean;
-}
-
-const props = withDefaults(defineProps<LocalProps>(), {
-    show_title: true,
-});
+const menuItems: menuItemShim[] = [
+    {
+        name: "Items",
+        icon: IconItem,
+        url: route("item.index"),
+    },
+    {
+        name: "Item Categories",
+        icon: IconItemCategory,
+        url: route("category.index"),
+    },
+];
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <AppAdminLayout title="Category Management" :show_title="false">
+    <AppAdminLayout>
         <template v-slot:header>
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
@@ -65,7 +65,7 @@
                         <span v-if="form.errors.description">
                             {{ form.errors.description }}
                         </span>
-                    </div>                    
+                    </div>
                 </div>
             </form>
         </template>
@@ -94,7 +94,7 @@ interface FormProps {
 
 const form = useForm<FormProps>({
     name: categoryProp.name,
-    description: categoryProp.description
+    description: categoryProp.description,
 });
 
 const submit = () => {
@@ -105,5 +105,4 @@ const submit = () => {
         },
     });
 };
-
 </script>

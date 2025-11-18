@@ -157,6 +157,7 @@ class ItemController extends Controller
     {
         // TODO: add authorization (spatie roles?)
         $item->delete();
+
         return Inertia::location(route('item.index')); // TODO: sync flash message
     }
 }

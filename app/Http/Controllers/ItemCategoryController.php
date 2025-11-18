@@ -15,6 +15,7 @@ class ItemCategoryController extends Controller
     public function index(Request $request)
     {
         $categories = $this->buildCollectionFromSearch($request->query('search'));
+
         return Inertia::render('item_category/Index', [
             'categories' => $categories,
             'filter' => [
@@ -36,6 +37,7 @@ class ItemCategoryController extends Controller
 
         return $query->orderByDesc('created_at')->paginate(10)->withQueryString();
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -51,12 +53,12 @@ class ItemCategoryController extends Controller
     {
         $validate = $request->validate([
             'name' => 'required|min:4|max:32|unique:item_categories,name',
-            'description' => 'required|min:4|max:32'
+            'description' => 'required|min:4|max:32',
         ]);
 
         ItemCategory::create([
             'name' => $validate['name'],
-            'description' => $validate['description']
+            'description' => $validate['description'],
         ]);
 
         return redirect()->route('category.index')->with('message', 'Category has been created.');
@@ -68,7 +70,7 @@ class ItemCategoryController extends Controller
     public function edit(ItemCategory $category)
     {
         return Inertia::render('item_category/Edit', [
-            'category' => $category
+            'category' => $category,
         ]);
     }
 
@@ -82,12 +84,12 @@ class ItemCategoryController extends Controller
                 'required', 'min:4', 'max:32',
                 Rule::unique('item_categories', 'name')->ignore($category->id), // check if name is unique, but ignore own id
             ],
-            'description' => 'required|min:4|max:32'
+            'description' => 'required|min:4|max:32',
         ]);
 
         $category->update([
             'name' => $validate['name'],
-            'description' => $validate['description']
+            'description' => $validate['description'],
         ]);
 
         return redirect()->route('category.index')->with('message', 'Category has been updated.');

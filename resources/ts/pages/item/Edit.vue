@@ -1,5 +1,5 @@
 <template>
-    <AppAdminLayout title="Product Management" :show_title="false">
+    <AppAdminLayout>
         <template v-slot:header>
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
