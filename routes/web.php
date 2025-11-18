@@ -9,6 +9,11 @@ use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/user', function () {
+
+    return Inertia::render('Welcome');
+})->name('profile');
+
 Route::get('/user/two-faction-setup', function () {
 
     return Inertia::render('auth/TwoFactorSetup', [

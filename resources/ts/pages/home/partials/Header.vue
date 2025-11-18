@@ -33,11 +33,18 @@
                     </span>
                 </div>
                 <Link
-                    :href="route('login')"
+                    :href="
+                        usePage<PageProps>().props.auth !== null
+                            ? route('profile')
+                            : route('login')
+                    "
                     as="button"
                     class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
                 >
-                    <IconAccount />
+                    <IconAccount
+                        v-if="usePage<PageProps>().props.auth === null"
+                    />
+                    <IconProfile v-else />
                 </Link>
             </div>
         </div>
@@ -48,6 +55,7 @@ import { usePage, Link } from "@inertiajs/vue3";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShoppingCart from "@/icons/IconShoppingCart.vue";
 import IconAccount from "@/icons/IconAccount.vue";
+import IconProfile from "@/icons/IconProfile.vue";
 
 interface PageProps extends Record<string, unknown> {
     app: {
