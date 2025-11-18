@@ -65,42 +65,42 @@ class SupplierController extends Controller
                 case 'by_oldest_create':
                     $query->oldest('created_at');
                     break;
-                
+
                 case 'by_newest_create':
                     $query->latest('created_at');
                     break;
-                
+
                 case 'by_oldest_update':
                     $query->oldest('updated_at');
                     break;
-                
+
                 case 'by_newest_update':
                     $query->latest('updated_at');
                     break;
-                
+
                 case 'no_updates': // orders where updated_at equals created_at (never updated)
                     $query->whereColumn('updated_at', '=', 'created_at')
-                            ->latest('created_at');
+                        ->latest('created_at');
                     break;
-                
+
                 case 'oldest_update': // orders that have been updated, sorted by oldest update
                     $query->whereColumn('updated_at', '!=', 'created_at')
-                            ->oldest('updated_at');
+                        ->oldest('updated_at');
                     break;
-                
+
                 case 'newest_update': // orders that have been updated, sorted by newest update
                     $query->whereColumn('updated_at', '!=', 'created_at')
-                            ->latest('updated_at');
+                        ->latest('updated_at');
                     break;
-                
+
                 default:
                     $query->latest('created_at');
                     break;
             }
-            
+
             $query->limit(10);
         }]);
-    
+
         return Inertia::render('supplier/Show', [
             'supplier' => [
                 'id' => $supplier->id,
@@ -114,7 +114,7 @@ class SupplierController extends Controller
             ],
             'filters' => [
                 'order_sort_date' => $orderSortDate,
-            ]
+            ],
         ]);
     }
 

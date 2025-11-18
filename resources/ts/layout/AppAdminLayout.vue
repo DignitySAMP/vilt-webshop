@@ -65,8 +65,8 @@ const menuItems: menuItemShim[] = [
     {
         name: "Supplier",
         icon: IconSupplier,
-        url: route("supplier.index")
-    }
+        url: route("supplier.index"),
+    },
 ];
 
 // TODO: Add click event that closes the dropdown when clicking outside of it
