@@ -4,8 +4,21 @@
             class="w-full h-fit flex flex-col bg-white rounded-xl p-2 md:p-4 shadow-sm border border-slate-200"
         >
             <div class="flex w-full justify-between md:block">
-                <h2 class="text-lg font-semibold text-slate-900 mb-0 md:mb-4">
-                    Categories
+                <h2 class="text-slate-900 mb-0 md:mb-4">
+                    <span class="hidden md:block text-lg font-semibold">
+                        Categories
+                    </span>
+                    <div class="flex gap-4 items-center md:hidden">
+                        <IconItemCategory class="size-5 block md:hidden" />
+                        <span class="block md:hidden">
+                            {{
+                                categories.find(
+                                    (cat: ItemCategory) =>
+                                        cat.id == selectedCategory,
+                                )?.name ?? "Show All Items"
+                            }}
+                        </span>
+                    </div>
                 </h2>
                 <div
                     class="block md:hidden"
@@ -66,8 +79,16 @@
             class="w-full h-fit bg-white rounded-xl p-2 md:p-4 shadow-sm border border-slate-200"
         >
             <div class="flex w-full justify-between md:block">
-                <h2 class="text-lg font-semibold text-slate-900 mb-0 md:mb-4">
-                    Price Range
+                <h2 class="text-slate-900 mb-0 md:mb-4">
+                    <span class="hidden md:block text-lg font-semibold">
+                        Price Range
+                    </span>
+                    <div class="flex gap-4 items-center md:hidden">
+                        <IconItemCategory class="size-5 block md:hidden" />
+                        <span class="block md:hidden">
+                            Maximum ${{ priceRange }}
+                        </span>
+                    </div>
                 </h2>
                 <div
                     class="block md:hidden"
@@ -93,7 +114,7 @@
                 <input
                     v-model="priceRange"
                     type="range"
-                    @change="emit('on-search', selectedCategory, priceRange)"
+                    @change="onCeilPriceSlider()"
                     class="w-full accent-blue-600"
                     :min="minPrice"
                     :max="maxPrice"
@@ -103,9 +124,7 @@
 
                     <input
                         class="w-16 text-center text-indigo-600 font-bold"
-                        @change="
-                            emit('on-search', selectedCategory, priceRange)
-                        "
+                        @change="onCeilPriceSlider()"
                         type="number"
                         :min="minPrice"
                         :max="maxPrice"
@@ -127,14 +146,11 @@ import Coupon from "@/pages/home/partials/Coupon.vue";
 // props
 import { ItemCategory } from "@/types";
 import { usePage } from "@inertiajs/vue3";
+import IconItemCategory from "@/icons/IconItemCategory.vue";
 interface PageProps extends Record<string, unknown> {
     categories: ItemCategory[];
 }
 const categories = usePage<PageProps>().props.categories;
-
-// ceil minmax the range slider
-const minPrice = usePage<PageProps>().props.filter.min_price;
-const maxPrice = usePage<PageProps>().props.filter.max_price;
 
 // emit filter data to parent, so router.get can be called with interia
 const emit = defineEmits(["on-search"]);
@@ -146,12 +162,47 @@ const priceRange = ref<number>(
         usePage<PageProps>().props.filter.avg_price,
 );
 
+// ceil minmax the range slider
+const minPrice = usePage<PageProps>().props.filter.min_price;
+const maxPrice = usePage<PageProps>().props.filter.max_price;
+const onCeilPriceSlider = () => {
+    if (priceRange.value <= minPrice) {
+        priceRange.value = minPrice;
+    }
+    if (priceRange.value >= maxPrice) {
+        priceRange.value = maxPrice;
+    }
+
+    emit("on-search", selectedCategory.value, priceRange.value);
+};
+
 // mobile:
 const collapseCategories = ref<boolean>(false);
+const selectedMobileCategory = ref<string>(
+    usePage<PageProps>().props.categories.find(
+        (cat: ItemCategory) => cat.id === selectedCategory.value,
+    ),
+);
+
 const collapsePriceRange = ref<boolean>(false);
+
+// TODO: priceRange must be toFixed.
+// priceRange.value?.toFixed is not a function
 
 // trigger search emit for static element without listener
 watch(selectedCategory, () => {
+    console.log(
+        usePage<PageProps>().props.categories.find(
+            (cat) => cat.id == selectedCategory.value,
+        ),
+    );
+    selectedMobileCategory.value = usePage<PageProps>().props.categories.find(
+        (cat: ItemCategory) => cat.id == selectedCategory.value,
+    );
     emit("on-search", selectedCategory.value, priceRange.value);
+});
+
+watch(selectedMobileCategory, () => {
+    console.log(selectedMobileCategory.value);
 });
 </script>

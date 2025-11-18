@@ -26,10 +26,14 @@
                             placeholder="Search products..."
                             class="flex-1 outline-none text-slate-700"
                         />
+                        <span v-if="searchText" @click="resetTextSearch">
+                            x
+                        </span>
                     </div>
                 </div>
 
                 <div
+                    v-if="items.length > 0"
                     class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4"
                 >
                     <ItemCard
@@ -37,6 +41,12 @@
                         :key="product.id"
                         v-bind="product"
                     />
+                </div>
+
+                <div v-else class="w-full flex justify-center items-center">
+                    <span class="w-full text-slate-700 text-center">
+                        No items found.
+                    </span>
                 </div>
             </main>
         </div>
@@ -74,6 +84,14 @@ const onSearch = (category: number, price_range: number) => {
             // options
             replace: true,
         },
+    );
+};
+
+const resetTextSearch = () => {
+    searchText.value = "";
+    onSearch(
+        usePage<PageProps>().props.filter.category,
+        usePage<PageProps>().props.filter.price_range,
     );
 };
 
