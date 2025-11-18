@@ -26,7 +26,9 @@
             >
                 <div class="p-4 flex flex-col md:flex-row gap-4 items-center">
                     <div class="flex relative w-full">
-                        <IconSearch />
+                        <IconSearch
+                            class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
+                        />
 
                         <input
                             v-model="searchQuery"
