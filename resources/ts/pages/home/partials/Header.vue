@@ -1,7 +1,10 @@
 <template>
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="px-6 py-4 flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-slate-900">ShopCo</h1>
+            <h1
+                class="text-2xl font-bold text-slate-900"
+                v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
+            />
             <div class="flex items-center gap-4">
                 <div class="relative">
                     <button
@@ -34,8 +37,15 @@
     </header>
 </template>
 <script setup lang="ts">
+import { usePage } from "@inertiajs/vue3";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShoppingCart from "@/icons/IconShoppingCart.vue";
+
+interface PageProps extends Record<string, unknown> {
+    app: {
+        name: string;
+    };
+}
 
 const favouriteItemCount: number = 3;
 const cartItemCount: number = 6;
