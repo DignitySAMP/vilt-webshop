@@ -158,7 +158,7 @@ const searchQuery = ref("");
 
 const onSearch = () => {
     router.get(
-        route("item.index"),
+        route("supplier.index"),
         {
             // data
             search: searchQuery.value,

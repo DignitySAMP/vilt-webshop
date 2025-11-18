@@ -13,7 +13,7 @@ class SupplierController extends Controller
      */
     public function index(Request $request)
     {
-        $suppliers = Supplier::paginate(10);
+        $suppliers = $this->buildCollectionFromSearch($request->query('search'));
 
         return Inertia::render('supplier/Index', [
             'suppliers' => $suppliers,
@@ -21,6 +21,20 @@ class SupplierController extends Controller
                 'search' => $request->query('search'),
             ],
         ]);
+    }
+
+    private function buildCollectionFromSearch($search)
+    {
+        $query = Supplier::select();
+
+        if (isset($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        return $query->orderByDesc('created_at')->paginate(10)->withQueryString();
     }
 
     /**
