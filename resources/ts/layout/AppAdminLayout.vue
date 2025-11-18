@@ -41,6 +41,7 @@ import IconItem from "@/icons/IconItem.vue";
 import IconItemCategory from "@/icons/IconItemCategory.vue";
 import { type Component, ref } from "vue";
 import { Link } from "@inertiajs/vue3";
+import IconSupplier from "@/icons/IconSupplier.vue";
 
 const collapseDropdown = ref<boolean>(false);
 
@@ -61,5 +62,12 @@ const menuItems: menuItemShim[] = [
         icon: IconItemCategory,
         url: route("category.index"),
     },
+    {
+        name: "Supplier",
+        icon: IconSupplier,
+        url: route("supplier.index")
+    }
 ];
+
+// TODO: Add click event that closes the dropdown when clicking outside of it
 </script>
