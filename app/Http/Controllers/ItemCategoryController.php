@@ -63,17 +63,6 @@ class ItemCategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(ItemCategory $category)
-    {
-        // shows all of the items inside a category, can be used for front-end?
-        return Inertia::render('item_category/Show', [
-            'category' => $category->with('items')->get()
-        ]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(ItemCategory $category)
