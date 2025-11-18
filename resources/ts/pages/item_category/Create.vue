@@ -1,7 +1,7 @@
 <template>
     <AppAdminLayout>
         <template v-slot:header>
-            <div class="flex items-center justify-between">
+
                 <div class="flex items-center gap-4">
                     <Link
                         :href="route('category.index')"
@@ -28,7 +28,7 @@
                         Create Category
                     </button>
                 </div>
-            </div>
+
         </template>
 
         <template v-slot:body>
