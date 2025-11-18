@@ -20,17 +20,7 @@
                     </span>
                 </div>
                 <div class="relative">
-                    <button
-                        class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-                    >
-                        <IconShoppingCart class="w-5 h-5 text-slate-600" />
-                    </button>
-                    <span
-                        v-if="cartItemCount > 0"
-                        class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium"
-                    >
-                        {{ cartItemCount }}
-                    </span>
+                    <ShoppingCart />
                 </div>
                 <Link
                     :href="
@@ -52,8 +42,8 @@
 </template>
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
+import ShoppingCart from "@/pages/home/partials/ShoppingCart.vue";
 import IconFavorites from "@/icons/IconFavorites.vue";
-import IconShoppingCart from "@/icons/IconShoppingCart.vue";
 import IconAccount from "@/icons/IconAccount.vue";
 import IconProfile from "@/icons/IconProfile.vue";
 
@@ -64,5 +54,4 @@ interface PageProps extends Record<string, unknown> {
 }
 
 const favouriteItemCount: number = 3;
-const cartItemCount: number = 6;
 </script>
