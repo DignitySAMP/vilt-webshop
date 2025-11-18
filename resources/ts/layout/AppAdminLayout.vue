@@ -22,7 +22,7 @@
                     <div v-for="item in menuItems" :key="item.name">
                         <Link
                             :href="item.url"
-                            class="flex w-full justify-between"
+                            class="px-2 py-1 flex w-full justify-between hover:bg-gray-100 rounded-lg"
                         >
                             <component :is="item.icon" class="size-5" />
                             <span>
