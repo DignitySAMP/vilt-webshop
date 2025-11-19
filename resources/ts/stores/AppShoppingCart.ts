@@ -7,13 +7,15 @@ import axios from "axios";
 
 export const useShoppingCartStore = defineStore("shopping_cart", () => {
     interface ShoppingCartResponse {
-        cart: {
-            id: number;
-            user_id: number;
-            created_at: string;
-            updated_at: string;
-            items: ShoppingCartItem[];
-        };
+        cart: ShoppingCart;
+    }
+
+    interface ShoppingCart {
+        id: number;
+        user_id: number;
+        created_at: string;
+        updated_at: string;
+        items: ShoppingCartItem[];
     }
 
     interface ShoppingCartItem {
@@ -38,7 +40,6 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
     const getShoppingBasket = async (): Promise<AxiosResponse> => {
         try {
             const response = await axios.get(route("cart.index"));
-            console.log(response);
 
             if (response.data) {
                 shoppingBasket.value = response.data;
@@ -56,6 +57,12 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
                 data: response.data, // { shopping_cart: {...} }
             };
         } catch (error: any) {
+            // cart not found, reset vars to make 'cart is empty' show
+            if (error.response?.status === 404) {
+                shoppingBasket.value = null;
+                shoppingBasketItems.value = null;
+            }
+
             return {
                 status: error.response?.status ?? 500,
                 message: error.response?.data?.message ?? error.message,
@@ -75,7 +82,37 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
             return {
                 status: response.status,
                 message: "OK",
-                data: response.data, // { shopping_cart: {...} }
+                data: response.data,
+            };
+        } catch (error: any) {
+            return {
+                status: error.response?.status ?? 500,
+                message: error.response?.data?.message ?? error.message,
+                data: null,
+            };
+        }
+    };
+
+    const updateItemInBasket = async (
+        cart: number,
+        item: Item,
+        amount: number,
+    ): Promise<AxiosResponse> => {
+        try {
+            const response = await axios.patch(
+                route("cart.update", {
+                    cart: cart,
+                    item_id: item.id,
+                    amount: amount,
+                }),
+            );
+
+            await getShoppingBasket();
+            console.log(response);
+            return {
+                status: response.status,
+                message: "OK",
+                data: response.data,
             };
         } catch (error: any) {
             return {
@@ -92,5 +129,6 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
 
         getShoppingBasket,
         storeItemToBasket,
+        updateItemInBasket, // also handles deletes (see controller)
     };
 });

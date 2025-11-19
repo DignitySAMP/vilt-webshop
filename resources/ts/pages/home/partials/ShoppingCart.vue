@@ -74,6 +74,13 @@
                                     class="flex justify-end items-center gap-2"
                                 >
                                     <button
+                                        @click="
+                                            shopping_cart_store.updateItemInBasket(
+                                                product.id,
+                                                product.item,
+                                                product?.amount - 1,
+                                            )
+                                        "
                                         class="size-6 bg-slate-100 rounded flex items-center justify-center hover:bg-slate-200 transition-colors"
                                     >
                                         <IconMinus class="size-3" />
@@ -83,6 +90,13 @@
                                         >{{ product?.amount }}</span
                                     >
                                     <button
+                                        @click="
+                                            shopping_cart_store.updateItemInBasket(
+                                                product.id,
+                                                product.item,
+                                                product?.amount + 1,
+                                            )
+                                        "
                                         class="size-6 bg-slate-100 rounded flex items-center justify-center hover:bg-slate-200 transition-colors"
                                     >
                                         <IconPlus class="size-3" />

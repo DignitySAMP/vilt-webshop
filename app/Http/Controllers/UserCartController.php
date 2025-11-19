@@ -86,14 +86,45 @@ class UserCartController extends Controller
      */
     public function update(Request $request, UserCart $userCart)
     {
-        //
-    }
+        if (! Auth::check()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(UserCart $userCart)
-    {
-        //
+        $validate = $request->validate([
+            'item_id' => 'required|exists:items,id',
+            'amount' => 'required|integer|min:0',
+        ]);
+
+        $cart = Auth::user()->cart;
+        if (! $cart) {
+            return response()->json(['message' => 'Cart not found'], 404);
+        }
+
+        $item = $cart->items()->where('item_id', $validate['item_id'])->first();
+        if (! $item) {
+            return response()->json(['message' => 'Item not found in cart'], 404);
+        }
+
+        // handle negative amounts
+        if ($validate['amount'] <= 0) {
+            $item->delete();
+
+            // is cart empty after deleting last item => destroy instance
+            if ($cart->items()->count() === 0) {
+                $cart->delete();
+
+                return response()->json(['message' => 'Last item removed, cart deleted'], 200);
+            }
+
+            return response()->json(['message' => 'Item removed from cart'], 200);
+        }
+
+        $item->amount = $validate['amount'];
+        $item->save();
+
+        return response()->json([
+            'message' => 'Item updated successfully',
+            'cart' => $cart->load('items'),
+        ], 200);
     }
 }

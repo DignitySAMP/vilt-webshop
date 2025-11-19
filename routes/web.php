@@ -25,4 +25,4 @@ Route::get('/user/two-faction-setup', function () {
 Route::resource('item', ItemController::class)->except(['show']);
 Route::resource('category', ItemCategoryController::class)->except(['show']);
 Route::resource('supplier', SupplierController::class);
-Route::resource('cart', UserCartController::class);
+Route::resource('cart', UserCartController::class)->except('show', 'edit', 'create', 'destroy');
