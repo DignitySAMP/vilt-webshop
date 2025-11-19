@@ -1,7 +1,5 @@
 <template>
-    <div class="min-h-screen bg-slate-50">
-        <Header />
-
+    <AppLayout>
         <div
             class="grid md:grid-cols-[180px_1fr] lg:grid-cols-[280px_1fr] gap-4 p-3 md:p-6 max-w-[1800px] mx-auto"
         >
@@ -50,19 +48,21 @@
                 </div>
             </main>
         </div>
-    </div>
+    </AppLayout>
 </template>
 <script setup lang="ts">
-import Header from "@/pages/home/partials/Header.vue";
+import { ref } from "vue";
+import { router, usePage } from "@inertiajs/vue3";
+
+import AppLayout from "@/layout/AppLayout.vue";
 import Filters from "@/pages/home/partials/Filters.vue";
 
 import ItemCard from "./partials/ItemCard.vue";
 import IconSearch from "@/icons/IconSearch.vue";
 
-import { ItemCategory, Item } from "@/types";
-import { ref } from "vue";
-import { router, usePage } from "@inertiajs/vue3";
 import IconClose from "@/icons/IconClose.vue";
+
+import { ItemCategory, Item } from "@/types";
 
 interface PageProps extends Record<string, unknown> {
     categories: ItemCategory[];

@@ -1,10 +1,12 @@
 <template>
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="px-6 py-4 flex items-center justify-between">
-            <h1
-                class="text-2xl font-bold text-slate-900"
-                v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
-            />
+            <Link :href="route('home')">
+                <h1
+                    class="text-2xl font-bold text-slate-900"
+                    v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
+                />
+            </Link>
             <div class="flex items-center gap-4">
                 <div class="relative">
                     <button
@@ -42,7 +44,7 @@
 </template>
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
-import ShoppingCart from "@/pages/home/partials/ShoppingCart.vue";
+import ShoppingCart from "@/layout/partials/ShoppingCart.vue";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconAccount from "@/icons/IconAccount.vue";
 import IconProfile from "@/icons/IconProfile.vue";

@@ -23,6 +23,8 @@ Route::get('/user/two-faction-setup', function () {
 })->middleware(['auth', 'verified', 'password.confirm'])->name('two-factor.setup');
 
 Route::resource('item', ItemController::class)->except(['show']);
+Route::get('item/{item}', [ItemController::class, 'show'])->name('item.show');
+
 Route::resource('category', ItemCategoryController::class)->except(['show']);
 Route::resource('supplier', SupplierController::class);
 Route::resource('cart', UserCartController::class)->except('show', 'edit', 'create', 'destroy');

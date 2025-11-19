@@ -1,6 +1,6 @@
 <template>
-    <div
-        :key="product.id"
+    <Link
+        :href="route('item.show', product.id)"
         class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group"
     >
         <img
@@ -33,9 +33,10 @@
                 </button>
             </div>
         </div>
-    </div>
+    </Link>
 </template>
 <script setup lang="ts">
+import { Link } from "@inertiajs/vue3";
 import { Item } from "@/types";
 const product = defineProps<Item>();
 

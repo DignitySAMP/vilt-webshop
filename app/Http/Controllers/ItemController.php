@@ -47,6 +47,18 @@ class ItemController extends Controller
     }
 
     /**
+     * Show the specific resource.
+     */
+    public function show(Item $item)
+    {
+        $item->load(['item_category', 'supplier']);
+
+        return Inertia::render('item/Show', [
+            'item' => $item,
+        ]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
