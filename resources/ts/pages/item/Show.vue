@@ -132,46 +132,12 @@
                         Related Items
                     </h2>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div
-                            v-for="product in relatedItems"
+                        <PartialShowRelatedCard
+                            v-for="product in usePage<PageProps>().props
+                                .similar"
                             :key="product.id"
-                            class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group cursor-pointer"
-                        >
-                            <img
-                                :src="product.image_url"
-                                class="bg-slate-100 flex items-center justify-center group-hover:scale-105 transition duration-300 h-48 w-full object-cover"
-                            />
-                            <div class="p-4">
-                                <h3 class="font-semibold text-slate-900 mb-1">
-                                    {{ product.name }}
-                                </h3>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="text-sm text-slate-500">{{
-                                        product.description
-                                    }}</span>
-                                </div>
-                                <div
-                                    class="text-sm text-slate-500 flex items-center gap-2 mb-3"
-                                >
-                                    <span class="font-bold">{{
-                                        product.stock
-                                    }}</span>
-                                    <span>items in stock.</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span
-                                        class="text-xl font-bold text-slate-900"
-                                        >${{ product.price.toFixed(2) }}</span
-                                    >
-                                    <button
-                                        @click.stop="addRelatedToCart(product)"
-                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                                    >
-                                        Add to Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            v-bind="product"
+                        />
                     </div>
                 </div>
             </div>
@@ -183,8 +149,6 @@
 import AppLayout from "@/layout/AppLayout.vue";
 import { usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
-
-import { Item } from "@/types";
 
 interface PageProps extends Record<string, unknown> {
     item: {
@@ -221,54 +185,12 @@ interface PageProps extends Record<string, unknown> {
 const item = usePage<PageProps>().props.item;
 const isFavourite = ref(false);
 
-const relatedItems = ref([
-    {
-        id: 101,
-        name: "Premium Wireless Headphones",
-        description: "Noise-canceling audio experience",
-        price: 149.99,
-        stock: 25,
-        image_url:
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
-    },
-    {
-        id: 102,
-        name: "Smart Watch Pro",
-        description: "Track your fitness goals",
-        price: 299.99,
-        stock: 12,
-        image_url:
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
-    },
-    {
-        id: 103,
-        name: "Portable Charger",
-        description: "Fast charging on the go",
-        price: 39.99,
-        stock: 50,
-        image_url:
-            "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400",
-    },
-    {
-        id: 104,
-        name: "Bluetooth Speaker",
-        description: "Waterproof outdoor audio",
-        price: 79.99,
-        stock: 18,
-        image_url:
-            "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400",
-    },
-]);
-
 import { useShoppingCartStore } from "@/stores/AppShoppingCart";
+import PartialShowRelatedCard from "@/pages/item/partials/PartialShowRelatedCard.vue";
 const shopping_cart_store = useShoppingCartStore();
 
 const addToCart = async () => {
     await shopping_cart_store.storeItemToBasket(item);
-};
-
-const addRelatedToCart = (product: any) => {
-    console.log("addRelatedToCart:", product.id);
 };
 
 const toggleFavourite = () => {

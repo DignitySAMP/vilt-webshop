@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,5 +40,26 @@ class Item extends Model
         }
 
         return null;
+    }
+
+    // Builds a collection of random images with similar values (file_name, description, publisher.name)
+    public function similar(): Collection
+    {
+        return self::with(['item_category', 'supplier'])
+            ->where('id', '!=', $this->id)
+            ->where(
+                column: function ($query): void {
+                    $query->where('name', $this->name)
+                        ->orWhere('description', $this->description)
+                        ->orWhere('item_category_id', $this->item_category_id)
+                        ->orWhere('supplier_id', $this->supplier_id)
+                        ->orWhereHas('supplier', function ($q): void {
+                            $q->where('name', $this->supplier?->name);
+                        }
+                        );
+                })
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
     }
 }

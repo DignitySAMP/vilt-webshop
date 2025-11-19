@@ -55,6 +55,7 @@ class ItemController extends Controller
 
         return Inertia::render('item/Show', [
             'item' => $item,
+            'similar' => $item->similar(),
         ]);
     }
 
