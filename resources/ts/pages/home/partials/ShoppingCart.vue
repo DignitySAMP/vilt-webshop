@@ -171,18 +171,20 @@ const shopping_cart_store = useShoppingCartStore();
 import IconPlus from "@/icons/IconPlus.vue";
 import IconMinus from "@/icons/IconMinus.vue";
 
-
 const shoppingCartRef = ref<HTMLElement | null>(null);
 onMounted(async () => {
     await shopping_cart_store.getShoppingBasket();
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
 });
 
 const handleClickOutside = (event: MouseEvent) => {
-	if (shoppingCartRef.value && !shoppingCartRef.value.contains(event.target as Node)) {
-		showShoppingCart.value = false
-	}
-}
+    if (
+        shoppingCartRef.value &&
+        !shoppingCartRef.value.contains(event.target as Node)
+    ) {
+        showShoppingCart.value = false;
+    }
+};
 
 const cartItemCount = computed<number>(
     () => shopping_cart_store.shoppingBasketItems?.length ?? 0,

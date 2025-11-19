@@ -86,7 +86,7 @@
                     <div class="flex gap-4 items-center md:hidden">
                         <IconItemCategory class="size-5 block md:hidden" />
                         <span class="block md:hidden">
-                            Maximum ${{ priceRange }}
+                            Maximum ${{ numberToFixed(priceRange) }}
                         </span>
                     </div>
                 </h2>
@@ -120,7 +120,7 @@
                     :max="maxPrice"
                 />
                 <div class="flex justify-between text-sm text-slate-600">
-                    <span>${{ minPrice }}</span>
+                    <span>${{ numberToFixed(minPrice) }}</span>
 
                     <input
                         class="w-16 text-center text-indigo-600 font-bold"
@@ -131,7 +131,7 @@
                         v-model="priceRange"
                     />
 
-                    <span>${{ maxPrice }}</span>
+                    <span>${{ numberToFixed(maxPrice) }}</span>
                 </div>
             </div>
         </div>
@@ -176,6 +176,11 @@ const onCeilPriceSlider = () => {
     emit("on-search", selectedCategory.value, priceRange.value);
 };
 
+// safely formats a number to have 2 decimals
+const numberToFixed = (input: number) => {
+    return Number(input).toFixed(2);
+};
+
 // mobile:
 const collapseCategories = ref<boolean>(false);
 const selectedMobileCategory = ref<string>(
@@ -185,9 +190,6 @@ const selectedMobileCategory = ref<string>(
 );
 
 const collapsePriceRange = ref<boolean>(false);
-
-// TODO: priceRange must be toFixed.
-// priceRange.value?.toFixed is not a function
 
 // trigger search emit for static element without listener
 watch(selectedCategory, () => {

@@ -19,9 +19,9 @@ class HomeController extends Controller
             'categories' => ItemCategory::all(),
             'filter' => [
                 // TODO: cache the _price's
-                'min_price' => Item::min('price'),
-                'avg_price' => Item::avg('price'),
-                'max_price' => Item::max('price'),
+                'min_price' => round(Item::min('price'), 2),
+                'avg_price' => round(Item::avg('price'), 2),
+                'max_price' => round(Item::max('price'), 2),
                 'price_range' => $request->query('price_range') ?? null,
                 'category' => $request->query('category') ?? null,
                 'search' => $request->query('search') ?? null,
