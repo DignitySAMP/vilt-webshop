@@ -11,12 +11,10 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    show: {
-        type: Boolean,
-        required: true,
-    },
-});
+interface Props { 
+    show: boolean
+}
+const props = defineProps<Props>();
 
 const emit = defineEmits(["close"]);
 </script>
