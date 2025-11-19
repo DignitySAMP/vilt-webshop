@@ -96,12 +96,15 @@
 
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
-import { useForm } from "@inertiajs/vue3";
+import { InertiaForm, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
 
-const recoveryMode = ref(false);
+const recoveryMode = ref<boolean>(false);
 
-const form = useForm({
+const form: InertiaForm<{
+    code: string,
+    recovery_code: string,
+}> = useForm({
     code: "",
     recovery_code: "",
 });

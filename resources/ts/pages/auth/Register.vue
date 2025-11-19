@@ -100,9 +100,14 @@
 </template>
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
-import { Link, useForm } from "@inertiajs/vue3";
+import { InertiaForm, Link, useForm } from "@inertiajs/vue3";
 
-const form = useForm({
+const form: InertiaForm<{
+        name: string,
+        email: string,
+        password: string,
+        password_confirmation: string
+    }> = useForm({
     name: "",
     email: "",
     password: "",
@@ -113,7 +118,7 @@ const submit = () => {
     form.post(route("register.store"), {
         preserveScroll: true,
         onSuccess: () => form.reset("password"),
-        onError: (error: Array<string>) => console.error(error),
+        onError: (error) => console.error(error),
         onFinish: () => form.reset(),
     });
 };

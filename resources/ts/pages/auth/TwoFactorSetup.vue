@@ -58,9 +58,9 @@
                 </button>
 
                 <span
-                    v-if="form.errors['confirmTwoFactorAuthentication']"
+                    v-if="form.errors.confirmTwoFactorAuthentication"
                     class="text-sm text-red-700"
-                    v-html="form.errors['confirmTwoFactorAuthentication']"
+                    v-html="form.errors.confirmTwoFactorAuthentication"
                 />
             </div>
 
@@ -82,19 +82,18 @@
 import { ref } from "vue";
 
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
-import { useForm, usePage } from "@inertiajs/vue3";
+import { InertiaForm, useForm, usePage } from "@inertiajs/vue3";
 import axios from "axios";
 
-const form = useForm<
-    {
-        code: string;
-    } & Record<string, string | string[]>
->({
+const form: InertiaForm<{
+    code: string
+    confirmTwoFactorAuthentication?: string;
+}> = useForm({
     code: "",
 });
 
-const qrCode = ref(null);
-const recoveryCodes = ref([]);
+const qrCode = ref<string|null>(null);
+const recoveryCodes = ref<Array<string>>([]);
 
 const submitEnable = () => {
     form.post(route("two-factor.enable"), {
@@ -103,7 +102,7 @@ const submitEnable = () => {
             await fetch2FAQRCode();
             await fetch2FARecoveryCodes();
         },
-        onError: (error: Array<string>) => console.error(error),
+        onError: (error) => console.error(error),
         onFinish: () => form.reset(),
     });
 };
@@ -116,7 +115,7 @@ const submitConfirm = () => {
             confirmed.value = true;
             await fetch2FARecoveryCodes(); // refresh codes after confirmation
         },
-        onError: (error: Array<string>) => console.error(error),
+        onError: (error) => console.error(error),
         onFinish: () => form.reset(),
     });
 };

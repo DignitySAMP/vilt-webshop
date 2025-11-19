@@ -64,9 +64,11 @@
 </template>
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
-import { Link, useForm, usePage } from "@inertiajs/vue3";
+import { InertiaForm, Link, useForm, usePage } from "@inertiajs/vue3";
 
-const form = useForm({
+const form: InertiaForm<{
+    email: string
+}> = useForm({
     email: "",
 });
 
@@ -74,7 +76,7 @@ const submit = () => {
     form.post(route("password.email"), {
         preserveScroll: true,
         onSuccess: () => form.reset("email"),
-        onError: (error: Array<string>) => console.error(error),
+        onError: (error) => console.error(error),
         onFinish: () => form.reset(),
     });
 };
