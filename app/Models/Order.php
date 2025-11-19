@@ -28,9 +28,4 @@ class Order extends Model
     {
         return $this->hasMany(OrderPayment::class);
     }
-
-    public function shoppingBasket(): HasOne
-    {
-        return $this->hasOne(OrderShoppingBasket::class);
-    }
 }

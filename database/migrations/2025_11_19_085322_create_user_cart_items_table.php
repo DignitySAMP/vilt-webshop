@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Order;
-use App\Models\User;
+use App\Models\Item;
+use App\Models\UserCart;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_shopping_baskets', function (Blueprint $table) {
+        Schema::create('user_cart_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Order::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(UserCart::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Item::class)->constrained()->cascadeOnDelete();
+            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_shopping_baskets');
+        Schema::dropIfExists('user_cart_items');
     }
 };

@@ -26,6 +26,7 @@
                     >${{ product.price.toFixed(2) }}</span
                 >
                 <button
+                    @click="addToCart(product)"
                     class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
                 >
                     Add to Cart
@@ -37,4 +38,12 @@
 <script setup lang="ts">
 import { Item } from "@/types";
 const product = defineProps<Item>();
+
+import { useShoppingCartStore } from '@/stores/AppShoppingCart'
+const shopping_cart_store = useShoppingCartStore();
+
+const addToCart = async (item: Item) => {
+    await shopping_cart_store.storeItemToBasket(item);
+    await shopping_cart_store.getShoppingBasket();
+}
 </script>

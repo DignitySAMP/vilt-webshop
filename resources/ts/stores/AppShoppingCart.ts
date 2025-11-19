@@ -1,0 +1,102 @@
+import { defineStore } from 'pinia';
+
+import { ref } from 'vue';
+
+import { Item } from "@/types";
+import axios from "axios";
+
+export const useShoppingCartStore = defineStore('shopping_cart', () => {
+
+    interface ShoppingCartResponse {
+
+        cart: {
+            id: number,
+            user_id: number,
+            created_at: string,
+            updated_at: string,
+            items: ShoppingCartItem[]
+        }
+    }
+
+    interface ShoppingCartItem {
+        id: number,
+        user_cart_id: number,
+        item_id: number,
+        amount: number,
+        created_at: string,
+        updated_at: string,
+        item: Item
+    }
+
+    interface AxiosResponse {
+        status: number;
+        message: string;
+        data: any[] | null;
+    }
+
+    const shoppingBasket = ref<ShoppingCartResponse | null>(null);
+    const shoppingBasketItems = ref<ShoppingCartItem[] | null>(null);
+
+    const getShoppingBasket = async (): Promise<AxiosResponse> => {
+        try {
+            const response = await axios.get(route('cart.index'));
+            console.log(response);
+
+            if (response.data) {
+                shoppingBasket.value = response.data;
+                shoppingBasketItems.value = shoppingBasket.value?.cart.items ?? null;
+
+                console.log(shoppingBasket.value, shoppingBasketItems.value);
+            } else {
+                shoppingBasket.value = null;
+            }
+
+            return {
+                status: response.status,
+                message: "OK",
+                data: response.data   // { shopping_cart: {...} }
+            };
+
+        } catch (error: any) {
+
+            return {
+                status: error.response?.status ?? 500,
+                message: error.response?.data?.message ?? error.message,
+                data: null
+            };
+        }
+    }
+
+    const storeItemToBasket = async (item: Item): Promise<AxiosResponse> => {
+
+        try {
+            const response = await axios.post(
+                route('cart.store', {
+                    item: item.id
+                }
+                ));
+
+            return {
+                status: response.status,
+                message: "OK",
+                data: response.data   // { shopping_cart: {...} }
+            };
+
+        } catch (error: any) {
+
+            return {
+                status: error.response?.status ?? 500,
+                message: error.response?.data?.message ?? error.message,
+                data: null
+            };
+        }
+    }
+
+    return {
+        shoppingBasket,
+        shoppingBasketItems,
+
+        getShoppingBasket,
+        storeItemToBasket
+    }
+})
