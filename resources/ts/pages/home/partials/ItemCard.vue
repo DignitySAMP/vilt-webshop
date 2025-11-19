@@ -44,6 +44,5 @@ const shopping_cart_store = useShoppingCartStore();
 
 const addToCart = async (item: Item) => {
     await shopping_cart_store.storeItemToBasket(item);
-    await shopping_cart_store.getShoppingBasket();
 };
 </script>

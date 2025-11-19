@@ -41,14 +41,14 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
         try {
             const response = await axios.get(route("cart.index"));
 
+            // init shopping basket if data is found
             if (response.data) {
                 shoppingBasket.value = response.data;
                 shoppingBasketItems.value =
                     shoppingBasket.value?.cart.items ?? null;
-
-                console.log(shoppingBasket.value, shoppingBasketItems.value);
             } else {
                 shoppingBasket.value = null;
+                shoppingBasketItems.value = null;
             }
 
             return {
@@ -79,6 +79,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
                 }),
             );
 
+            await getShoppingBasket(); // refresh basket
             return {
                 status: response.status,
                 message: "OK",
@@ -107,8 +108,8 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
                 }),
             );
 
-            await getShoppingBasket();
-            console.log(response);
+            await getShoppingBasket(); // refresh basket
+
             return {
                 status: response.status,
                 message: "OK",
