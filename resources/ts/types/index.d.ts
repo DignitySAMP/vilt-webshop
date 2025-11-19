@@ -59,7 +59,7 @@ export interface Order {
 export interface OrderItem {
     id: number;
     order_id: number;
-    order?: Order | null,
+    order?: Order | null;
     item_id: number;
     item?: Item | null;
     amount: number;

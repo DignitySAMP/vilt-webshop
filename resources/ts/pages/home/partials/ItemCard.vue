@@ -39,11 +39,11 @@
 import { Item } from "@/types";
 const product = defineProps<Item>();
 
-import { useShoppingCartStore } from '@/stores/AppShoppingCart'
+import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 const shopping_cart_store = useShoppingCartStore();
 
 const addToCart = async (item: Item) => {
     await shopping_cart_store.storeItemToBasket(item);
     await shopping_cart_store.getShoppingBasket();
-}
+};
 </script>

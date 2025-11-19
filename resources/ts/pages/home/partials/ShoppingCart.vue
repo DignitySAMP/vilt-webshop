@@ -24,20 +24,34 @@
                     Shopping Cart
                 </h2>
 
-                <div v-if="!shopping_cart_store.shoppingBasket && (!shopping_cart_store.shoppingBasketItems || shopping_cart_store.shoppingBasketItems.length === 0)" class="text-center py-8">
+                <div
+                    v-if="
+                        !shopping_cart_store.shoppingBasket &&
+                        (!shopping_cart_store.shoppingBasketItems ||
+                            shopping_cart_store.shoppingBasketItems.length ===
+                                0)
+                    "
+                    class="text-center py-8"
+                >
                     <IconShoppingCart
                         class="w-16 h-16 text-slate-300 mx-auto mb-3"
                     />
                     <p class="text-slate-500 text-sm">Your cart is empty</p>
                 </div>
 
-                <div v-if="shopping_cart_store.shoppingBasket && (shopping_cart_store.shoppingBasketItems && shopping_cart_store.shoppingBasketItems.length > 0)" class="space-y-4 mb-6">
+                <div
+                    v-if="
+                        shopping_cart_store.shoppingBasket &&
+                        shopping_cart_store.shoppingBasketItems &&
+                        shopping_cart_store.shoppingBasketItems.length > 0
+                    "
+                    class="space-y-4 mb-6"
+                >
                     <div
                         v-for="product in shopping_cart_store.shoppingBasketItems"
                         :key="product.id"
                         class="flex gap-3 w-full pb-4 border-b border-slate-100"
                     >
-
                         <img
                             :src="product?.item?.image_url"
                             class="size-16 bg-slate-100 rounded-lg flex items-center justify-center text-2xl shrink-0"
@@ -62,7 +76,7 @@
                                     <button
                                         class="size-6 bg-slate-100 rounded flex items-center justify-center hover:bg-slate-200 transition-colors"
                                     >
-                                        <IconMinus class="size-3"/>
+                                        <IconMinus class="size-3" />
                                     </button>
                                     <span
                                         class="text-sm font-medium text-slate-700 w-8 text-center"
@@ -71,15 +85,22 @@
                                     <button
                                         class="size-6 bg-slate-100 rounded flex items-center justify-center hover:bg-slate-200 transition-colors"
                                     >
-                                       <IconPlus class="size-3"/>
+                                        <IconPlus class="size-3" />
                                     </button>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
 
-                <div v-if="shopping_cart_store.shoppingBasket && shopping_cart_store.shoppingBasket?.cart.items.length > 0" class="space-y-4">
+                <div
+                    v-if="
+                        shopping_cart_store.shoppingBasket &&
+                        shopping_cart_store.shoppingBasket?.cart.items.length >
+                            0
+                    "
+                    class="space-y-4"
+                >
                     <div class="flex items-center gap-2 mb-4">
                         <input
                             type="text"
@@ -130,7 +151,7 @@ import { computed, onMounted, ref } from "vue";
 
 const showShoppingCart = ref<boolean>(false);
 
-import { useShoppingCartStore } from '@/stores/AppShoppingCart'
+import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 const shopping_cart_store = useShoppingCartStore();
 
 import IconPlus from "@/icons/IconPlus.vue";
@@ -140,12 +161,21 @@ onMounted(async () => {
     await shopping_cart_store.getShoppingBasket();
 });
 
-const cartItemCount = computed<number>(() => shopping_cart_store.shoppingBasketItems?.length ?? 0);
-    const cartTotal = computed<number>(() => {
-    if (!shopping_cart_store.shoppingBasketItems || shopping_cart_store.shoppingBasketItems?.length === 0) return 0;
+const cartItemCount = computed<number>(
+    () => shopping_cart_store.shoppingBasketItems?.length ?? 0,
+);
+const cartTotal = computed<number>(() => {
+    if (
+        !shopping_cart_store.shoppingBasketItems ||
+        shopping_cart_store.shoppingBasketItems?.length === 0
+    )
+        return 0;
 
-    return shopping_cart_store.shoppingBasketItems?.reduce((total, cartItem) => {
-        return total + (cartItem.item?.price ?? 0) * (cartItem.amount ?? 1);
-    }, 0);
+    return shopping_cart_store.shoppingBasketItems?.reduce(
+        (total, cartItem) => {
+            return total + (cartItem.item?.price ?? 0) * (cartItem.amount ?? 1);
+        },
+        0,
+    );
 });
 </script>

@@ -3,8 +3,8 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\UserCartController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserCartController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 

@@ -10,11 +10,13 @@ class UserCart extends Model
 {
     protected $fillable = ['user_id'];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function items(): HasMany {
+    public function items(): HasMany
+    {
         return $this->hasMany(UserCartItem::class);
     }
 }

@@ -14,61 +14,60 @@ class UserCartController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
-    
+
         $cart = Auth::user()
-        ->cart()
-        ->with([
-            'items',
-            'items.item'
-        ])
-        ->first();
-    
-        if (!$cart) {
+            ->cart()
+            ->with([
+                'items',
+                'items.item',
+            ])
+            ->first();
+
+        if (! $cart) {
             return response()->json(['message' => 'Cart not found'], 404);
         }
-    
+
         return response()->json([
-            'cart' => $cart
+            'cart' => $cart,
         ]);
     }
+
     // TODO: except create, show, edit
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
 
         $validate = $request->validate([
-            'item' => 'required|exists:items,id'
+            'item' => 'required|exists:items,id',
         ]);
 
-
         $cart = Auth::user()->cart;
-        if (!$cart) {
+        if (! $cart) {
             $cart = UserCart::create([
-                'user_id' => Auth::id()
+                'user_id' => Auth::id(),
             ]);
         }
 
         UserCartItem::create([
             'user_cart_id' => $cart->id,
             'item_id' => $validate['item'],
-            'amount' => 1
+            'amount' => 1,
         ]);
 
-        $cart->load('items'); 
+        $cart->load('items');
 
         return response()->json([
-            'cart' => $cart
+            'cart' => $cart,
         ]);
     }
-
 
     /**
      * Update the specified resource in storage.
