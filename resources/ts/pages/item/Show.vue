@@ -75,41 +75,21 @@
                                 @click="toggleFavourite"
                                 class="px-6 py-3 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="w-6 h-6"
+                                <IconFavorites
+                                    class="size-6"
                                     :class="
                                         isFavourite
                                             ? 'fill-red-500 text-red-500'
                                             : 'text-slate-400'
                                     "
-                                    viewBox="0 0 24 24"
-                                    :fill="
-                                        isFavourite ? 'currentColor' : 'none'
-                                    "
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                                    />
-                                </svg>
+                                />
                             </button>
                         </div>
 
                         <div class="bg-blue-50 rounded-lg p-4">
-                            <div class="flex items-start gap-3">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-blue-600 mt-0.5"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 16v-4M12 8h.01" />
-                                </svg>
+                            <div class="flex items-center gap-3">
+                                <IconShipping class="size-10 text-indigo-300" />
+
                                 <div class="text-sm text-blue-900">
                                     <p class="font-semibold mb-1">
                                         Free Shipping
@@ -149,7 +129,8 @@
 import AppLayout from "@/layout/AppLayout.vue";
 import { usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
-
+import IconFavorites from "@/icons/IconFavorites.vue";
+import IconShipping from "@/icons/IconShipping.vue";
 interface PageProps extends Record<string, unknown> {
     item: {
         id: number;
@@ -187,6 +168,7 @@ const isFavourite = ref(false);
 
 import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 import PartialShowRelatedCard from "@/pages/item/partials/PartialShowRelatedCard.vue";
+
 const shopping_cart_store = useShoppingCartStore();
 
 const addToCart = async () => {
