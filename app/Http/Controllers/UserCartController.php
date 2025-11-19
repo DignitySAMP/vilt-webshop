@@ -55,12 +55,24 @@ class UserCartController extends Controller
                 'user_id' => Auth::id(),
             ]);
         }
+        // TODO: reduce cart items from stock
+        // TODO: make this automatically expire after 48h, or if stock is already < X
+        // TODO: make this show a status / label on the item
 
-        UserCartItem::create([
-            'user_cart_id' => $cart->id,
-            'item_id' => $validate['item'],
-            'amount' => 1,
-        ]);
+        // validate whether they already have this item in their cart, if not, make a new one
+        $item = UserCartItem::firstWhere('item_id', $validate['item']);
+        if ($item == null) {
+            UserCartItem::create([
+                'user_cart_id' => $cart->id,
+                'item_id' => $validate['item'],
+                'amount' => 1,
+            ]);
+        }
+        // item is already in shopping card, increase the item amount...
+        else {
+            $item->amount++;
+            $item->save();
+        }
 
         $cart->load('items');
 
