@@ -1,5 +1,5 @@
 <template>
-    <AppLayout>
+    <AppGuestLayout>
         <div class="flex flex-col gap-2">
             <div
                 v-if="
@@ -42,10 +42,10 @@
                 </span>
             </div>
         </div>
-    </AppLayout>
+    </AppGuestLayout>
 </template>
 <script setup lang="ts">
-import AppLayout from "@/layout/AppLayout.vue";
+import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
 const form = useForm({});
 </script>
