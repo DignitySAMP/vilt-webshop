@@ -94,6 +94,7 @@ const form: InertiaForm<{
 
 const qrCode = ref<string|null>(null);
 const recoveryCodes = ref<Array<string>>([]);
+const confirmed = ref<boolean>(false);
 
 const submitEnable = () => {
     form.post(route("two-factor.enable"), {
@@ -107,7 +108,6 @@ const submitEnable = () => {
     });
 };
 
-const confirmed = ref(false);
 const submitConfirm = () => {
     form.post(route("two-factor.confirm"), {
         preserveScroll: true,
