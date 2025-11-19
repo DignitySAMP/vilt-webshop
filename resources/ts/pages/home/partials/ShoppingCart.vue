@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div ref="shoppingCartRef" class="relative">
         <button
             @click="showShoppingCart = !showShoppingCart"
             class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
@@ -171,9 +171,18 @@ const shopping_cart_store = useShoppingCartStore();
 import IconPlus from "@/icons/IconPlus.vue";
 import IconMinus from "@/icons/IconMinus.vue";
 
+
+const shoppingCartRef = ref<HTMLElement | null>(null);
 onMounted(async () => {
     await shopping_cart_store.getShoppingBasket();
+    document.addEventListener('click', handleClickOutside);
 });
+
+const handleClickOutside = (event: MouseEvent) => {
+	if (shoppingCartRef.value && !shoppingCartRef.value.contains(event.target as Node)) {
+		showShoppingCart.value = false
+	}
+}
 
 const cartItemCount = computed<number>(
     () => shopping_cart_store.shoppingBasketItems?.length ?? 0,
