@@ -72,7 +72,6 @@ const items = usePage<PageProps>().props.items.data;
 
 const searchText = ref<string>(usePage<PageProps>().props.filter.search);
 const onSearch = (category: number, price_range: number) => {
-    console.log(searchText.value, category, price_range);
     router.get(
         route("home"),
         {

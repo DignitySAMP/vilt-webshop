@@ -156,7 +156,7 @@ interface PageProps extends Record<string, unknown> {
 
 // data
 const suppliers: Supplier[] = usePage<PageProps>().props.suppliers.data;
-console.log(suppliers, usePage<PageProps>().props.suppliers);
+
 // search queries
 const searchQuery = ref("");
 

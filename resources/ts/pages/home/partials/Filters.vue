@@ -198,8 +198,4 @@ watch(selectedCategory, () => {
     );
     emit("on-search", selectedCategory.value, priceRange.value);
 });
-
-watch(selectedMobileCategory, () => {
-    console.log(selectedMobileCategory.value);
-});
 </script>
