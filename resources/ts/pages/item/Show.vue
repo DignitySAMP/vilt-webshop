@@ -131,37 +131,7 @@ import { usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShipping from "@/icons/IconShipping.vue";
-interface PageProps extends Record<string, unknown> {
-    item: {
-        id: number;
-        item_category_id: number;
-        supplier_id: number;
-        name: string;
-        description: string;
-        image: string;
-        price: number;
-        stock: number;
-        created_at: string;
-        updated_at: string;
-        image_url: string;
-        item_category: {
-            id: number;
-            name: string;
-            description: string;
-            item_count: number;
-            created_at: string;
-            updated_at: string;
-        };
-        supplier: {
-            id: number;
-            name: string;
-            description: string;
-            pending_orders: number;
-            created_at: string;
-            updated_at: string;
-        };
-    };
-}
+import { type PageProps } from "@/types/inertia";
 
 const item = usePage<PageProps>().props.item;
 const isFavourite = ref(false);

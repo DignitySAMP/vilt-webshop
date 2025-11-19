@@ -190,15 +190,7 @@ import IconSearch from "@/icons/IconSearch.vue";
 
 // props
 import { Item, ItemCategory } from "@/types";
-import type { PaginationData } from "@/types/pagination";
-interface PageProps extends Record<string, unknown> {
-    items: PaginationData<Item>;
-    categories: ItemCategory[];
-    filter: {
-        category: number;
-        search: string;
-    };
-}
+import { type PageProps } from "@/types/inertia";
 
 // data
 const products: Item[] = usePage<PageProps>().props.items.data;

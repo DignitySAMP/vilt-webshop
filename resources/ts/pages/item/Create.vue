@@ -224,19 +224,17 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { useForm, usePage, Link } from "@inertiajs/vue3";
+import { useForm, usePage, Link, InertiaForm } from "@inertiajs/vue3";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
-
-import { ItemCategory } from "@/types";
 import { ref } from "vue";
-interface PageProps extends Record<string, unknown> {
-    categories: ItemCategory[];
-}
 
-interface FormProps {
+import { type PageProps } from "@/types/inertia";
+
+const previewImage = ref<string | null>("");
+const form: InertiaForm<{
     name: string;
     description: string;
     category: number;
@@ -244,10 +242,7 @@ interface FormProps {
     price: number;
     stock: number;
     image: File | null;
-}
-
-const previewImage = ref<string | null>("");
-const form = useForm<FormProps>({
+}> = useForm({
     name: "",
     description: "",
     category: usePage<PageProps>().props.categories[0].id ?? 1,

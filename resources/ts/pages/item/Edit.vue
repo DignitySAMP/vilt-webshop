@@ -228,23 +228,17 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { useForm, usePage, Link } from "@inertiajs/vue3";
+import { useForm, InertiaForm, usePage, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
 
-import { ItemCategory, Item, Supplier } from "@/types";
-interface PageProps extends Record<string, unknown> {
-    categories: ItemCategory[];
-    suppliers: Supplier[];
-    item: Item;
-}
-
+import { type PageProps } from "@/types/inertia";
 const itemProp = usePage<PageProps>().props.item;
 
-interface FormProps {
+const form: InertiaForm<{
     _method?: any;
     name: string;
     description: string;
@@ -253,9 +247,7 @@ interface FormProps {
     price: number;
     stock: number;
     image: File | null;
-}
-
-const form = useForm<FormProps>({
+}> = useForm({
     _method: "patch" as any, // ignore in ts, will force useForm as patch anyway...
     name: itemProp.name,
     description: itemProp.description,

@@ -70,18 +70,16 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { useForm, Link } from "@inertiajs/vue3";
+import { useForm, Link, InertiaForm } from "@inertiajs/vue3";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
 
-interface FormProps {
+const form: InertiaForm<{
     name: string;
     description: string;
-}
-
-const form = useForm<FormProps>({
+}> = useForm({
     name: "",
     description: "",
 });

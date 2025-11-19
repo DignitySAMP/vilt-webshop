@@ -49,11 +49,7 @@ import IconFavorites from "@/icons/IconFavorites.vue";
 import IconAccount from "@/icons/IconAccount.vue";
 import IconProfile from "@/icons/IconProfile.vue";
 
-interface PageProps extends Record<string, unknown> {
-    app: {
-        name: string;
-    };
-}
+import { type PageProps } from "@/types/inertia";
 
 const favouriteItemCount: number = 3;
 </script>

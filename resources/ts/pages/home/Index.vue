@@ -62,12 +62,7 @@ import IconSearch from "@/icons/IconSearch.vue";
 
 import IconClose from "@/icons/IconClose.vue";
 
-import { ItemCategory, Item } from "@/types";
-
-interface PageProps extends Record<string, unknown> {
-    categories: ItemCategory[];
-    item: Item;
-}
+import { type PageProps } from "@/types/inertia";
 const items = usePage<PageProps>().props.items.data;
 
 const searchText = ref<string>(usePage<PageProps>().props.filter.search);

@@ -147,9 +147,7 @@ import Coupon from "@/pages/home/partials/Coupon.vue";
 import { ItemCategory } from "@/types";
 import { usePage } from "@inertiajs/vue3";
 import IconItemCategory from "@/icons/IconItemCategory.vue";
-interface PageProps extends Record<string, unknown> {
-    categories: ItemCategory[];
-}
+import { type PageProps } from "@/types/inertia";
 const categories = usePage<PageProps>().props.categories;
 
 // emit filter data to parent, so router.get can be called with interia

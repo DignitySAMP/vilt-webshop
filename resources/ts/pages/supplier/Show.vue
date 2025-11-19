@@ -141,9 +141,7 @@ import IconBack from "@/icons/IconBack.vue";
 
 // props
 import { Supplier, SupplierOrder } from "@/types";
-interface PageProps extends Record<string, unknown> {
-    supplier: Supplier;
-}
+import { type PageProps } from "@/types/inertia";
 
 // data
 const supplier: Supplier = usePage<PageProps>().props.supplier;

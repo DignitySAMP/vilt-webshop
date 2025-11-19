@@ -72,10 +72,5 @@
 
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
-
-interface PageProps extends Record<string, unknown> {
-    app: {
-        name: string;
-    };
-}
+import { type PageProps } from "@/types/inertia";
 </script>

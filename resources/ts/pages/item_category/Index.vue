@@ -156,13 +156,8 @@ import IconSearch from "@/icons/IconSearch.vue";
 
 // props
 import { ItemCategory } from "@/types";
-interface PageProps extends Record<string, unknown> {
-    categories: ItemCategory[];
-    filter: {
-        category: number;
-        search: string;
-    };
-}
+
+import { type PageProps } from "@/types/inertia";
 const categories: ItemCategory[] = usePage<PageProps>().props.categories.data;
 
 // search queries

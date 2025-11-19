@@ -72,27 +72,22 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { useForm, usePage, Link } from "@inertiajs/vue3";
+import { useForm, usePage, Link, InertiaForm } from "@inertiajs/vue3";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
 
-import { ItemCategory, Item, Supplier } from "@/types";
-interface PageProps extends Record<string, unknown> {
-    categories: ItemCategory[];
-    suppliers: Supplier[];
-    item: Item;
-}
+import { ItemCategory } from "@/types";
 
-const categoryProp = usePage<PageProps>().props.category;
+import { type PageProps } from "@/types/inertia";
 
-interface FormProps {
+const categoryProp: ItemCategory = usePage<PageProps>().props.category;
+
+const form: InertiaForm<{
     name: string;
     description: string;
-}
-
-const form = useForm<FormProps>({
+}> = useForm({
     name: categoryProp.name,
     description: categoryProp.description,
 });
