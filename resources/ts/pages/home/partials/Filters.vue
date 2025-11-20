@@ -109,28 +109,12 @@
                 class="mt-2 md:mt-0 block space-y-4 md:block"
                 :class="collapsePriceRange ? 'flex flex-col' : 'hidden'"
             >
-                <input
-                    v-model="priceRange"
-                    type="range"
-                    @change="onCeilPriceSlider()"
-                    class="w-full accent-blue-600"
+                <AppFormSlider
                     :min="minPrice"
                     :max="maxPrice"
+                    v-model="priceRange"
+                    @on-slider-change="onSliderChange"
                 />
-                <div class="flex justify-between text-sm text-slate-600">
-                    <span>${{ numberToFixed(minPrice) }}</span>
-
-                    <input
-                        class="w-16 text-center text-indigo-600 font-bold"
-                        @change="onCeilPriceSlider()"
-                        type="number"
-                        :min="minPrice"
-                        :max="maxPrice"
-                        v-model="priceRange"
-                    />
-
-                    <span>${{ numberToFixed(maxPrice) }}</span>
-                </div>
             </div>
         </div>
 
@@ -146,6 +130,7 @@ import { ItemCategory } from "@/types";
 import { usePage } from "@inertiajs/vue3";
 import IconItemCategory from "@/icons/IconItemCategory.vue";
 import { type PageProps } from "@/types/inertia";
+import AppFormSlider from "@/components/form/AppFormSlider.vue";
 const categories = usePage<PageProps>().props.categories;
 
 // emit filter data to parent, so router.get can be called with interia
@@ -161,14 +146,7 @@ const priceRange = ref<number>(
 // ceil minmax the range slider
 const minPrice = usePage<PageProps>().props.filter.min_price;
 const maxPrice = usePage<PageProps>().props.filter.max_price;
-const onCeilPriceSlider = () => {
-    if (priceRange.value <= minPrice) {
-        priceRange.value = minPrice;
-    }
-    if (priceRange.value >= maxPrice) {
-        priceRange.value = maxPrice;
-    }
-
+const onSliderChange = () => {
     emit("on-search", selectedCategory.value, priceRange.value);
 };
 
