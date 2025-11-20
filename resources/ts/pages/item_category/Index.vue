@@ -97,7 +97,7 @@
                                             :href="edit(category.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
-                                            <IconEdit />
+                                            <IconEdit class="size-4" />
                                         </Link>
 
                                         <div class="text-left">

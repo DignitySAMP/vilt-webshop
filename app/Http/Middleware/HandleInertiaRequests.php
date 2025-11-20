@@ -42,7 +42,6 @@ class HandleInertiaRequests extends Middleware
                 'name' => env('APP_NAME'),
             ],
             'auth' => Auth::check() ? Auth::user() : null,
-            //
         ];
     }
 }

@@ -6,7 +6,7 @@
                     :href="index()"
                     class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
                 >
-                    <IconBack />
+                    <IconBack class="size-5 text-slate-600" />
                 </Link>
                 <div
                     class="w-full flex flex-col justify-center items-center md:block"

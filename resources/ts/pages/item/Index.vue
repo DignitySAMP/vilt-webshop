@@ -76,7 +76,7 @@
                                     <div class="flex items-center gap-3">
                                         <img
                                             :src="product.image_url"
-                                            class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl"
+                                            class="size-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl"
                                         />
                                         <div class="font-medium text-slate-900">
                                             {{ product.name }}
@@ -121,7 +121,7 @@
                                             :href="edit(product.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
-                                            <IconEdit />
+                                            <IconEdit class="size-4" />
                                         </Link>
 
                                         <div class="text-left">

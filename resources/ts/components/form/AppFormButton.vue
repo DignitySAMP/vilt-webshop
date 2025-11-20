@@ -8,7 +8,11 @@
                     : 'justify-center'
             "
         >
-            <component v-if="props.icon !== undefined" :is="props.icon" />
+            <component
+                class="size-4"
+                v-if="props.icon !== undefined"
+                :is="props.icon"
+            />
             <span class="font-medium">
                 {{ props.text }}
             </span>

@@ -3,7 +3,7 @@
         class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition duration-300"
         @click="showDeleteModal = !showDeleteModal"
     >
-        <IconDelete />
+        <IconDelete class="size-4" />
     </span>
 
     <AppModal :show="showDeleteModal" @close="showDeleteModal = false">
