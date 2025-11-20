@@ -146,6 +146,7 @@ import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import AppFormSelect from "@/components/form/AppFormSelect.vue";
 import AppFormFile from "@/components/form/AppFormFile.vue";
+import { toast } from "vue3-toastify";
 
 const form: InertiaForm<{
     name: string;
@@ -169,8 +170,11 @@ const submit = () => {
     form.submit(store(), {
         preserveScroll: true,
         forceFormData: true,
-        onError: (error: any) => {
-            console.error(error);
+        onSuccess: () => toast.success('You have created a new product.'),
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
         },
     });
 };

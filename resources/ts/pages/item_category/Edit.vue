@@ -76,6 +76,7 @@ import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import { toast } from "vue3-toastify";
 
 const categoryProp: ItemCategory = usePage<PageProps>().props.category;
 
@@ -90,8 +91,11 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(update(categoryProp.id), {
         preserveScroll: true,
-        onError: (error: any) => {
-            console.error(error);
+        onSuccess: () => toast.success(`You have edited a ${categoryProp.name}.`),
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
         },
     });
 };

@@ -60,6 +60,7 @@ import { login, register } from "@/wayfinder/routes";
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import { toast } from "vue3-toastify";
 
 const form: InertiaForm<{
     email: string;
@@ -70,8 +71,16 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(email(), {
         preserveScroll: true,
-        onSuccess: () => form.reset("email"),
-        onError: (error) => console.error(error),
+        onSuccess: () => {
+            form.reset("email");
+            toast.warning(usePage().props.status);
+        },
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
+            console.error(error);
+        },
         onFinish: () => form.reset(),
     });
 };

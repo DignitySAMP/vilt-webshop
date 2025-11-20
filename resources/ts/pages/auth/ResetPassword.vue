@@ -53,6 +53,7 @@ import { update } from "@/wayfinder/routes/password";
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import { toast } from "vue3-toastify";
 
 interface Props {
     token: string;
@@ -75,8 +76,16 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(update(), {
         preserveScroll: true,
-        onSuccess: () => form.reset("password"),
-        onError: (error) => console.error(error),
+        onSuccess: () => {
+            form.reset("password");
+            toast.warning('Your password has been reset.');
+        },
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
+            console.error(error);
+        },
         onFinish: () => form.reset(),
     });
 };

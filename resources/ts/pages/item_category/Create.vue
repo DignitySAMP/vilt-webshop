@@ -69,6 +69,7 @@ import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import { toast } from "vue3-toastify";
 
 const form: InertiaForm<{
     name: string;
@@ -81,8 +82,11 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(store(), {
         preserveScroll: true,
-        onError: (error: any) => {
-            console.error(error);
+        onSuccess: () => toast.success('You have created a new item category.'),
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
         },
     });
 };

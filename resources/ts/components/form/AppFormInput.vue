@@ -5,7 +5,8 @@
                 v-if="props.label"
                 :for="props.name"
                 v-html="props.label"
-                class="block text-sm font-medium text-slate-700"
+                class="block text-sm font-medium"
+                :class="props.error ? 'text-red-600': 'text-slate-700'"
             />
             <span v-if="props.required" class="text-sm text-slate-500" v-html="'*'"/>
         </div>

@@ -148,6 +148,7 @@ import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import AppFormSelect from "@/components/form/AppFormSelect.vue";
 import AppFormFile from "@/components/form/AppFormFile.vue";
+import { toast } from "vue3-toastify";
 
 const props = usePage<PageProps>().props.item;
 const form: InertiaForm<{
@@ -177,7 +178,12 @@ const submit = () => {
     form.submit("post", update(props.id).url, {
         preserveScroll: true,
         forceFormData: true,
-        onError: (error: any) => console.error(error),
+        onSuccess: () => toast.success(`You have updated ${props.name}`),
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
+        },
     });
 };
 

@@ -67,6 +67,7 @@ import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import AppFormCheckbox from "@/components/form/AppFormCheckbox.vue";
+import { toast } from "vue3-toastify";
 
 const form: InertiaForm<{
     email: string;
@@ -81,8 +82,16 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(store(), {
         preserveScroll: true,
-        onSuccess: () => form.reset("password"),
-        onError: (error) => console.error(error),
+        onSuccess: () => {
+            toast.success('You have logged in.');
+            form.reset("password");
+        },
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
+            console.error(error);
+        },
         onFinish: () => form.reset(),
     });
 };

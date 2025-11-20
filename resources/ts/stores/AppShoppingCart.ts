@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import { Item } from "@/types";
 import axios from "axios";
 import { index, store, update } from "@/wayfinder/routes/cart";
+import { toast } from "vue3-toastify";
 
 export const useShoppingCartStore = defineStore("shopping_cart", () => {
     interface ShoppingCartResponse {
@@ -80,6 +81,8 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
             const response = await axios.post(store(options).url);
 
             await getShoppingBasket(); // refresh basket
+            toast.success(`You have added ${item.name} to your shopping cart.`);
+
             return {
                 status: response.status,
                 message: "OK",
@@ -108,7 +111,6 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
                 },
             };
             const response = await axios.patch(update(cart, options).url);
-
             await getShoppingBasket(); // refresh basket
 
             return {

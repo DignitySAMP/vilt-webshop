@@ -73,6 +73,7 @@ import { login } from "@/wayfinder/routes"; // redirect
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import { toast } from "vue3-toastify";
 
 const form: InertiaForm<{
     name: string;
@@ -89,8 +90,16 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(store(), {
         preserveScroll: true,
-        onSuccess: () => form.reset("password"),
-        onError: (error) => console.error(error),
+        onSuccess: () => {
+            form.reset("password");
+            toast.success('You have registered and have been automatically logged in.');
+        },
+        onError: (error) => {
+            for(const key in error) {
+                toast.error(error[key]);
+            }
+            console.error(error);
+        },
         onFinish: () => form.reset(),
     });
 };
