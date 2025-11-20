@@ -13,8 +13,6 @@
     </button>
 </template>
 <script setup lang="ts">
-// TODO: !!!!!!! Replace all <Link> and <button> before committing...
-
 import { type Component, computed } from 'vue';
 
 interface Props {
