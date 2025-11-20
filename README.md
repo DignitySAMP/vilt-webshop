@@ -1,6 +1,6 @@
 ## A proof of concept Webstore built using the latest techniques of Laravel 12, Inertia 2, Vue 3.5 (composition/TS), and Tailwind 4
 
-Using Laravel Fortify for authentication and Wayfinder BETA to bridge Laravel controllers and routers to the front-end (as a replacement of ziggy.js).
+Using Laravel Fortify for authentication, Wayfinder BETA to bridge Laravel controllers and routers to the front-end (as a replacement of ziggy.js) and Toastify-3 for toasts.
 
 This features everything from n+1-safe filtering, shopping cart management, categorized item management (stock counts) which is tied to extensive supplier chain management (posting orders to supplier info, through address and contact relations), payments using Laravel Stripe (and safe storage thereof, using k-anonimity) and much more.
 
@@ -21,5 +21,5 @@ php artisan wayfinder:generate --path=resources/ts/wayfinder ## generate wayfind
 ```
 
 ### Notes:
-All forms are handled programmatically using Inertia.js's useForm(). Where possible, we use form.submit with wayfinder. Axios is used where this is not feasible (i.e. shopping carts).
 In this project, /components/ are global reusables. Some pages have /partial/ folders which include subfiles intended to split and improve readability/maintainability of large pages.
+All forms are handled programmatically using Inertia.js's useForm(). Where possible, we use form.submit with wayfinder. Axios is used where this is not feasible (i.e. shopping carts).
