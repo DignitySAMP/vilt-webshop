@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-slate-50 flex items-center justify-center p-6">
         <div class="w-full max-w-md">
             <div class="mb-8 text-center">
-                <Link :href="route('home')" class="">
+                <Link :href="home()" class="">
                     <h1
                         class="text-3xl font-bold text-slate-900"
                         v-html="
@@ -73,4 +73,5 @@
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
 import { type PageProps } from "@/types/inertia";
+import { home } from "@/wayfinder/routes";
 </script>

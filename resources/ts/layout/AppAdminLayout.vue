@@ -45,6 +45,11 @@ import IconItem from "@/icons/IconItem.vue";
 import IconItemCategory from "@/icons/IconItemCategory.vue";
 import { type Component, ref } from "vue";
 import { Link } from "@inertiajs/vue3";
+
+import { index as index_item } from "@/wayfinder/routes/item";
+import { index as index_category } from "@/wayfinder/routes/category";
+import { index as index_supplier } from "@/wayfinder/routes/supplier";
+
 import IconSupplier from "@/icons/IconSupplier.vue";
 
 const collapseDropdown = ref<boolean>(false);
@@ -59,17 +64,17 @@ const menuItems: menuItemShim[] = [
     {
         name: "Items",
         icon: IconItem,
-        url: route("item.index"),
+        url: index_item().url
     },
     {
         name: "Item Categories",
         icon: IconItemCategory,
-        url: route("category.index"),
+        url: index_category().url
     },
     {
         name: "Supplier",
         icon: IconSupplier,
-        url: route("supplier.index"),
+        url: index_supplier().url
     },
 ];
 

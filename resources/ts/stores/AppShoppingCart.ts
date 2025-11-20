@@ -1,9 +1,8 @@
-import { defineStore } from "pinia";
-
 import { ref } from "vue";
-
+import { defineStore } from "pinia";
 import { Item } from "@/types";
 import axios from "axios";
+import { index, store, update } from "@/wayfinder/routes/cart";
 
 export const useShoppingCartStore = defineStore("shopping_cart", () => {
     interface ShoppingCartResponse {
@@ -39,7 +38,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
 
     const getShoppingBasket = async (): Promise<AxiosResponse> => {
         try {
-            const response = await axios.get(route("cart.index"));
+            const response = await axios.get(index().url);
 
             // init shopping basket if data is found
             if (response.data) {
@@ -73,10 +72,13 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
 
     const storeItemToBasket = async (item: Item): Promise<AxiosResponse> => {
         try {
+            const options = {
+                query: {
+                    item: item.id
+                }
+            };
             const response = await axios.post(
-                route("cart.store", {
-                    item: item.id,
-                }),
+                store(options).url
             );
 
             await getShoppingBasket(); // refresh basket
@@ -100,12 +102,17 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
         amount: number,
     ): Promise<AxiosResponse> => {
         try {
-            const response = await axios.patch(
-                route("cart.update", {
+            const options = {
+                query: {
+
                     cart: cart,
                     item_id: item.id,
                     amount: amount,
-                }),
+
+                }
+            };
+            const response = await axios.patch(
+                update(cart, options).url
             );
 
             await getShoppingBasket(); // refresh basket
