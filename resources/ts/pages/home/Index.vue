@@ -53,6 +53,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { router, usePage } from "@inertiajs/vue3";
+import { home } from "@/wayfinder/routes";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import Filters from "@/pages/home/partials/Filters.vue";
@@ -68,7 +69,7 @@ const items = usePage<PageProps>().props.items.data;
 const searchText = ref<string>(usePage<PageProps>().props.filter.search);
 const onSearch = (category: number, price_range: number) => {
     router.get(
-        route("home"),
+        home(),
         {
             // data
             search: searchText.value,

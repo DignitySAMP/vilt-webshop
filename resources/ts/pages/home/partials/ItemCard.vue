@@ -1,6 +1,6 @@
 <template>
     <Link
-        :href="route('item.show', product.id)"
+        :href="show(product.id)"
         class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group"
     >
         <img
@@ -38,6 +38,7 @@
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
 import { Item } from "@/types";
+import { show } from "@/wayfinder/routes/item";
 const product = defineProps<Item>();
 
 import { useShoppingCartStore } from "@/stores/AppShoppingCart";
