@@ -41,6 +41,7 @@
                         type="text"
                         autocomplete="name"
                         v-model="form.name"
+                        :required="true"
                         :error="form.errors.name"
                         :disabled="form.processing"
                     />
@@ -52,6 +53,7 @@
                         type="text"
                         autocomplete="description"
                         v-model="form.description"
+                        :required="true"
                         :error="form.errors.description"
                         :disabled="form.processing"
                     />
@@ -60,6 +62,7 @@
                         <AppFormSelect
                             label="Category"
                             name="category"
+                            :required="true"
                             :options="
                                 usePage<PageProps>().props.categories.map(
                                     (cat: { id: number; name: string }) => ({
@@ -75,6 +78,7 @@
                         <AppFormSelect
                             label="Supplier"
                             name="supplier"
+                            :required="true"
                             :options="
                                 usePage<PageProps>().props.suppliers.map(
                                     (cat: { id: number; name: string }) => ({
@@ -92,6 +96,7 @@
                             name="price"
                             label="Price ($)"
                             type="number"
+                            :required="true"
                             step="0.01"
                             v-model="form.price"
                             :error="form.errors.price"
@@ -103,6 +108,7 @@
                             name="stock"
                             label="Stock"
                             type="number"
+                            :required="true"
                             step="0.01"
                             v-model.number="form.stock"
                             :error="form.errors.stock"
@@ -112,6 +118,7 @@
                         <AppFormFile
                             name="image"
                             label="Product Icon"
+                            :required="true"
                             @on-file-upload="handleFileSelect($event)"
                             :error="form.errors.image"
                             accept="image/*"

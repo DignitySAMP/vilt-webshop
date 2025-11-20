@@ -22,6 +22,7 @@
                     v-model="form.email"
                     :error="form.errors.email"
                     :disabled="form.processing"
+                    :required="true"
                 />
             </form>
 

@@ -1,15 +1,19 @@
 <template>
     <div class="w-full">
-        <label
-            v-if="props.label"
-            :for="props.name"
-            v-html="props.label"
-            class="block text-sm font-medium text-slate-700"
-        />
+        <div class="flex gap-2">
+            <label
+                v-if="props.label"
+                :for="props.name"
+                v-html="props.label"
+                class="block text-sm font-medium text-slate-700"
+            />
+            <span v-if="props.required" class="text-sm text-slate-500" v-html="'*'"/>
+        </div>
         <select
             :id="getElementId"
             :name="props.name"
             v-model="model"
+            :required="props.required"
             class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
         >
             <option
@@ -42,6 +46,7 @@ interface Props {
     label?: string;
     options: Option[];
     error?: string;
+    required?: boolean,
 }
 
 const props = defineProps<Props>();

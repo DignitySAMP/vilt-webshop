@@ -1,11 +1,14 @@
 <template>
     <div class="w-full">
-        <label
-            v-if="props.label"
-            :for="getElementId"
-            v-html="props.label"
-            class="block text-sm font-medium text-slate-700 mb-2"
-        />
+        <div class="flex gap-2">
+            <label
+                v-if="props.label"
+                :for="props.name"
+                v-html="props.label"
+                class="block text-sm font-medium text-slate-700"
+            />
+            <span v-if="props.required" class="text-sm text-slate-500" v-html="'*'"/>
+        </div>
 
         <input
             :id="getElementId"
@@ -49,11 +52,13 @@ interface Props {
     accept?: string;
     disabled?: boolean;
     error?: string;
+    required?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
     accept: "image/*",
     disabled: false,
+    required: false,
 });
 
 const getElementId = computed((): string => props.id ?? props.name);

@@ -29,6 +29,7 @@
                     type="submit"
                     @click="form.submit(send())"
                     text="Reset password"
+                    :required="true"
                 />
             </div>
 

@@ -10,6 +10,7 @@
                 v-model="form.email"
                 :error="form.errors.email"
                 :disabled="form.processing"
+                :required="true"
             />
             <AppFormInput
                 placeholder="**************"
@@ -20,6 +21,7 @@
                 v-model="form.password"
                 :error="form.errors.password"
                 :disabled="form.processing"
+                :required="true"
             />
 
             <AppFormCheckbox

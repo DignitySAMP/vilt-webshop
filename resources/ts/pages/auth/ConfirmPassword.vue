@@ -17,6 +17,7 @@
                     v-model="form.password"
                     :error="form.errors.password"
                     :disabled="form.processing"
+                    :required="true"
                 />
             </form>
 

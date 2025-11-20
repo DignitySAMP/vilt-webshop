@@ -10,6 +10,7 @@
                 v-model="form.name"
                 :error="form.errors.name"
                 :disabled="form.processing"
+                :required="true"
             />
             <AppFormInput
                 placeholder="your@email.com"
@@ -20,6 +21,7 @@
                 v-model="form.email"
                 :error="form.errors.email"
                 :disabled="form.processing"
+                :required="true"
             />
             <AppFormInput
                 placeholder="**************"
@@ -30,6 +32,7 @@
                 v-model="form.password"
                 :error="form.errors.password"
                 :disabled="form.processing"
+                :required="true"
             />
             <AppFormInput
                 placeholder="**************"
@@ -40,6 +43,7 @@
                 v-model="form.password_confirmation"
                 :error="form.errors.password_confirmation"
                 :disabled="form.processing"
+                :required="true"
             />
 
             <div class="flex justify-end text-sm text-gray-600">

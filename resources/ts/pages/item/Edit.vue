@@ -41,6 +41,7 @@
                         label="Product Name"
                         type="text"
                         autocomplete="name"
+                        :required="true"
                         v-model="form.name"
                         :error="form.errors.name"
                         :disabled="form.processing"
@@ -52,6 +53,7 @@
                         label="Product Description"
                         type="text"
                         autocomplete="description"
+                        :required="true"
                         v-model="form.description"
                         :error="form.errors.description"
                         :disabled="form.processing"
@@ -61,6 +63,7 @@
                         <AppFormSelect
                             label="Category"
                             name="category"
+                            :required="true"
                             :options="
                                 usePage<PageProps>().props.categories.map(
                                     (cat: { id: number; name: string }) => ({
@@ -76,6 +79,7 @@
                         <AppFormSelect
                             label="Supplier"
                             name="supplier"
+                            :required="true"
                             :options="
                                 usePage<PageProps>().props.suppliers.map(
                                     (cat: { id: number; name: string }) => ({
@@ -92,6 +96,7 @@
                             placeholder="0.00"
                             name="price"
                             label="Price ($)"
+                            :required="true"
                             type="number"
                             step="0.01"
                             v-model="form.price"
@@ -103,6 +108,7 @@
                             placeholder="0"
                             name="stock"
                             label="Stock"
+                            :required="true"
                             type="number"
                             step="0.01"
                             v-model.number="form.stock"
@@ -113,6 +119,7 @@
                         <AppFormFile
                             name="image"
                             label="Product Icon"
+                            :required="true"
                             @on-file-upload="handleFileSelect($event)"
                             :error="form.errors.image"
                             accept="image/*"

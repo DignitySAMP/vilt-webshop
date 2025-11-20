@@ -44,6 +44,7 @@
                         v-model="form.name"
                         :error="form.errors.name"
                         :disabled="form.processing"
+                        :required="true"
                     />
 
                     <AppFormInput
@@ -55,6 +56,7 @@
                         v-model="form.description"
                         :error="form.errors.description"
                         :disabled="form.processing"
+                        :required="true"
                     />
                 </div>
             </form>
