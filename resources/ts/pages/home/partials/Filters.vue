@@ -41,10 +41,10 @@
                 class="mt-2 md:mt-0 block space-y-2 md:block"
                 :class="collapseCategories ? 'flex flex-col' : 'hidden'"
             >
-                <button
+                <div
                     @click="selectedCategory = null"
                     :class="[
-                        'w-full text-left px-2 py-1 md:px-4 md:py-3 rounded-lg transition duration-300',
+                        'w-full flex justify-between items-center text-left px-2 py-1 md:px-4 md:py-3 rounded-lg transition duration-300',
                         selectedCategory === null
                             ? 'bg-blue-50 text-blue-700 font-medium'
                             : 'text-slate-700 hover:bg-slate-50',
@@ -53,25 +53,25 @@
                     <div class="flex justify-between items-center">
                         <span>Show All Items</span>
                     </div>
-                </button>
-                <button
+                </div>
+                <div
                     v-for="cat in categories"
                     :key="cat.id"
                     @click="selectedCategory = cat.id"
                     :class="[
-                        'w-full text-left px-2 py-1 md:px-4 md:py-3 rounded-lg transition duration-300',
+                        'w-full flex justify-between items-center text-left px-2 py-1 md:px-4 md:py-3 rounded-lg transition duration-300',
                         selectedCategory == cat.id
                             ? 'bg-blue-50 text-blue-700 font-medium'
                             : 'text-slate-700 hover:bg-slate-50',
                     ]"
                 >
-                    <div class="flex justify-between items-center">
+
                         <span>{{ cat.name }}</span>
                         <span class="text-sm text-slate-500">{{
                             cat.item_count
                         }}</span>
-                    </div>
-                </button>
+
+                </div>
             </div>
         </div>
 

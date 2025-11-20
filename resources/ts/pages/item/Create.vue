@@ -18,14 +18,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button
-                    @click="submit"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                >
-                    <IconCreate />
 
-                    Create Product
-                </button>
+                <div class="w-fit">
+
+                    <AppFormButton name="btn_add_to_cart" :icon="IconCreate" text="Create Product" @click="submit()"/>
+                </div>
+                
             </div>
         </template>
 
@@ -233,6 +231,7 @@ import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const form: InertiaForm<{
     name: string;

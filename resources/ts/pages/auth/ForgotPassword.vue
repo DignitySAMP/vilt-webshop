@@ -1,12 +1,13 @@
 <template>
-    <AppGuestLayout>
+    <AppGuestLayout title="Forgot your password?">
         <div class="flex flex-col gap-2">
+            
             <span
                 v-if="usePage().props.status"
                 v-html="usePage().props.status"
                 class="rounded border border-green-300 bg-green-100 px-4 py-2 text-sm text-green-800"
             />
-
+            
             <span class="text-sm text-gray-700">
                 If you forgot your password, enter your e-mail below to recieve
                 an e-mail with a reset link.
@@ -50,24 +51,27 @@
             </div>
 
             <div class="flex w-full">
-                <button
+                <AppFormButton
+                    name="btn_register"
                     :disabled="form.processing"
                     type="submit"
                     @click="submit"
-                    class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
-                >
-                    Request new password
-                </button>
+                    text="Request new password"
+                />
             </div>
         </div>
     </AppGuestLayout>
 </template>
 <script setup lang="ts">
-import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, Link, useForm, usePage } from "@inertiajs/vue3";
-
 import { email } from '@/wayfinder/routes/password';
 import { login, register } from '@/wayfinder/routes';
+
+
+import AppGuestLayout from "@/layout/AppGuestLayout.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
+
+
 const form: InertiaForm<{
     email: string
 }> = useForm({

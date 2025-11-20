@@ -1,11 +1,10 @@
 <template>
     <div ref="shoppingCartRef" class="relative">
-        <button
+        <AppFormIconButton
+            name="btn_shopping_cart"
+            :icon="IconShoppingCart"
             @click="showShoppingCart = !showShoppingCart"
-            class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-        >
-            <IconShoppingCart class="w-5 h-5 text-slate-600" />
-        </button>
+        />  
         <span
             v-if="cartItemCount > 0"
             class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium"
@@ -73,7 +72,10 @@
                                 <div
                                     class="flex justify-end items-center gap-2"
                                 >
-                                    <button
+                                    <AppFormIconButton
+                                        name="btn_shopping_cart_minus"
+                                        :icon="IconMinus"
+                                        :background="true"
                                         @click="
                                             shopping_cart_store.updateItemInBasket(
                                                 product.id,
@@ -81,15 +83,15 @@
                                                 product?.amount - 1,
                                             )
                                         "
-                                        class="size-6 bg-slate-100 rounded flex items-center justify-center hover:bg-slate-200 transition-colors"
-                                    >
-                                        <IconMinus class="size-3" />
-                                    </button>
+                                    />
                                     <span
                                         class="text-sm font-medium text-slate-700 w-8 text-center"
                                         >{{ product?.amount }}</span
                                     >
-                                    <button
+                                    <AppFormIconButton
+                                        name="btn_shopping_cart_plus"
+                                        :icon="IconPlus"
+                                        :background="true"
                                         @click="
                                             shopping_cart_store.updateItemInBasket(
                                                 product.id,
@@ -97,10 +99,7 @@
                                                 product?.amount + 1,
                                             )
                                         "
-                                        class="size-6 bg-slate-100 rounded flex items-center justify-center hover:bg-slate-200 transition-colors"
-                                    >
-                                        <IconPlus class="size-3" />
-                                    </button>
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -121,11 +120,10 @@
                             placeholder="Coupon code"
                             class="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-600 transition-colors"
                         />
-                        <button
-                            class="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 transition-colors"
-                        >
-                            Apply
-                        </button>
+                        <div class="w-fit">
+                            <AppFormButton name="btn_apply" text="Apply" theme="secondary"/>
+                        </div>
+                        
                     </div>
 
                     <div class="space-y-2 pt-4 border-t border-slate-200">
@@ -149,11 +147,7 @@
                         </div>
                     </div>
 
-                    <button
-                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                    >
-                        Checkout
-                    </button>
+                    <AppFormButton name="btn_checkout" theme="primary" text="Checkout"/>
                 </div>
             </div>
         </aside>
@@ -170,6 +164,8 @@ const shopping_cart_store = useShoppingCartStore();
 
 import IconPlus from "@/icons/IconPlus.vue";
 import IconMinus from "@/icons/IconMinus.vue";
+import AppFormIconButton from "@/components/form/AppFormIconButton.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const shoppingCartRef = ref<HTMLElement | null>(null);
 onMounted(async () => {

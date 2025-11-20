@@ -1,5 +1,5 @@
 <template>
-    <AppGuestLayout>
+    <AppGuestLayout title="Register an account">
         <form @submit.prevent class="flex flex-col gap-2">
             <div class="flex flex-col gap-2">
                 <label for="name" class="text-sm text-gray-700">Name</label>
@@ -86,24 +86,25 @@
             </div>
 
             <div class="flex w-full">
-                <button
+                <AppFormButton
+                    name="btn_register"
                     :disabled="form.processing"
                     type="submit"
                     @click="submit"
-                    class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
-                >
-                    Register
-                </button>
+                    text="Register"
+                />
             </div>
         </form>
     </AppGuestLayout>
 </template>
 <script setup lang="ts">
-import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, Link, useForm } from "@inertiajs/vue3";
 
 import { store } from '@/wayfinder/routes/register' // form
 import { login } from '@/wayfinder/routes' // redirect
+
+import AppGuestLayout from "@/layout/AppGuestLayout.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const form: InertiaForm<{
         name: string,

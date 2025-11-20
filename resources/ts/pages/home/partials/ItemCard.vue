@@ -26,12 +26,7 @@
         </Link>
 
         <div class="px-4 pb-4">
-            <button
-                @click="addToCart(product)"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium w-full"
-            >
-                Add to Cart
-            </button>
+            <AppFormButton @click="addToCart(product)" name="btn_add_to_cart" text="Add to Cart"/>
         </div>
     </div>
 </template>
@@ -39,11 +34,12 @@
 import { Link } from "@inertiajs/vue3";
 import { Item } from "@/types";
 import { show } from "@/wayfinder/routes/item";
+import { useShoppingCartStore } from "@/stores/AppShoppingCart";
+import AppFormButton from "@/components/form/AppFormButton.vue";
+
 const product = defineProps<Item>();
 
-import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 const shopping_cart_store = useShoppingCartStore();
-
 const addToCart = async (item: Item) => {
     await shopping_cart_store.storeItemToBasket(item);
 };

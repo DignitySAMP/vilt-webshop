@@ -1,10 +1,10 @@
 <template>
-    <button
+    <span
         class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition duration-300"
         @click="showDeleteModal = !showDeleteModal"
     >
         <IconDelete />
-    </button>
+    </span>
 
     <AppModal :show="showDeleteModal" @close="showDeleteModal = false">
         <div class="flex flex-col gap-2">
@@ -30,12 +30,7 @@
                 </span>
             </div>
 
-            <button
-                @click="submit"
-                class="px-4 py-2 rounded-lg shadow-md w-full bg-red-600 text-white hover:bg-red-700"
-            >
-                Delete {{ props.name }}
-            </button>
+            <AppFormButton name="btn_item_delete" :text="`Delete ${props.name}`" theme="error" @click="submit"/>
         </div>
     </AppModal>
 </template>
@@ -47,6 +42,7 @@ import { Item } from "@/types";
 
 import AppModal from "@/components/AppModal.vue";
 import IconDelete from "@/icons/IconDelete.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const props = defineProps<Item>();
 const showDeleteModal = ref<boolean>(false);

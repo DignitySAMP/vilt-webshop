@@ -22,11 +22,9 @@
             <div class="flex items-center gap-3">
                 <Link
                     :href="edit(supplier.id)"
-                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
+                    class="w-50"
                 >
-                    <IconEdit />
-
-                    Edit Supplier
+                    <AppFormButton class="flex" name="btn_redirect_edit" text="Edit Supplier" :icon="IconEdit"/>
                 </Link>
             </div>
         </template>
@@ -140,6 +138,7 @@ import { type PageProps } from "@/types/inertia";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import IconEdit from "@/icons/IconEdit.vue";
 import IconBack from "@/icons/IconBack.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const supplier: Supplier = usePage<PageProps>().props.supplier;
 const supplier_orders: SupplierOrder[] =

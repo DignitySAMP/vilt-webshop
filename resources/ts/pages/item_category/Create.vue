@@ -18,14 +18,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button
+                <AppFormButton
                     @click="submit"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                >
-                    <IconCreate />
-
-                    Create Category
-                </button>
+                    name="btn_create_category"
+                    text="Create Category"
+                    :icon="IconCreate"
+                />
             </div>
         </template>
 
@@ -76,6 +74,7 @@ import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const form: InertiaForm<{
     name: string;

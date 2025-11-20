@@ -20,14 +20,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button
-                    @click="submit"
-                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                >
-                    <IconSave />
-
-                    Save Product
-                </button>
+                <AppFormButton name="btn_edit" text="Save Product" :icon="IconSave" @click="submit"/>
             </div>
         </template>
 
@@ -182,6 +175,7 @@ import PreviewItem from "@/pages/item/partials/PartialEdit_Preview.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const props = usePage<PageProps>().props.item;
 const form: InertiaForm<{

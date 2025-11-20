@@ -9,11 +9,10 @@
             </Link>
             <div class="flex items-center gap-4">
                 <div class="relative">
-                    <button
-                        class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-                    >
-                        <IconFavorites class="w-5 h-5 text-slate-600" />
-                    </button>
+                    <AppFormIconButton
+                        name="btn_favorites"
+                        :icon="IconFavorites"
+                    />
                     <span
                         v-if="favouriteItemCount > 0"
                         class="absolute -top-1 -right-1 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium"
@@ -48,9 +47,12 @@ import { type PageProps } from "@/types/inertia";
 import { home, profile, login } from "@/wayfinder/routes";
 
 import ShoppingCart from "@/layout/partials/ShoppingCart.vue";
+import AppFormIconButton from "@/components/form/AppFormIconButton.vue";
+
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconAccount from "@/icons/IconAccount.vue";
 import IconProfile from "@/icons/IconProfile.vue";
+
 
 const favouriteItemCount: number = 3;
 </script>

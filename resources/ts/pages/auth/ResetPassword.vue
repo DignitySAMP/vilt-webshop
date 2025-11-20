@@ -1,5 +1,5 @@
 <template>
-    <AppGuestLayout>
+    <AppGuestLayout title="Reset your password">
         <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-2">
                 <label for="email" class="text-sm text-gray-700"
@@ -58,22 +58,23 @@
             </div>
 
             <div class="flex w-full">
-                <button
+                <AppFormButton
+                    name="btn_register"
                     :disabled="form.processing"
                     type="submit"
                     @click="submit"
-                    class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
-                >
-                    Reset Password
-                </button>
+                    text="Reset password"
+                />
             </div>
         </div>
     </AppGuestLayout>
 </template>
 <script setup lang="ts">
-import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, useForm } from "@inertiajs/vue3";
 import { update } from '@/wayfinder/routes/password';
+
+import AppGuestLayout from "@/layout/AppGuestLayout.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 interface Props {
     token: string;

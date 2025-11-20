@@ -1,10 +1,10 @@
 <template>
-    <button
+    <span
         class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition duration-300"
         @click="showDeleteModal = !showDeleteModal"
     >
         <IconDelete />
-    </button>
+    </span>
 
     <AppModal :show="showDeleteModal" @close="showDeleteModal = false">
         <div class="flex flex-col gap-2">
@@ -30,13 +30,8 @@
                     </span>
                 </div>
             </div>
-
-            <button
-                @click="submit"
-                class="px-4 py-2 rounded-lg shadow-md w-full bg-red-600 text-white hover:bg-red-700"
-            >
-                Delete {{ props.name }}
-            </button>
+            <AppFormButton name="btn_delete_category" @click="submit" :text="`Delete ${props.name}`" theme="error"/>
+            
         </div>
     </AppModal>
 </template>
@@ -48,6 +43,7 @@ import { destroy } from "@/wayfinder/routes/category";
 
 import AppModal from "@/components/AppModal.vue";
 import IconDelete from "@/icons/IconDelete.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const showDeleteModal = ref<boolean>(false);
 const props = defineProps<ItemCategory>();

@@ -20,14 +20,7 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button
-                    @click="submit"
-                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                >
-                    <IconSave />
-
-                    Save Product
-                </button>
+                <AppFormButton name="btn_edit_category" text="Save Category" :icon="IconSave" @click="submit"/>
             </div>
         </template>
 
@@ -82,6 +75,7 @@ import { index, update } from "@/wayfinder/routes/category";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const categoryProp: ItemCategory = usePage<PageProps>().props.category;
 

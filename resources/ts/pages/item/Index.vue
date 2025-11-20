@@ -11,12 +11,10 @@
                 <p class="text-sm text-slate-500 mt-1">Product Management</p>
             </div>
             <Link
+                class="w-50"
                 :href="create()"
-                class="min-w-40 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
             >
-                <IconCreate />
-
-                Add Product
+                <AppFormButton class="flex" name="btn_redirect_create" text="Add Product" :icon="IconCreate"/>
             </Link>
         </template>
 
@@ -159,6 +157,7 @@ import AppPagination from "@/components/AppPagination.vue";
 
 import IconEdit from "@/icons/IconEdit.vue";
 import IconCreate from "@/icons/IconCreate.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const products: Item[] = usePage<PageProps>().props.items.data;
 
