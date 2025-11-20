@@ -3,7 +3,7 @@
         <template v-slot:header>
             <div class="flex items-center gap-4">
                 <Link
-                    :href="route('category.index')"
+                    :href="index()"
                     class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
                 >
                     <IconBack />
@@ -71,6 +71,7 @@
 </template>
 <script setup lang="ts">
 import { useForm, Link, InertiaForm } from "@inertiajs/vue3";
+import { index, store } from "@/wayfinder/routes/category";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
@@ -85,7 +86,7 @@ const form: InertiaForm<{
 });
 
 const submit = () => {
-    form.post(route("category.store"), {
+    form.submit(store(), {
         preserveScroll: true,
         onError: (error: any) => {
             console.error(error);
