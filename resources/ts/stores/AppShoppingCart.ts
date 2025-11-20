@@ -74,12 +74,10 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
         try {
             const options = {
                 query: {
-                    item: item.id
-                }
+                    item: item.id,
+                },
             };
-            const response = await axios.post(
-                store(options).url
-            );
+            const response = await axios.post(store(options).url);
 
             await getShoppingBasket(); // refresh basket
             return {
@@ -104,16 +102,12 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
         try {
             const options = {
                 query: {
-
                     cart: cart,
                     item_id: item.id,
                     amount: amount,
-
-                }
+                },
             };
-            const response = await axios.patch(
-                update(cart, options).url
-            );
+            const response = await axios.patch(update(cart, options).url);
 
             await getShoppingBasket(); // refresh basket
 

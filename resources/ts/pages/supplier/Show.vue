@@ -20,11 +20,13 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <Link
-                    :href="edit(supplier.id)"
-                    class="w-50"
-                >
-                    <AppFormButton class="flex" name="btn_redirect_edit" text="Edit Supplier" :icon="IconEdit"/>
+                <Link :href="edit(supplier.id)" class="w-50">
+                    <AppFormButton
+                        class="flex"
+                        name="btn_redirect_edit"
+                        text="Edit Supplier"
+                        :icon="IconEdit"
+                    />
                 </Link>
             </div>
         </template>

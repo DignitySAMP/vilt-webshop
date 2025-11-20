@@ -32,13 +32,13 @@
                 </div>
 
                 <div class="mt-6 grid grid-cols-2 gap-3">
-                    <AppFormButton 
+                    <AppFormButton
                         name="btn_google"
                         :icon="IconGoogle"
                         text="Google"
                         theme="secondary"
                     />
-                    <AppFormButton 
+                    <AppFormButton
                         name="btn_facebook"
                         :icon="IconFacebook"
                         text="Facebook"
@@ -61,8 +61,7 @@ import IconGoogle from "@/icons/IconGoogle.vue";
 import IconFacebook from "@/icons/IconFacebook.vue";
 
 interface Props {
-    title: string
-};
+    title: string;
+}
 const props = defineProps<Props>();
-
 </script>

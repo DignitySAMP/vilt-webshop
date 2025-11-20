@@ -1,5 +1,7 @@
 <template>
-    <Link as="div" :href="show(product.id)"
+    <Link
+        as="div"
+        :href="show(product.id)"
         class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group cursor-pointer"
     >
         <img
@@ -23,8 +25,12 @@
                 <span class="text-xl font-bold text-slate-900"
                     >${{ product.price.toFixed(2) }}</span
                 >
-                
-                <AppFormButton name="btn_add_to_cart" text="Add to Cart" @click.stop="addToCart()"/>
+
+                <AppFormButton
+                    name="btn_add_to_cart"
+                    text="Add to Cart"
+                    @click.stop="addToCart()"
+                />
             </div>
         </div>
     </Link>
@@ -69,6 +75,6 @@ interface RelatedItemInterface {
 const product = defineProps<RelatedItemInterface>();
 
 const shopping_cart_store = useShoppingCartStore();
-const addToCart = async () => await shopping_cart_store.storeItemToBasket(product);
-
+const addToCart = async () =>
+    await shopping_cart_store.storeItemToBasket(product);
 </script>

@@ -9,8 +9,13 @@
         <p class="text-sm text-blue-100 md:mb-4">
             Get 20% off your first order with code WELCOME20
         </p>
-       
-        <AppFormButton name="btn_coupon" text="Copy Code" theme="light-blue" class="text-sm"/>
+
+        <AppFormButton
+            name="btn_coupon"
+            text="Copy Code"
+            theme="light-blue"
+            class="text-sm"
+        />
     </div>
 </template>
 <script setup lang="ts">

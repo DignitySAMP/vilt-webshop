@@ -4,7 +4,7 @@
             name="btn_shopping_cart"
             :icon="IconShoppingCart"
             @click="showShoppingCart = !showShoppingCart"
-        />  
+        />
         <span
             v-if="cartItemCount > 0"
             class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-medium"
@@ -115,16 +115,19 @@
                     class="space-y-4"
                 >
                     <div class="flex items-center gap-2 mb-4">
-                        <AppFormInput 
-                            placeholder="Coupon code" 
-                            name="coupon" 
-                            type="text" 
+                        <AppFormInput
+                            placeholder="Coupon code"
+                            name="coupon"
+                            type="text"
                         />
-                       
+
                         <div class="w-fit">
-                            <AppFormButton name="btn_apply" text="Apply" theme="secondary"/>
+                            <AppFormButton
+                                name="btn_apply"
+                                text="Apply"
+                                theme="secondary"
+                            />
                         </div>
-                        
                     </div>
 
                     <div class="space-y-2 pt-4 border-t border-slate-200">
@@ -148,7 +151,11 @@
                         </div>
                     </div>
 
-                    <AppFormButton name="btn_checkout" theme="primary" text="Checkout"/>
+                    <AppFormButton
+                        name="btn_checkout"
+                        theme="primary"
+                        text="Checkout"
+                    />
                 </div>
             </div>
         </aside>

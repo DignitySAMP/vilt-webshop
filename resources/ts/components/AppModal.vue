@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-interface Props { 
-    show: boolean
+interface Props {
+    show: boolean;
 }
 const props = defineProps<Props>();
 

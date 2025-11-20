@@ -8,14 +8,14 @@
             </span>
 
             <form @submit.prevent class="flex flex-col gap-2">
-                <AppFormInput 
-                    placeholder="**************" 
-                    name="password" 
-                    label="Password Confirmation" 
-                    type="password" 
-                    autocomplete="password" 
-                    v-model="form.password" 
-                    :error="form.errors.password"  
+                <AppFormInput
+                    placeholder="**************"
+                    name="password"
+                    label="Password Confirmation"
+                    type="password"
+                    autocomplete="password"
+                    v-model="form.password"
+                    :error="form.errors.password"
                     :disabled="form.processing"
                 />
             </form>
@@ -34,13 +34,13 @@
 </template>
 <script setup lang="ts">
 import { InertiaForm, useForm } from "@inertiajs/vue3";
-import { store } from '@/wayfinder/routes/password/confirm';
+import { store } from "@/wayfinder/routes/password/confirm";
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 
 const form: InertiaForm<{
-    password: string,
+    password: string;
 }> = useForm({
     password: "",
 });

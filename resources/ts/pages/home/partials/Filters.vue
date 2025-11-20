@@ -65,12 +65,10 @@
                             : 'text-slate-700 hover:bg-slate-50',
                     ]"
                 >
-
-                        <span>{{ cat.name }}</span>
-                        <span class="text-sm text-slate-500">{{
-                            cat.item_count
-                        }}</span>
-
+                    <span>{{ cat.name }}</span>
+                    <span class="text-sm text-slate-500">{{
+                        cat.item_count
+                    }}</span>
                 </div>
             </div>
         </div>

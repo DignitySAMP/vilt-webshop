@@ -20,7 +20,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <AppFormButton name="btn_edit" text="Save Product" :icon="IconSave" @click="submit"/>
+                <AppFormButton
+                    name="btn_edit"
+                    text="Save Product"
+                    :icon="IconSave"
+                    @click="submit"
+                />
             </div>
         </template>
 
@@ -30,30 +35,28 @@
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <div class="space-y-6">
-
-                    <AppFormInput 
-                        placeholder="Enter desired product name" 
-                        name="name" 
-                        label="Product Name" 
-                        type="text" 
-                        autocomplete="name" 
-                        v-model="form.name" 
-                        :error="form.errors.name"  
+                    <AppFormInput
+                        placeholder="Enter desired product name"
+                        name="name"
+                        label="Product Name"
+                        type="text"
+                        autocomplete="name"
+                        v-model="form.name"
+                        :error="form.errors.name"
                         :disabled="form.processing"
                     />
 
-                    
-                    <AppFormInput 
-                        placeholder="Enter desired product description" 
-                        name="description" 
-                        label="Product Description" 
-                        type="text" 
-                        autocomplete="description" 
-                        v-model="form.description" 
-                        :error="form.errors.description"  
+                    <AppFormInput
+                        placeholder="Enter desired product description"
+                        name="description"
+                        label="Product Description"
+                        type="text"
+                        autocomplete="description"
+                        v-model="form.description"
+                        :error="form.errors.description"
                         :disabled="form.processing"
                     />
-                    
+
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label
@@ -103,29 +106,28 @@
                             </span>
                         </div>
 
-                       
-                        <AppFormInput 
-                            placeholder="0.00" 
-                            name="price" 
-                            label="Price ($)" 
-                            type="number" 
+                        <AppFormInput
+                            placeholder="0.00"
+                            name="price"
+                            label="Price ($)"
+                            type="number"
                             step="0.01"
-                            v-model="form.price" 
-                            :error="form.errors.price"  
+                            v-model="form.price"
+                            :error="form.errors.price"
                             :disabled="form.processing"
                         />
-                        
-                        <AppFormInput 
-                            placeholder="0" 
-                            name="stock" 
-                            label="Stock" 
-                            type="number" 
+
+                        <AppFormInput
+                            placeholder="0"
+                            name="stock"
+                            label="Stock"
+                            type="number"
                             step="0.01"
-                            v-model.number="form.stock" 
-                            :error="form.errors.stock"  
+                            v-model.number="form.stock"
+                            :error="form.errors.stock"
                             :disabled="form.processing"
                         />
-                        
+
                         <div>
                             <label
                                 class="block text-sm font-medium text-slate-700 mb-2"
@@ -154,7 +156,7 @@ import { useForm, InertiaForm, usePage, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { type PageProps } from "@/types/inertia";
 import { index } from "@/wayfinder/routes/item";
-import { update } from "@/wayfinder/actions/App/Http/Controllers/ItemController"
+import { update } from "@/wayfinder/actions/App/Http/Controllers/ItemController";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import PreviewItem from "@/pages/item/partials/PartialEdit_Preview.vue";
@@ -186,10 +188,10 @@ const form: InertiaForm<{
 const submit = () => {
     form.transform((data) => ({
         ...data,
-        _method: 'PATCH',
+        _method: "PATCH",
     }));
 
-    form.submit('post', update(props.id).url, {
+    form.submit("post", update(props.id).url, {
         preserveScroll: true,
         forceFormData: true,
         onError: (error: any) => console.error(error),

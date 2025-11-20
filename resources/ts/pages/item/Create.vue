@@ -18,12 +18,14 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-
                 <div class="w-fit">
-
-                    <AppFormButton name="btn_add_to_cart" :icon="IconCreate" text="Create Product" @click="submit()"/>
+                    <AppFormButton
+                        name="btn_add_to_cart"
+                        :icon="IconCreate"
+                        text="Create Product"
+                        @click="submit()"
+                    />
                 </div>
-                
             </div>
         </template>
 
@@ -32,25 +34,25 @@
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <form @submit.prevent class="space-y-6">
-                    <AppFormInput 
-                        placeholder="Enter desired product name" 
-                        name="name" 
-                        label="Product Name" 
-                        type="text" 
-                        autocomplete="name" 
-                        v-model="form.name" 
-                        :error="form.errors.name"  
+                    <AppFormInput
+                        placeholder="Enter desired product name"
+                        name="name"
+                        label="Product Name"
+                        type="text"
+                        autocomplete="name"
+                        v-model="form.name"
+                        :error="form.errors.name"
                         :disabled="form.processing"
                     />
 
-                    <AppFormInput 
-                        placeholder="Enter desired product description" 
-                        name="description" 
-                        label="Product Description" 
-                        type="text" 
-                        autocomplete="description" 
-                        v-model="form.description" 
-                        :error="form.errors.description"  
+                    <AppFormInput
+                        placeholder="Enter desired product description"
+                        name="description"
+                        label="Product Description"
+                        type="text"
+                        autocomplete="description"
+                        v-model="form.description"
+                        :error="form.errors.description"
                         :disabled="form.processing"
                     />
 
@@ -105,28 +107,28 @@
                             </span>
                         </div>
 
-                        <AppFormInput 
-                            placeholder="0.00" 
-                            name="price" 
-                            label="Price ($)" 
-                            type="number" 
+                        <AppFormInput
+                            placeholder="0.00"
+                            name="price"
+                            label="Price ($)"
+                            type="number"
                             step="0.01"
-                            v-model="form.price" 
-                            :error="form.errors.price"  
+                            v-model="form.price"
+                            :error="form.errors.price"
                             :disabled="form.processing"
                         />
-                        
-                        <AppFormInput 
-                            placeholder="0" 
-                            name="stock" 
-                            label="Stock" 
-                            type="number" 
+
+                        <AppFormInput
+                            placeholder="0"
+                            name="stock"
+                            label="Stock"
+                            type="number"
                             step="0.01"
-                            v-model.number="form.stock" 
-                            :error="form.errors.stock"  
+                            v-model.number="form.stock"
+                            :error="form.errors.stock"
                             :disabled="form.processing"
                         />
-                        
+
                         <div>
                             <label
                                 class="block text-sm font-medium text-slate-700 mb-2"
@@ -145,7 +147,7 @@
                         </div>
                     </div>
                 </form>
-                
+
                 <PreviewItem :item="form" :image_preview="image_preview" />
             </div>
         </template>

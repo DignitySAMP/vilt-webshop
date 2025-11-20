@@ -30,7 +30,12 @@
                 </span>
             </div>
 
-            <AppFormButton name="btn_item_delete" :text="`Delete ${props.name}`" theme="error" @click="submit"/>
+            <AppFormButton
+                name="btn_item_delete"
+                :text="`Delete ${props.name}`"
+                theme="error"
+                @click="submit"
+            />
         </div>
     </AppModal>
 </template>

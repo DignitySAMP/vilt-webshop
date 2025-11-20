@@ -1,5 +1,7 @@
 <template>
-    <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group">
+    <div
+        class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group"
+    >
         <Link :href="show(product.id)">
             <img
                 :src="product.image_url"
@@ -15,7 +17,9 @@
                         product.description
                     }}</span>
                 </div>
-                <div class="text-sm text-slate-500 flex items-center gap-2 mb-3">
+                <div
+                    class="text-sm text-slate-500 flex items-center gap-2 mb-3"
+                >
                     <span class="font-bold">{{ product.stock }}</span>
                     <span> items in stock. </span>
                 </div>
@@ -26,7 +30,11 @@
         </Link>
 
         <div class="px-4 pb-4">
-            <AppFormButton @click="addToCart(product)" name="btn_add_to_cart" text="Add to Cart"/>
+            <AppFormButton
+                @click="addToCart(product)"
+                name="btn_add_to_cart"
+                text="Add to Cart"
+            />
         </div>
     </div>
 </template>

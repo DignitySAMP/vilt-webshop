@@ -58,12 +58,14 @@
                             <AppFormButton
                                 name="btn_add_to_cart"
                                 :disabled="item.stock === 0"
-                                :text="item.stock > 0
+                                :text="
+                                    item.stock > 0
                                         ? 'Add to Cart'
-                                        : 'Out of Stock'"
+                                        : 'Out of Stock'
+                                "
                                 @click="addToCart"
                             />
-                            
+
                             <span
                                 @click="toggleFavourite"
                                 class="px-6 py-3 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors"

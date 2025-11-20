@@ -53,6 +53,5 @@ import IconFavorites from "@/icons/IconFavorites.vue";
 import IconAccount from "@/icons/IconAccount.vue";
 import IconProfile from "@/icons/IconProfile.vue";
 
-
 const favouriteItemCount: number = 3;
 </script>

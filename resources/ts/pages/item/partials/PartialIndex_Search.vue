@@ -1,36 +1,30 @@
 <template>
-<div
-    class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6"
->
-    <div class="p-4 flex flex-col md:flex-row gap-4 items-center">
-        <div class="flex relative w-full">
-            <IconSearch
-                class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
-            />
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6">
+        <div class="p-4 flex flex-col md:flex-row gap-4 items-center">
+            <div class="flex relative w-full">
+                <IconSearch
+                    class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
+                />
 
-            <input
-                v-model="searchQuery"
+                <input
+                    v-model="searchQuery"
+                    @change="onSearch"
+                    type="text"
+                    placeholder="Search products..."
+                    class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
+                />
+            </div>
+            <select
+                v-model="categoryQuery"
                 @change="onSearch"
-                type="text"
-                placeholder="Search products..."
-                class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-            />
-        </div>
-        <select
-            v-model="categoryQuery"
-            @change="onSearch"
-            class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-        >
-            <option
-                v-for="cat in categories"
-                :key="cat.id"
-                :value="cat.id"
+                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
             >
-                {{ cat.name }}
-            </option>
-        </select>
+                <option v-for="cat in categories" :key="cat.id" :value="cat.id">
+                    {{ cat.name }}
+                </option>
+            </select>
+        </div>
     </div>
-</div>
 </template>
 
 <script setup lang="ts">

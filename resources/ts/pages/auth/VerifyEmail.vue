@@ -23,7 +23,6 @@
             </span>
 
             <div class="flex w-full">
-                
                 <AppFormButton
                     name="btn_register"
                     :disabled="form.processing"
@@ -34,10 +33,7 @@
             </div>
 
             <div class="flex justify-end text-sm text-gray-600">
-                <span
-                    @click="form.submit(logout())"
-                    class="hover:underline"
-                >
+                <span @click="form.submit(logout())" class="hover:underline">
                     Log out
                 </span>
             </div>
@@ -46,8 +42,8 @@
 </template>
 <script setup lang="ts">
 import { useForm, usePage } from "@inertiajs/vue3";
-import { logout } from '@/wayfinder/routes';
-import { send } from '@//wayfinder/routes/verification';
+import { logout } from "@/wayfinder/routes";
+import { send } from "@//wayfinder/routes/verification";
 
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";

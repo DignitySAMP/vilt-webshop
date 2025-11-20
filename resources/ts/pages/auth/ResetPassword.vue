@@ -1,10 +1,36 @@
 <template>
     <AppGuestLayout title="Reset your password">
         <div class="flex flex-col gap-2">
-            <AppFormInput placeholder="your@email.com" name="email" label="E-mail Address" type="email" autocomplete="email" v-model="form.email" :error="form.errors.email"  :disabled="form.processing"/>
-            <AppFormInput placeholder="**************" name="password" label="Password" type="password" autocomplete="password-new" v-model="form.password" :error="form.errors.password"  :disabled="form.processing"/>
-            <AppFormInput placeholder="**************" name="password_confirmation" label="Password (confirm)" type="password" v-model="form.password_confirmation" :error="form.errors.password_confirmation"  :disabled="form.processing"/>
-          
+            <AppFormInput
+                placeholder="your@email.com"
+                name="email"
+                label="E-mail Address"
+                type="email"
+                autocomplete="email"
+                v-model="form.email"
+                :error="form.errors.email"
+                :disabled="form.processing"
+            />
+            <AppFormInput
+                placeholder="**************"
+                name="password"
+                label="Password"
+                type="password"
+                autocomplete="password-new"
+                v-model="form.password"
+                :error="form.errors.password"
+                :disabled="form.processing"
+            />
+            <AppFormInput
+                placeholder="**************"
+                name="password_confirmation"
+                label="Password (confirm)"
+                type="password"
+                v-model="form.password_confirmation"
+                :error="form.errors.password_confirmation"
+                :disabled="form.processing"
+            />
+
             <div class="flex w-full">
                 <AppFormButton
                     name="btn_register"
@@ -19,7 +45,7 @@
 </template>
 <script setup lang="ts">
 import { InertiaForm, useForm } from "@inertiajs/vue3";
-import { update } from '@/wayfinder/routes/password';
+import { update } from "@/wayfinder/routes/password";
 
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
@@ -33,9 +59,9 @@ interface Props {
 const props = defineProps<Props>();
 
 const form: InertiaForm<{
-    email: string,
-    password: string,
-    password_confirmation: string
+    email: string;
+    password: string;
+    password_confirmation: string;
 }> = useForm({
     email: props.email,
     password: "",

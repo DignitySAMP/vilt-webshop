@@ -64,17 +64,17 @@ const menuItems: menuItemShim[] = [
     {
         name: "Items",
         icon: IconItem,
-        url: index_item().url
+        url: index_item().url,
     },
     {
         name: "Item Categories",
         icon: IconItemCategory,
-        url: index_category().url
+        url: index_category().url,
     },
     {
         name: "Supplier",
         icon: IconSupplier,
-        url: index_supplier().url
+        url: index_supplier().url,
     },
 ];
 

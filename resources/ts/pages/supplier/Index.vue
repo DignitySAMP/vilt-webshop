@@ -10,18 +10,19 @@
                 />
                 <p class="text-sm text-slate-500 mt-1">Supplier Management</p>
             </div>
-            
 
-            <Link
-                :href="create()"
-                class="w-50"
-            >
-            <AppFormButton class="flex" name="btn_redirect_create" text="Add Supplier" :icon="IconCreate"/>
+            <Link :href="create()" class="w-50">
+                <AppFormButton
+                    class="flex"
+                    name="btn_redirect_create"
+                    text="Add Supplier"
+                    :icon="IconCreate"
+                />
             </Link>
         </template>
 
         <template v-slot:body>
-            <SupplierSearch/>
+            <SupplierSearch />
 
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
@@ -89,11 +90,7 @@
                                         class="flex items-center justify-end gap-2"
                                     >
                                         <Link
-                                            :href="
-                                                show(
-                                                    supplier.id,
-                                                )
-                                            "
+                                            :href="show(supplier.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
                                             <IconView />

@@ -20,7 +20,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <AppFormButton name="btn_edit_category" text="Save Category" :icon="IconSave" @click="submit"/>
+                <AppFormButton
+                    name="btn_edit_category"
+                    text="Save Category"
+                    :icon="IconSave"
+                    @click="submit"
+                />
             </div>
         </template>
 
@@ -30,26 +35,25 @@
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <div class="space-y-6">
-                    
-                    <AppFormInput 
-                        placeholder="Enter desired category name" 
-                        name="name" 
-                        label="Category Name" 
-                        type="text" 
-                        autocomplete="name" 
-                        v-model="form.name" 
-                        :error="form.errors.name"  
+                    <AppFormInput
+                        placeholder="Enter desired category name"
+                        name="name"
+                        label="Category Name"
+                        type="text"
+                        autocomplete="name"
+                        v-model="form.name"
+                        :error="form.errors.name"
                         :disabled="form.processing"
                     />
 
-                    <AppFormInput 
-                        placeholder="Enter desired category description" 
-                        name="description" 
-                        label="Category Description" 
-                        type="text" 
-                        autocomplete="description" 
-                        v-model="form.description" 
-                        :error="form.errors.description"  
+                    <AppFormInput
+                        placeholder="Enter desired category description"
+                        name="description"
+                        label="Category Description"
+                        type="text"
+                        autocomplete="description"
+                        v-model="form.description"
+                        :error="form.errors.description"
                         :disabled="form.processing"
                     />
                 </div>

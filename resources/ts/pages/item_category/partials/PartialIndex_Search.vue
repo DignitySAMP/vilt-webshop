@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6"
-    >
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6">
         <div class="p-4 flex gap-4 items-center">
             <div class="flex relative w-full">
                 <IconSearch

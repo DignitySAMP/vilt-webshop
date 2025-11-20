@@ -1,4 +1,3 @@
-
 <template>
     <Head title="Welcome">
         <link rel="preconnect" href="https://rsms.me/" />
@@ -1011,5 +1010,4 @@
 import { Head, Link, usePage } from "@inertiajs/vue3";
 
 import { login, register, logout } from "@/wayfinder/routes";
-
 </script>
