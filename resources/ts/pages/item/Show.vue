@@ -130,8 +130,8 @@ import AppLayout from "@/layout/AppLayout.vue";
 import RelatedItemCard from "@/pages/item/partials/PartialShow_RelatedCard.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
-import IconFavorites from "@/icons/IconFavorites.vue";
-import IconShipping from "@/icons/IconShipping.vue";
+import IconFavorites from "@/icons/shop/IconFavorites.vue";
+import IconShipping from "@/icons/shop/IconShipping.vue";
 
 // props
 const item = usePage<PageProps>().props.item;

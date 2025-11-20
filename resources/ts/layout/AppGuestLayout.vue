@@ -57,8 +57,8 @@ import { home } from "@/wayfinder/routes";
 
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
-import IconGoogle from "@/icons/IconGoogle.vue";
-import IconFacebook from "@/icons/IconFacebook.vue";
+import IconGoogle from "@/icons/logo/IconGoogle.vue";
+import IconFacebook from "@/icons/logo/IconFacebook.vue";
 
 interface Props {
     title: string;

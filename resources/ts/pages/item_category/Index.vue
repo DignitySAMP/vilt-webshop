@@ -131,8 +131,8 @@ import AppPagination from "@/components/AppPagination.vue";
 import CategoryDelete from "@/pages/item_category/Delete.vue";
 import CategorySearch from "@/pages/item_category/partials/PartialIndex_Search.vue";
 
-import IconEdit from "@/icons/IconEdit.vue";
-import IconCreate from "@/icons/IconCreate.vue";
+import IconEdit from "@/icons/crud/IconEdit.vue";
+import IconCreate from "@/icons/crud/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const categories: ItemCategory[] = usePage<PageProps>().props.categories.data;

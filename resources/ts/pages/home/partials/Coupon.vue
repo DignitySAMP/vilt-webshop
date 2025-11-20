@@ -20,5 +20,5 @@
 </template>
 <script setup lang="ts">
 import AppFormButton from "@/components/form/AppFormButton.vue";
-import IconCoupon from "@/icons/IconCoupon.vue";
+import IconCoupon from "@/icons/shop/IconCoupon.vue";
 </script>

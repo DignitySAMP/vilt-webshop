@@ -138,8 +138,8 @@ import { Supplier, SupplierOrder } from "@/types";
 import { type PageProps } from "@/types/inertia";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
-import IconEdit from "@/icons/IconEdit.vue";
-import IconBack from "@/icons/IconBack.vue";
+import IconEdit from "@/icons/crud/IconEdit.vue";
+import IconBack from "@/icons/crud/IconBack.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const supplier: Supplier = usePage<PageProps>().props.supplier;

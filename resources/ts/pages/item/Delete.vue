@@ -46,7 +46,7 @@ import { destroy } from "@/wayfinder/routes/item";
 import { Item } from "@/types";
 
 import AppModal from "@/components/AppModal.vue";
-import IconDelete from "@/icons/IconDelete.vue";
+import IconDelete from "@/icons/crud/IconDelete.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const props = defineProps<Item>();

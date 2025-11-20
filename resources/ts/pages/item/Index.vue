@@ -155,8 +155,8 @@ import ItemDelete from "@/pages/item/Delete.vue";
 
 import AppPagination from "@/components/AppPagination.vue";
 
-import IconEdit from "@/icons/IconEdit.vue";
-import IconCreate from "@/icons/IconCreate.vue";
+import IconEdit from "@/icons/crud/IconEdit.vue";
+import IconCreate from "@/icons/crud/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const products: Item[] = usePage<PageProps>().props.items.data;

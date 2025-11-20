@@ -55,8 +55,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import IconEmail from "@/icons/IconEmail.vue";
-import IconPassword from "@/icons/IconPassword.vue";
+import IconEmail from "@/icons/form/IconEmail.vue";
+import IconPassword from "@/icons/form/IconPassword.vue";
 
 import { computed, ref } from "vue";
 

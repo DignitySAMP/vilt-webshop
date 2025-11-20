@@ -49,9 +49,9 @@ import { home, profile, login } from "@/wayfinder/routes";
 import ShoppingCart from "@/layout/partials/ShoppingCart.vue";
 import AppFormIconButton from "@/components/form/AppFormIconButton.vue";
 
-import IconFavorites from "@/icons/IconFavorites.vue";
-import IconAccount from "@/icons/IconAccount.vue";
-import IconProfile from "@/icons/IconProfile.vue";
+import IconFavorites from "@/icons/shop/IconFavorites.vue";
+import IconAccount from "@/icons/layout/IconAccount.vue";
+import IconProfile from "@/icons/layout/IconProfile.vue";
 
 const favouriteItemCount: number = 3;
 </script>

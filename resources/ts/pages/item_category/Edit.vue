@@ -72,8 +72,8 @@ import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import { index, update } from "@/wayfinder/routes/category";
 
-import IconBack from "@/icons/IconBack.vue";
-import IconSave from "@/icons/IconSave.vue";
+import IconBack from "@/icons/crud/IconBack.vue";
+import IconSave from "@/icons/crud/IconSave.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import { toast } from "vue3-toastify";

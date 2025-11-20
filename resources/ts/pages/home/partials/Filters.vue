@@ -128,7 +128,7 @@ import Coupon from "@/pages/home/partials/Coupon.vue";
 // props
 import { ItemCategory } from "@/types";
 import { usePage } from "@inertiajs/vue3";
-import IconItemCategory from "@/icons/IconItemCategory.vue";
+import IconItemCategory from "@/icons/shop/IconItemCategory.vue";
 import { type PageProps } from "@/types/inertia";
 import AppFormSlider from "@/components/form/AppFormSlider.vue";
 const categories = usePage<PageProps>().props.categories;

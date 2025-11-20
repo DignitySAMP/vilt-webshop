@@ -121,8 +121,8 @@ import SupplierSearch from "@/pages/supplier/partials/PartialIndex_Search.vue";
 
 import AppPagination from "@/components/AppPagination.vue";
 
-import IconView from "@/icons/IconView.vue";
-import IconCreate from "@/icons/IconCreate.vue";
+import IconView from "@/icons/crud/IconView.vue";
+import IconCreate from "@/icons/crud/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const suppliers: Supplier[] = usePage<PageProps>().props.suppliers.data;

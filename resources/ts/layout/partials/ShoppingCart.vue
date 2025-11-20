@@ -162,7 +162,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import IconShoppingCart from "@/icons/IconShoppingCart.vue";
+import IconShoppingCart from "@/icons/shop/IconShoppingCart.vue";
 import { computed, onMounted, ref } from "vue";
 
 const showShoppingCart = ref<boolean>(false);
@@ -170,8 +170,8 @@ const showShoppingCart = ref<boolean>(false);
 import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 const shopping_cart_store = useShoppingCartStore();
 
-import IconPlus from "@/icons/IconPlus.vue";
-import IconMinus from "@/icons/IconMinus.vue";
+import IconPlus from "@/icons/form/IconPlus.vue";
+import IconMinus from "@/icons/form/IconMinus.vue";
 import AppFormIconButton from "@/components/form/AppFormIconButton.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";

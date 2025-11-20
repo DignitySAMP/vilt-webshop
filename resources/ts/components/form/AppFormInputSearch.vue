@@ -21,8 +21,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import IconSearch from "@/icons/IconSearch.vue";
-import IconClose from "@/icons/IconClose.vue";
+import IconSearch from "@/icons/form/IconSearch.vue";
+import IconClose from "@/icons/form/IconClose.vue";
 
 const model = defineModel();
 const emit = defineEmits(["on-search-query"]);

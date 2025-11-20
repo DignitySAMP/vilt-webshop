@@ -140,8 +140,8 @@ import { type PageProps } from "@/types/inertia";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import PreviewItem from "@/pages/item/partials/PartialEdit_Preview.vue";
 
-import IconBack from "@/icons/IconBack.vue";
-import IconCreate from "@/icons/IconCreate.vue";
+import IconBack from "@/icons/crud/IconBack.vue";
+import IconCreate from "@/icons/crud/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import AppFormSelect from "@/components/form/AppFormSelect.vue";

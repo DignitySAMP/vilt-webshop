@@ -40,9 +40,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import IconBreadcrumbs from "@/icons/IconBreadcrumbs.vue";
-import IconItem from "@/icons/IconItem.vue";
-import IconItemCategory from "@/icons/IconItemCategory.vue";
+import IconBreadcrumbs from "@/icons/layout/IconBreadcrumbs.vue";
+import IconItem from "@/icons/shop/IconItem.vue";
+import IconItemCategory from "@/icons/shop/IconItemCategory.vue";
 import { type Component, ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 
@@ -50,7 +50,7 @@ import { index as index_item } from "@/wayfinder/routes/item";
 import { index as index_category } from "@/wayfinder/routes/category";
 import { index as index_supplier } from "@/wayfinder/routes/supplier";
 
-import IconSupplier from "@/icons/IconSupplier.vue";
+import IconSupplier from "@/icons/shop/IconSupplier.vue";
 
 const collapseDropdown = ref<boolean>(false);
 
