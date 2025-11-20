@@ -109,22 +109,13 @@
                             :disabled="form.processing"
                         />
 
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Product Icon</label
-                            >
-                            <input
-                                type="file"
-                                @input="handleFileSelect($event)"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                                placeholder="Click to upload an image..."
-                            />
-
-                            <span v-if="form.errors.image">
-                                {{ form.errors.image }}
-                            </span>
-                        </div>
+                        <AppFormFile
+                            name="image"
+                            label="Product Icon"
+                            @on-file-upload="handleFileSelect($event)"
+                            :error="form.errors.image"
+                            accept="image/*"
+                        />
                     </div>
                 </form>
 
@@ -147,6 +138,7 @@ import IconCreate from "@/icons/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import AppFormSelect from "@/components/form/AppFormSelect.vue";
+import AppFormFile from "@/components/form/AppFormFile.vue";
 
 const form: InertiaForm<{
     name: string;
