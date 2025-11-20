@@ -167,3 +167,21 @@ export interface SupplierOrderItems {
     created_at: string;
     updated_at: string;
 }
+
+interface ShoppingCart {
+    id: number;
+    user_id: number;
+    created_at: string;
+    updated_at: string;
+    items: ShoppingCartItem[];
+}
+
+interface ShoppingCartItem {
+    id: number;
+    user_cart_id: number;
+    item_id: number;
+    amount: number;
+    created_at: string;
+    updated_at: string;
+    item: Item;
+}

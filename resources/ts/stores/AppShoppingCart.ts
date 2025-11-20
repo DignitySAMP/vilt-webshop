@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { Item } from "@/types";
+import { Item, ShoppingCart, ShoppingCartItem } from "@/types";
 import axios from "axios";
 import { index, store, update } from "@/wayfinder/routes/cart";
 import { toast } from "vue3-toastify";
@@ -8,24 +8,6 @@ import { toast } from "vue3-toastify";
 export const useShoppingCartStore = defineStore("shopping_cart", () => {
     interface ShoppingCartResponse {
         cart: ShoppingCart;
-    }
-
-    interface ShoppingCart {
-        id: number;
-        user_id: number;
-        created_at: string;
-        updated_at: string;
-        items: ShoppingCartItem[];
-    }
-
-    interface ShoppingCartItem {
-        id: number;
-        user_cart_id: number;
-        item_id: number;
-        amount: number;
-        created_at: string;
-        updated_at: string;
-        item: Item;
     }
 
     interface AxiosResponse {
