@@ -18,7 +18,7 @@
             <div class="flex flex-col text-sm">
                 <span class="text-slate-500">
                     <span class="font-bold"> Description: </span>
-                    {{ props.description }}
+                    <span class="truncate">{{ props.description }}</span>
                 </span>
                 <span class="text-slate-500">
                     <span class="font-bold"> Price: </span>
@@ -42,18 +42,18 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import { destroy } from "@/wayfinder/routes/item";
+import { Item } from "@/types";
 
 import AppModal from "@/components/AppModal.vue";
 import IconDelete from "@/icons/IconDelete.vue";
 
-const showDeleteModal = ref<boolean>(false);
-
-import { Item } from "@/types";
 const props = defineProps<Item>();
-
+const showDeleteModal = ref<boolean>(false);
 const form = useForm({});
+
 const submit = () => {
-    form.delete(route("item.destroy", props.id), {
+    form.submit(destroy(props.id), {
         preserveScroll: true,
         onError: (error: any) => {
             console.error(error);

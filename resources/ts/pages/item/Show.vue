@@ -112,7 +112,7 @@
                         Related Items
                     </h2>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <PartialShowRelatedCard
+                        <RelatedItemCard
                             v-for="product in usePage<PageProps>().props
                                 .similar"
                             :key="product.id"
@@ -126,25 +126,28 @@
 </template>
 
 <script setup lang="ts">
-import AppLayout from "@/layout/AppLayout.vue";
 import { usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
+import { type PageProps } from "@/types/inertia";
+import { useShoppingCartStore } from "@/stores/AppShoppingCart";
+
+import AppLayout from "@/layout/AppLayout.vue";
+import RelatedItemCard from "@/pages/item/partials/PartialShow_RelatedCard.vue";
+
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShipping from "@/icons/IconShipping.vue";
-import { type PageProps } from "@/types/inertia";
 
+// props
 const item = usePage<PageProps>().props.item;
-const isFavourite = ref(false);
 
-import { useShoppingCartStore } from "@/stores/AppShoppingCart";
-import PartialShowRelatedCard from "@/pages/item/partials/PartialShowRelatedCard.vue";
-
+// cart handler
 const shopping_cart_store = useShoppingCartStore();
-
 const addToCart = async () => {
     await shopping_cart_store.storeItemToBasket(item);
 };
 
+// TODO: favourite handler
+const isFavourite = ref(false);
 const toggleFavourite = () => {
     isFavourite.value = !isFavourite.value;
     console.log("addToFavourites");

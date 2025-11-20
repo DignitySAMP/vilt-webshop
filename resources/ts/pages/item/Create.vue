@@ -3,7 +3,7 @@
         <template v-slot:header>
             <div class="flex items-center gap-4">
                 <Link
-                    :href="route('item.index')"
+                    :href="index()"
                     class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
                 >
                     <IconBack />
@@ -224,16 +224,16 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
+import { ref } from "vue";
 import { useForm, usePage, Link, InertiaForm } from "@inertiajs/vue3";
+import { store, index } from "@/wayfinder/routes/item";
+import { type PageProps } from "@/types/inertia";
+
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
-import { ref } from "vue";
 
-import { type PageProps } from "@/types/inertia";
-
-const previewImage = ref<string | null>("");
 const form: InertiaForm<{
     name: string;
     description: string;
@@ -253,14 +253,16 @@ const form: InertiaForm<{
 });
 
 const submit = () => {
-    form.post(route("item.store"), {
+    form.submit(store(), {
         preserveScroll: true,
+        forceFormData: true,
         onError: (error: any) => {
             console.error(error);
         },
     });
 };
 
+const previewImage = ref<string | null>("");
 const handleFileSelect = (event: Event) => {
     const file = (event.target as HTMLInputElement).files?.[0] || null;
 
