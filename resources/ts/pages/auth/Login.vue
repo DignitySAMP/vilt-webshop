@@ -22,19 +22,12 @@
                 :disabled="form.processing"
             />
 
-            <div class="flex items-center gap-2">
-                <input
-                    type="checkbox"
-                    name="remember"
-                    id="remember"
-                    v-model="form.remember"
-                    autocomplete="remember"
-                    class="size-4 checked:accent-gray-500"
-                />
-                <label class="text-sm text-gray-700" for="remember"
-                    >Remember me?</label
-                >
-            </div>
+            <AppFormCheckbox
+                name="remember"
+                v-model="form.remember"
+                label="Remember me?"
+                autocomplete="remember"
+            />
 
             <div class="flex justify-between text-sm text-gray-600">
                 <Link
@@ -71,6 +64,7 @@ import { request } from "@/wayfinder/routes/password";
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import AppFormCheckbox from "@/components/form/AppFormCheckbox.vue";
 
 const form: InertiaForm<{
     email: string;
