@@ -9,25 +9,12 @@
                 <div
                     class="bg-white rounded-xl p-4 shadow-sm border border-slate-200"
                 >
-                    <div class="flex items-center gap-3">
-                        <IconSearch class="size-5 text-slate-400" />
-                        <input
-                            @change="
-                                onSearch(
-                                    usePage<PageProps>().props.filter.category,
-                                    usePage<PageProps>().props.filter
-                                        .price_range,
-                                )
-                            "
-                            v-model="searchText"
-                            type="text"
-                            placeholder="Search products..."
-                            class="flex-1 outline-none text-slate-700"
-                        />
-                        <span v-if="searchText" @click="resetTextSearch">
-                            <IconClose />
-                        </span>
-                    </div>
+                    <AppFormInputSearch
+                        placeholder="Search for your next purchase..."
+                        :borders="false"
+                        @on-search-query="onSearch"
+                        v-model="searchText"
+                    />
                 </div>
 
                 <div
@@ -59,11 +46,9 @@ import AppLayout from "@/layout/AppLayout.vue";
 import Filters from "@/pages/home/partials/Filters.vue";
 
 import ItemCard from "./partials/ItemCard.vue";
-import IconSearch from "@/icons/IconSearch.vue";
-
-import IconClose from "@/icons/IconClose.vue";
 
 import { type PageProps } from "@/types/inertia";
+import AppFormInputSearch from "@/components/form/AppFormInputSearch.vue";
 const items = usePage<PageProps>().props.items.data;
 
 const searchText = ref<string>(usePage<PageProps>().props.filter.search);
@@ -82,14 +67,4 @@ const onSearch = (category: number, price_range: number) => {
         },
     );
 };
-
-const resetTextSearch = () => {
-    searchText.value = "";
-    onSearch(
-        usePage<PageProps>().props.filter.category,
-        usePage<PageProps>().props.filter.price_range,
-    );
-};
-
-//onMounted(() => (searchQuery.value = usePage<PageProps>().props.filter.search));
 </script>
