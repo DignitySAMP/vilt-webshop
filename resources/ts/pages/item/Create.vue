@@ -57,55 +57,35 @@
                     />
 
                     <div class="grid grid-cols-2 gap-6 mb-4">
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Category</label
-                            >
-                            <select
-                                v-model="form.category"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            >
-                                <option
-                                    v-for="(
-                                        category, key
-                                    ) in usePage<PageProps>().props.categories"
-                                    :key="key"
-                                    :value="category.id"
-                                >
-                                    {{ category.name }}
-                                </option>
-                            </select>
+                        <AppFormSelect
+                            label="Category"
+                            name="category"
+                            :options="
+                                usePage<PageProps>().props.categories.map(
+                                    (cat: { id: number; name: string }) => ({
+                                        value: cat.id,
+                                        label: cat.name,
+                                    }),
+                                )
+                            "
+                            v-model="form.category"
+                            :error="form.errors.category"
+                        />
 
-                            <span v-if="form.errors.category">
-                                {{ form.errors.category }}
-                            </span>
-                        </div>
-
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Supplier</label
-                            >
-                            <select
-                                v-model="form.supplier"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            >
-                                <option
-                                    v-for="(
-                                        supplier, key
-                                    ) in usePage<PageProps>().props.suppliers"
-                                    :key="key"
-                                    :value="supplier.id"
-                                >
-                                    {{ supplier.name }}
-                                </option>
-                            </select>
-
-                            <span v-if="form.errors.category">
-                                {{ form.errors.category }}
-                            </span>
-                        </div>
+                        <AppFormSelect
+                            label="Supplier"
+                            name="supplier"
+                            :options="
+                                usePage<PageProps>().props.suppliers.map(
+                                    (cat: { id: number; name: string }) => ({
+                                        value: cat.id,
+                                        label: cat.name,
+                                    }),
+                                )
+                            "
+                            v-model="form.supplier"
+                            :error="form.errors.supplier"
+                        />
 
                         <AppFormInput
                             placeholder="0.00"
@@ -166,6 +146,7 @@ import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
+import AppFormSelect from "@/components/form/AppFormSelect.vue";
 
 const form: InertiaForm<{
     name: string;
