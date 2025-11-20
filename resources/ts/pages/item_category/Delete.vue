@@ -43,18 +43,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import { ItemCategory } from "@/types";
+import { destroy } from "@/wayfinder/routes/category";
 
 import AppModal from "@/components/AppModal.vue";
 import IconDelete from "@/icons/IconDelete.vue";
 
 const showDeleteModal = ref<boolean>(false);
-
-import { ItemCategory } from "@/types";
 const props = defineProps<ItemCategory>();
-
 const form = useForm({});
 const submit = () => {
-    form.delete(route("category.destroy", props.id), {
+    form.submit(destroy(props.id), {
         preserveScroll: true,
         onError: (error: any) => {
             console.error(error);

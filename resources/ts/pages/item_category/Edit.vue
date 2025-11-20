@@ -3,7 +3,7 @@
         <template v-slot:header>
             <div class="flex items-center gap-4">
                 <Link
-                    :href="route('category.index')"
+                    :href="index()"
                     class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
                 >
                     <IconBack />
@@ -73,14 +73,15 @@
 </template>
 <script setup lang="ts">
 import { useForm, usePage, Link, InertiaForm } from "@inertiajs/vue3";
+import { ItemCategory } from "@/types";
+import { type PageProps } from "@/types/inertia";
+
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
+
+import { index, update } from "@/wayfinder/routes/category";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
-
-import { ItemCategory } from "@/types";
-
-import { type PageProps } from "@/types/inertia";
 
 const categoryProp: ItemCategory = usePage<PageProps>().props.category;
 
@@ -93,7 +94,7 @@ const form: InertiaForm<{
 });
 
 const submit = () => {
-    form.patch(route("category.update", categoryProp.id), {
+    form.submit(update(categoryProp.id), {
         preserveScroll: true,
         onError: (error: any) => {
             console.error(error);

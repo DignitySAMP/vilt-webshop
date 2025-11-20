@@ -12,7 +12,7 @@
                 an e-mail with a reset link.
             </span>
 
-            <div class="flex flex-col gap-2">
+            <form @submit.prevent class="flex flex-col gap-2">
                 <label for="email" class="text-sm text-gray-700"
                     >Email address</label
                 >
@@ -29,11 +29,11 @@
                     v-html="form.errors.email"
                     class="text-sm text-red-700"
                 />
-            </div>
+            </form>
 
             <div class="flex justify-between text-sm text-gray-600">
                 <Link
-                    :href="route('login')"
+                    :href="login()"
                     class="hover:underline"
                     view-transition
                 >
@@ -41,7 +41,7 @@
                 </Link>
 
                 <Link
-                    :href="route('register')"
+                    :href="register()"
                     class="hover:underline"
                     view-transition
                 >
@@ -66,6 +66,8 @@
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, Link, useForm, usePage } from "@inertiajs/vue3";
 
+import { email } from '@/wayfinder/routes/password';
+import { login, register } from '@/wayfinder/routes';
 const form: InertiaForm<{
     email: string
 }> = useForm({
@@ -73,7 +75,7 @@ const form: InertiaForm<{
 });
 
 const submit = () => {
-    form.post(route("password.email"), {
+    form.submit(email(), {
         preserveScroll: true,
         onSuccess: () => form.reset("email"),
         onError: (error) => console.error(error),

@@ -1,7 +1,7 @@
 <template>
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="px-6 py-4 flex items-center justify-between">
-            <Link :href="route('home')">
+            <Link :href="home()">
                 <h1
                     class="text-2xl font-bold text-slate-900"
                     v-html="usePage<PageProps>().props.app.name ?? 'Laravel'"
@@ -27,8 +27,8 @@
                 <Link
                     :href="
                         usePage<PageProps>().props.auth !== null
-                            ? route('profile')
-                            : route('login')
+                            ? profile()
+                            : login()
                     "
                     as="button"
                     class="p-2 hover:bg-slate-100 rounded-lg transition-colors"
@@ -44,12 +44,13 @@
 </template>
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
+import { type PageProps } from "@/types/inertia";
+import { home, profile, login } from "@/wayfinder/routes";
+
 import ShoppingCart from "@/layout/partials/ShoppingCart.vue";
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconAccount from "@/icons/IconAccount.vue";
 import IconProfile from "@/icons/IconProfile.vue";
-
-import { type PageProps } from "@/types/inertia";
 
 const favouriteItemCount: number = 3;
 </script>

@@ -3,7 +3,7 @@
         <template v-slot:header>
             <div class="flex items-center gap-4">
                 <Link
-                    :href="route('item.index')"
+                    :href="index()"
                     class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
                 >
                     <IconBack />
@@ -164,64 +164,7 @@
                         </div>
                     </div>
 
-                    <article>
-                        <h3 class="text-lg font-semibold text-slate-900 mb-4">
-                            Preview
-                        </h3>
-                        <div
-                            class="bg-slate-50 rounded-lg p-4 border border-slate-200"
-                        >
-                            <div class="flex items-center gap-4">
-                                <img
-                                    v-if="image_preview"
-                                    :src="image_preview"
-                                    class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
-                                />
-                                <figure
-                                    v-else
-                                    class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
-                                >
-                                    <span
-                                        class="text-slate-400"
-                                        v-html="form.name[0] ?? '?'"
-                                    />
-                                </figure>
-                                <div class="flex flex-col gap-1">
-                                    <div class="flex items-center gap-2">
-                                        <h4
-                                            class="font-semibold text-slate-900 text-lg"
-                                        >
-                                            {{ form.name || "Product Name" }}
-                                        </h4>
-
-                                        <span
-                                            class="text-sm text-slate-600 capitalize"
-                                            v-html="
-                                                usePage<PageProps>().props.categories.filter(
-                                                    (cat: any) =>
-                                                        cat.id ===
-                                                        form.category,
-                                                )[0].name
-                                            "
-                                        />
-                                        <span
-                                            class="text-slate-400"
-                                            v-html="'•'"
-                                        />
-                                        <span
-                                            class="text-sm text-slate-600"
-                                            v-html="`${form.stock} in stock`"
-                                        />
-                                    </div>
-                                    <span
-                                        class="text-xl font-bold text-slate-900"
-                                    >
-                                        ${{ form.price.toFixed(2) }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                    <PreviewItem :item="form" :image_preview="image_preview" />
                 </div>
             </form>
         </template>
@@ -230,16 +173,18 @@
 <script setup lang="ts">
 import { useForm, InertiaForm, usePage, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
+import { type PageProps } from "@/types/inertia";
+import { index } from "@/wayfinder/routes/item";
+import { update } from "@/wayfinder/actions/App/Http/Controllers/ItemController"
+
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
+import PreviewItem from "@/pages/item/partials/PartialEdit_Preview.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
 
-import { type PageProps } from "@/types/inertia";
-const itemProp = usePage<PageProps>().props.item;
-
+const props = usePage<PageProps>().props.item;
 const form: InertiaForm<{
-    _method?: any;
     name: string;
     description: string;
     category: number;
@@ -248,28 +193,29 @@ const form: InertiaForm<{
     stock: number;
     image: File | null;
 }> = useForm({
-    _method: "patch" as any, // ignore in ts, will force useForm as patch anyway...
-    name: itemProp.name,
-    description: itemProp.description,
-    category: itemProp.item_category_id,
-    supplier: itemProp.supplier_id,
-    price: itemProp.price,
-    stock: itemProp.stock,
+    name: props.name,
+    description: props.description,
+    category: props.item_category_id,
+    supplier: props.supplier_id,
+    price: props.price,
+    stock: props.stock,
     image: null,
 });
 
-const image_preview = ref(itemProp.image_url);
-
 const submit = () => {
-    form.post(route("item.update", itemProp.id), {
+    form.transform((data) => ({
+        ...data,
+        _method: 'PATCH',
+    }));
+
+    form.submit('post', update(props.id).url, {
         preserveScroll: true,
         forceFormData: true,
-        onError: (error: any) => {
-            console.error(error);
-        },
+        onError: (error: any) => console.error(error),
     });
 };
 
+const image_preview = ref(props.image_url);
 const handleFileSelect = (event: Event) => {
     const file = (event.target as HTMLInputElement).files?.[0] || null;
 

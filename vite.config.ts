@@ -4,6 +4,7 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
+import { wayfinder } from "@laravel/vite-plugin-wayfinder";
 
 export default defineConfig({
     plugins: [
@@ -20,6 +21,10 @@ export default defineConfig({
                 },
             },
         }),
+        wayfinder({
+            path: './resources/ts/wayfinder',
+
+        })
     ],
     resolve: {
         alias: {

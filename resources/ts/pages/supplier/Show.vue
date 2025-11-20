@@ -3,7 +3,7 @@
         <template v-slot:header>
             <div class="flex items-center gap-4">
                 <Link
-                    :href="route('supplier.index')"
+                    :href="index()"
                     class="p-2 hover:bg-slate-100 rounded-lg transition duration-300"
                 >
                     <IconBack />
@@ -21,8 +21,7 @@
             </div>
             <div class="flex items-center gap-3">
                 <Link
-                    as="button"
-                    :href="route('supplier.edit', supplier.id)"
+                    :href="edit(supplier.id)"
                     class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
                 >
                     <IconEdit />
@@ -134,16 +133,14 @@
 </template>
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
+import { index, edit } from "@/wayfinder/routes/supplier";
+import { Supplier, SupplierOrder } from "@/types";
+import { type PageProps } from "@/types/inertia";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import IconEdit from "@/icons/IconEdit.vue";
 import IconBack from "@/icons/IconBack.vue";
 
-// props
-import { Supplier, SupplierOrder } from "@/types";
-import { type PageProps } from "@/types/inertia";
-
-// data
 const supplier: Supplier = usePage<PageProps>().props.supplier;
 const supplier_orders: SupplierOrder[] =
     usePage<PageProps>().props.supplier.orders;

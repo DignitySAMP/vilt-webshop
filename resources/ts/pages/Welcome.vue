@@ -1,6 +1,3 @@
-<script setup lang="ts">
-import { Head, Link, usePage } from "@inertiajs/vue3";
-</script>
 
 <template>
     <Head title="Welcome">
@@ -18,14 +15,14 @@ import { Head, Link, usePage } from "@inertiajs/vue3";
             >
                 <div v-if="usePage().props.auth === null" class="flex gap-4">
                     <Link
-                        :href="route('login')"
+                        :href="login()"
                         class="w-fit rounded-md border-stone-700 bg-stone-800 px-4 py-2 text-stone-200 transition duration-300 hover:bg-stone-700"
                         view-transition
                     >
                         Login
                     </Link>
                     <Link
-                        :href="route('register')"
+                        :href="register()"
                         class="w-fit rounded-md border-stone-700 bg-stone-800 px-4 py-2 text-stone-200 transition duration-300 hover:bg-stone-700"
                         view-transition
                     >
@@ -34,16 +31,7 @@ import { Head, Link, usePage } from "@inertiajs/vue3";
                 </div>
                 <div v-else class="flex gap-4">
                     <Link
-                        :href="route('two-factor.setup')"
-                        as="button"
-                        class="w-fit rounded-md border-stone-700 bg-stone-800 px-4 py-2 text-stone-200 transition duration-300 hover:bg-stone-700"
-                        view-transition
-                    >
-                        Manage 2FA
-                    </Link>
-
-                    <Link
-                        :href="route('logout')"
+                        :href="logout()"
                         method="post"
                         class="w-fit rounded-md border-stone-700 bg-stone-800 px-4 py-2 text-stone-200 transition duration-300 hover:bg-stone-700"
                         view-transition
@@ -1019,3 +1007,9 @@ import { Head, Link, usePage } from "@inertiajs/vue3";
         <div class="hidden h-14.5 lg:block"></div>
     </div>
 </template>
+<script setup lang="ts">
+import { Head, Link, usePage } from "@inertiajs/vue3";
+
+import { login, register, logout } from "@/wayfinder/routes";
+
+</script>

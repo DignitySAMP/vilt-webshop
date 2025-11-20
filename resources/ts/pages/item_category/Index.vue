@@ -11,7 +11,7 @@
                 <p class="text-sm text-slate-500 mt-1">Product Management</p>
             </div>
             <Link
-                :href="route('category.create')"
+                :href="create()"
                 class="min-w-50 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
             >
                 <IconCreate />
@@ -21,25 +21,7 @@
         </template>
 
         <template v-slot:body>
-            <div
-                class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6"
-            >
-                <div class="p-4 flex gap-4 items-center">
-                    <div class="flex relative w-full">
-                        <IconSearch
-                            class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
-                        />
-
-                        <input
-                            v-model="searchQuery"
-                            @change="onSearch"
-                            type="text"
-                            placeholder="Search categories..."
-                            class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition-colors"
-                        />
-                    </div>
-                </div>
-            </div>
+            <CategorySearch/>
 
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
@@ -113,8 +95,7 @@
                                     >
                                         <Link
                                             :href="
-                                                route(
-                                                    'category.edit',
+                                                edit(
                                                     category.id,
                                                 )
                                             "
@@ -142,40 +123,20 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { usePage, router, Link } from "@inertiajs/vue3";
-import { onMounted, ref } from "vue";
+import { usePage, Link } from "@inertiajs/vue3";
+
+import { ItemCategory } from "@/types";
+import { type PageProps } from "@/types/inertia";
+import { edit, create } from "@/wayfinder/routes/category";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import AppPagination from "@/components/AppPagination.vue";
 
 import CategoryDelete from "@/pages/item_category/Delete.vue";
+import CategorySearch from '@/pages/item_category/partials/PartialIndex_Search.vue'
 
 import IconEdit from "@/icons/IconEdit.vue";
 import IconCreate from "@/icons/IconCreate.vue";
-import IconSearch from "@/icons/IconSearch.vue";
 
-// props
-import { ItemCategory } from "@/types";
-
-import { type PageProps } from "@/types/inertia";
 const categories: ItemCategory[] = usePage<PageProps>().props.categories.data;
-
-// search queries
-const searchQuery = ref("");
-
-const onSearch = () => {
-    router.get(
-        route("category.index"),
-        {
-            // data
-            search: searchQuery.value,
-        },
-        {
-            // options
-            replace: true,
-        },
-    );
-};
-
-onMounted(() => (searchQuery.value = usePage<PageProps>().props.filter.search));
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div
+    <Link as="div" :href="show(product.id)"
         class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group cursor-pointer"
     >
         <img
@@ -31,16 +31,14 @@
                 </button>
             </div>
         </div>
-    </div>
+    </Link>
 </template>
 <script setup lang="ts">
+import { Link } from "@inertiajs/vue3";
 import { useShoppingCartStore } from "@/stores/AppShoppingCart";
-const shopping_cart_store = useShoppingCartStore();
+import { show } from "@/wayfinder/routes/item";
 
-const addToCart = async () => {
-    await shopping_cart_store.storeItemToBasket(product);
-};
-
+// TODO: clean this up... raw prop data
 interface RelatedItemInterface {
     id: number;
     item_category_id: number;
@@ -72,4 +70,8 @@ interface RelatedItemInterface {
 }
 
 const product = defineProps<RelatedItemInterface>();
+
+const shopping_cart_store = useShoppingCartStore();
+const addToCart = async () => await shopping_cart_store.storeItemToBasket(product);
+
 </script>

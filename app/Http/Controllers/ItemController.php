@@ -81,7 +81,7 @@ class ItemController extends Controller
             'supplier' => 'required|exists:suppliers,id',
             'description' => 'required|min:8',
             'image' => 'required|file|image|max:1500',
-            'price' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
 
@@ -133,7 +133,7 @@ class ItemController extends Controller
             'supplier' => 'required|exists:suppliers,id',
             'description' => 'required|min:8',
             'image' => 'nullable|file|image|max:1500',
-            'price' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
         ]);
 

@@ -11,7 +11,7 @@
                 <p class="text-sm text-slate-500 mt-1">Supplier Management</p>
             </div>
             <Link
-                :href="route('item.create')"
+                :href="create()"
                 class="min-w-40 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
             >
                 <IconCreate />
@@ -21,25 +21,7 @@
         </template>
 
         <template v-slot:body>
-            <div
-                class="bg-white rounded-xl shadow-sm border border-slate-200 mb-6"
-            >
-                <div class="p-4 flex gap-4 items-center">
-                    <div class="flex relative w-full">
-                        <IconSearch
-                            class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2"
-                        />
-
-                        <input
-                            v-model="searchQuery"
-                            @change="onSearch"
-                            type="text"
-                            placeholder="Search suppliers..."
-                            class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition-colors"
-                        />
-                    </div>
-                </div>
-            </div>
+            <SupplierSearch/>
 
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
@@ -108,8 +90,7 @@
                                     >
                                         <Link
                                             :href="
-                                                route(
-                                                    'supplier.show',
+                                                show(
                                                     supplier.id,
                                                 )
                                             "
@@ -133,40 +114,18 @@
     </AppAdminLayout>
 </template>
 <script setup lang="ts">
-import { usePage, router, Link } from "@inertiajs/vue3";
-import { onMounted, ref } from "vue";
+import { usePage, Link } from "@inertiajs/vue3";
+import { Supplier } from "@/types";
+import { type PageProps } from "@/types/inertia";
+import { show, create } from "@/wayfinder/routes/supplier";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
+import SupplierSearch from "@/pages/supplier/partials/PartialIndex_Search.vue";
+
 import AppPagination from "@/components/AppPagination.vue";
 
 import IconView from "@/icons/IconView.vue";
 import IconCreate from "@/icons/IconCreate.vue";
-import IconSearch from "@/icons/IconSearch.vue";
 
-// props
-import { Supplier } from "@/types";
-
-import { type PageProps } from "@/types/inertia";
-
-// data
 const suppliers: Supplier[] = usePage<PageProps>().props.suppliers.data;
-
-// search queries
-const searchQuery = ref("");
-
-const onSearch = () => {
-    router.get(
-        route("supplier.index"),
-        {
-            // data
-            search: searchQuery.value,
-        },
-        {
-            // options
-            replace: true,
-        },
-    );
-};
-
-onMounted(() => (searchQuery.value = usePage<PageProps>().props.filter.search));
 </script>
