@@ -26,7 +26,7 @@
                 <button
                     :disabled="form.processing"
                     type="button"
-                    @click="form.post(route('verification.send'))"
+                    @click="form.submit(send())"
                     class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
                 >
                     Request new link
@@ -35,7 +35,7 @@
 
             <div class="flex justify-end text-sm text-gray-600">
                 <span
-                    click="form.post(route('logout'))"
+                    @click="form.submit(logout())"
                     class="hover:underline"
                 >
                     Log out
@@ -47,5 +47,8 @@
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
+import { logout } from '@/wayfinder/routes';
+import { send } from '@//wayfinder/routes/verification';
+
 const form = useForm({});
 </script>

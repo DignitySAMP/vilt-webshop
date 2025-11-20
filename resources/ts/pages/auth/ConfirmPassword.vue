@@ -7,7 +7,7 @@
                 submit in order to procees.
             </span>
 
-            <div class="flex flex-col gap-2">
+            <form @submit.prevent class="flex flex-col gap-2">
                 <label for="password" class="text-sm text-gray-700"
                     >Password Confirmation</label
                 >
@@ -23,7 +23,7 @@
                     v-html="form.errors.password"
                     class="text-sm text-red-700"
                 />
-            </div>
+            </form>
 
             <div class="flex w-full">
                 <button
@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, useForm } from "@inertiajs/vue3";
+import { store } from '@/wayfinder/routes/password/confirm';
 
 const form: InertiaForm<{
     password: string,
@@ -49,7 +50,7 @@ const form: InertiaForm<{
 });
 
 const submit = () => {
-    form.post(route("password.confirm.store"), {
+    form.submit(store(), {
         preserveScroll: true,
         onSuccess: () => form.reset("password"),
         onError: (error) => console.error(error),

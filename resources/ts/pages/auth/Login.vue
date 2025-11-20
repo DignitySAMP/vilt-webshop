@@ -55,7 +55,7 @@
 
             <div class="flex justify-between text-sm text-gray-600">
                 <Link
-                    :href="route('register')"
+                    :href="register()"
                     class="hover:underline"
                     view-transition
                 >
@@ -63,7 +63,7 @@
                 </Link>
 
                 <Link
-                    :href="route('password.request')"
+                    :href="request()"
                     class="hover:underline"
                     view-transition
                 >
@@ -87,6 +87,12 @@
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, Link, useForm } from "@inertiajs/vue3";
+// form
+import { store } from '@/wayfinder/routes/login';
+
+// redirects
+import { register } from '@/wayfinder/routes';
+import { request } from '@/wayfinder/routes/password';
 
 const form: InertiaForm<{
     email: string;
@@ -99,7 +105,7 @@ const form: InertiaForm<{
 });
 
 const submit = () => {
-    form.post(route("login.store"), {
+    form.submit(store(), {
         preserveScroll: true,
         onSuccess: () => form.reset("password"),
         onError: (error) => console.error(error),

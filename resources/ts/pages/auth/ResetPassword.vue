@@ -73,7 +73,7 @@
 <script setup lang="ts">
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, useForm } from "@inertiajs/vue3";
-
+import { update } from '@/wayfinder/routes/password';
 
 interface Props {
     token: string;
@@ -90,10 +90,11 @@ const form: InertiaForm<{
     email: props.email,
     password: "",
     password_confirmation: "",
+    token: props.token,
 });
 
 const submit = () => {
-    form.post(route("login.store"), {
+    form.submit(update(), {
         preserveScroll: true,
         onSuccess: () => form.reset("password"),
         onError: (error) => console.error(error),
