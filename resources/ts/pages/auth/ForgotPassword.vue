@@ -14,21 +14,15 @@
             </span>
 
             <form @submit.prevent class="flex flex-col gap-2">
-                <label for="email" class="text-sm text-gray-700"
-                    >Email address</label
-                >
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    v-model="form.email"
-                    autocomplete="email"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.email"
-                    v-html="form.errors.email"
-                    class="text-sm text-red-700"
+                <AppFormInput 
+                    placeholder="your@email.com" 
+                    name="email" 
+                    label="E-mail Address" 
+                    type="email" 
+                    autocomplete="email" 
+                    v-model="form.email" 
+                    :error="form.errors.email"  
+                    :disabled="form.processing"
                 />
             </form>
 
@@ -70,6 +64,7 @@ import { login, register } from '@/wayfinder/routes';
 
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
 
 
 const form: InertiaForm<{

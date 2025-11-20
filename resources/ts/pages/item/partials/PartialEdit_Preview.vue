@@ -50,7 +50,7 @@
                     <span
                         class="text-xl font-bold text-slate-900"
                     >
-                        ${{ props.item.price.toFixed(2) }}
+                        ${{ numberToFixed(props.item.price) }}
                     </span>
                 </div>
             </div>
@@ -77,4 +77,8 @@
     };
     const props = defineProps<Props>();
 
+    // safely formats a number to have 2 decimals
+    const numberToFixed = (input: number) => {
+        return Number(input).toFixed(2);
+    };
 </script>

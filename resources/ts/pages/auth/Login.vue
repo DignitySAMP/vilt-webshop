@@ -1,44 +1,10 @@
 <template>
     <AppGuestLayout title="Authenticate yourself">
         <form @submit.prevent class="flex flex-col gap-2">
-            <div class="flex flex-col gap-2">
-                <label class="text-sm text-gray-700" for="email"
-                    >Email address</label
-                >
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    v-model="form.email"
-                    autocomplete="email"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.email"
-                    v-html="form.errors.email"
-                    class="text-sm text-red-700"
-                />
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <label class="text-sm text-gray-700" for="password"
-                    >Password</label
-                >
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    v-model="form.password"
-                    autocomplete="password"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.password"
-                    v-html="form.errors.password"
-                    class="text-sm text-red-700"
-                />
-            </div>
-
+            
+            <AppFormInput placeholder="your@email.com" name="email" label="E-mail address" type="email" autocomplete="email" v-model="form.email" :error="form.errors.email" :disabled="form.processing"/>
+            <AppFormInput placeholder="**************" name="password" label="Password" type="password" autocomplete="password" v-model="form.password" :error="form.errors.password"  :disabled="form.processing"/>
+                
             <div class="flex items-center gap-2">
                 <input
                     type="checkbox"
@@ -91,6 +57,7 @@ import { request } from '@/wayfinder/routes/password';
 
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
 
 const form: InertiaForm<{
     email: string;

@@ -32,36 +32,27 @@
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <form @submit.prevent class="space-y-6">
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Product Name</label
-                        >
-                        <input
-                            v-model="form.name"
-                            type="text"
-                            class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Enter product name"
-                        />
-                        <span v-if="form.errors.name">
-                            {{ form.errors.name }}
-                        </span>
-                    </div>
+                    <AppFormInput 
+                        placeholder="Enter desired product name" 
+                        name="name" 
+                        label="Product Name" 
+                        type="text" 
+                        autocomplete="name" 
+                        v-model="form.name" 
+                        :error="form.errors.name"  
+                        :disabled="form.processing"
+                    />
 
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Product Description</label
-                        >
-                        <textarea
-                            v-model="form.description"
-                            class="no-resize w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Enter product description"
-                        />
-                        <span v-if="form.errors.description">
-                            {{ form.errors.description }}
-                        </span>
-                    </div>
+                    <AppFormInput 
+                        placeholder="Enter desired product description" 
+                        name="description" 
+                        label="Product Description" 
+                        type="text" 
+                        autocomplete="description" 
+                        v-model="form.description" 
+                        :error="form.errors.description"  
+                        :disabled="form.processing"
+                    />
 
                     <div class="grid grid-cols-2 gap-6 mb-4">
                         <div>
@@ -114,39 +105,28 @@
                             </span>
                         </div>
 
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Price ($)</label
-                            >
-                            <input
-                                v-model.number="form.price"
-                                type="number"
-                                step="0.01"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                                placeholder="0.00"
-                            />
-
-                            <span v-if="form.errors.price">
-                                {{ form.errors.price }}
-                            </span>
-                        </div>
-
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Stock</label
-                            >
-                            <input
-                                v-model.number="form.stock"
-                                type="number"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                                placeholder="0"
-                            />
-                            <span v-if="form.errors.stock">
-                                {{ form.errors.stock }}
-                            </span>
-                        </div>
+                        <AppFormInput 
+                            placeholder="0.00" 
+                            name="price" 
+                            label="Price ($)" 
+                            type="number" 
+                            step="0.01"
+                            v-model="form.price" 
+                            :error="form.errors.price"  
+                            :disabled="form.processing"
+                        />
+                        
+                        <AppFormInput 
+                            placeholder="0" 
+                            name="stock" 
+                            label="Stock" 
+                            type="number" 
+                            step="0.01"
+                            v-model.number="form.stock" 
+                            :error="form.errors.stock"  
+                            :disabled="form.processing"
+                        />
+                        
                         <div>
                             <label
                                 class="block text-sm font-medium text-slate-700 mb-2"
@@ -165,58 +145,8 @@
                         </div>
                     </div>
                 </form>
-                <article>
-                    <h3 class="text-lg font-semibold text-slate-900 mb-4">
-                        Preview
-                    </h3>
-                    <div
-                        class="bg-slate-50 rounded-lg p-4 border border-slate-200"
-                    >
-                        <div class="flex items-center gap-4">
-                            <img
-                                v-if="form.image && previewImage !== null"
-                                :src="previewImage"
-                                class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
-                            />
-                            <figure
-                                v-else-if="!form.image"
-                                class="size-20 bg-white rounded-lg flex items-center justify-center text-4xl border border-slate-200"
-                            >
-                                <span
-                                    class="text-slate-400"
-                                    v-html="form.name[0] ?? '?'"
-                                />
-                            </figure>
-                            <div class="flex flex-col gap-1">
-                                <div class="flex items-center gap-2">
-                                    <h4
-                                        class="font-semibold text-slate-900 text-lg"
-                                    >
-                                        {{ form.name || "Product Name" }}
-                                    </h4>
-
-                                    <span
-                                        class="text-sm text-slate-600 capitalize"
-                                        v-html="
-                                            usePage<PageProps>().props.categories.filter(
-                                                (cat: any) =>
-                                                    cat.id === form.category,
-                                            )[0].name
-                                        "
-                                    />
-                                    <span class="text-slate-400" v-html="'•'" />
-                                    <span
-                                        class="text-sm text-slate-600"
-                                        v-html="`${form.stock} in stock`"
-                                    />
-                                </div>
-                                <span class="text-xl font-bold text-slate-900">
-                                    ${{ form.price.toFixed(2) }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                
+                <PreviewItem :item="form" :image_preview="image_preview" />
             </div>
         </template>
     </AppAdminLayout>
@@ -228,10 +158,12 @@ import { store, index } from "@/wayfinder/routes/item";
 import { type PageProps } from "@/types/inertia";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
+import PreviewItem from "@/pages/item/partials/PartialEdit_Preview.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconCreate from "@/icons/IconCreate.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
 
 const form: InertiaForm<{
     name: string;
@@ -261,16 +193,16 @@ const submit = () => {
     });
 };
 
-const previewImage = ref<string | null>("");
+const image_preview = ref<string | null>("");
 const handleFileSelect = (event: Event) => {
     const file = (event.target as HTMLInputElement).files?.[0] || null;
 
     if (file) {
         form.image = file;
-        previewImage.value = URL.createObjectURL(file);
+        image_preview.value = URL.createObjectURL(file);
     } else {
         form.image = null as any;
-        previewImage.value = null;
+        image_preview.value = null;
     }
 };
 </script>

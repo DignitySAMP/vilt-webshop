@@ -1,80 +1,11 @@
 <template>
     <AppGuestLayout title="Register an account">
         <form @submit.prevent class="flex flex-col gap-2">
-            <div class="flex flex-col gap-2">
-                <label for="name" class="text-sm text-gray-700">Name</label>
-                <input
-                    type="name"
-                    name="name"
-                    id="name"
-                    v-model="form.name"
-                    autocomplete="name"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.name"
-                    v-html="form.errors.name"
-                    class="text-sm text-red-700"
-                />
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <label for="email" class="text-sm text-gray-700"
-                    >Email address</label
-                >
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    v-model="form.email"
-                    autocomplete="email"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.email"
-                    v-html="form.errors.email"
-                    class="text-sm text-red-700"
-                />
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <label for="password" class="text-sm text-gray-700"
-                    >Password</label
-                >
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    v-model="form.password"
-                    autocomplete="password"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.password"
-                    v-html="form.errors.password"
-                    class="text-sm text-red-700"
-                />
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <label for="password_confirmation" class="text-sm text-gray-700"
-                    >Password Confirmation</label
-                >
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    v-model="form.password_confirmation"
-                    autocomplete="new-password"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.password_confirmation"
-                    v-html="form.errors.password_confirmation"
-                    class="text-sm text-red-700"
-                />
-            </div>
-
+            <AppFormInput placeholder="Firstname Lastname" name="input_name" label="Name" type="text" autocomplete="name" v-model="form.name" :error="form.errors.name"  :disabled="form.processing"/>
+            <AppFormInput placeholder="your@email.com" name="email" label="E-mail Address" type="email" autocomplete="email" v-model="form.email" :error="form.errors.email"  :disabled="form.processing"/>
+            <AppFormInput placeholder="**************" name="password" label="Password" type="password" autocomplete="password" v-model="form.password" :error="form.errors.password"  :disabled="form.processing"/>
+            <AppFormInput placeholder="**************" name="password_confirmation" label="Password (confirm)" type="password" autocomplete="new-password" v-model="form.password_confirmation" :error="form.errors.password_confirmation"  :disabled="form.processing"/>
+          
             <div class="flex justify-end text-sm text-gray-600">
                 <Link
                     :href="login()"
@@ -105,6 +36,7 @@ import { login } from '@/wayfinder/routes' // redirect
 
 import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
 
 const form: InertiaForm<{
         name: string,

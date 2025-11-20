@@ -115,11 +115,12 @@
                     class="space-y-4"
                 >
                     <div class="flex items-center gap-2 mb-4">
-                        <input
-                            type="text"
-                            placeholder="Coupon code"
-                            class="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm outline-none focus:border-blue-600 transition-colors"
+                        <AppFormInput 
+                            placeholder="Coupon code" 
+                            name="coupon" 
+                            type="text" 
                         />
+                       
                         <div class="w-fit">
                             <AppFormButton name="btn_apply" text="Apply" theme="secondary"/>
                         </div>
@@ -166,6 +167,7 @@ import IconPlus from "@/icons/IconPlus.vue";
 import IconMinus from "@/icons/IconMinus.vue";
 import AppFormIconButton from "@/components/form/AppFormIconButton.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
 
 const shoppingCartRef = ref<HTMLElement | null>(null);
 onMounted(async () => {
