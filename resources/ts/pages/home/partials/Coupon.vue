@@ -9,13 +9,16 @@
         <p class="text-sm text-blue-100 md:mb-4">
             Get 20% off your first order with code WELCOME20
         </p>
-        <button
-            class="hidden md:block bg-white text-blue-600 px-4 py-2 rounded-lg font-medium text-sm hover:bg-blue-50 transition-colors w-full"
-        >
-            Copy Code
-        </button>
+
+        <AppFormButton
+            name="btn_coupon"
+            text="Copy Code"
+            theme="light-blue"
+            class="text-sm"
+        />
     </div>
 </template>
 <script setup lang="ts">
+import AppFormButton from "@/components/form/AppFormButton.vue";
 import IconCoupon from "@/icons/IconCoupon.vue";
 </script>

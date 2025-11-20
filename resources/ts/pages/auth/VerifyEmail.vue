@@ -1,5 +1,5 @@
 <template>
-    <AppGuestLayout>
+    <AppGuestLayout title="Verify your e-mail address">
         <div class="flex flex-col gap-2">
             <div
                 v-if="
@@ -23,21 +23,17 @@
             </span>
 
             <div class="flex w-full">
-                <button
+                <AppFormButton
+                    name="btn_register"
                     :disabled="form.processing"
-                    type="button"
+                    type="submit"
                     @click="form.submit(send())"
-                    class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
-                >
-                    Request new link
-                </button>
+                    text="Reset password"
+                />
             </div>
 
             <div class="flex justify-end text-sm text-gray-600">
-                <span
-                    @click="form.submit(logout())"
-                    class="hover:underline"
-                >
+                <span @click="form.submit(logout())" class="hover:underline">
                     Log out
                 </span>
             </div>
@@ -45,10 +41,12 @@
     </AppGuestLayout>
 </template>
 <script setup lang="ts">
-import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { useForm, usePage } from "@inertiajs/vue3";
-import { logout } from '@/wayfinder/routes';
-import { send } from '@//wayfinder/routes/verification';
+import { logout } from "@/wayfinder/routes";
+import { send } from "@//wayfinder/routes/verification";
+
+import AppGuestLayout from "@/layout/AppGuestLayout.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const form = useForm({});
 </script>

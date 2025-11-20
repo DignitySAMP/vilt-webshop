@@ -20,14 +20,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button
+                <AppFormButton
+                    name="btn_edit"
+                    text="Save Product"
+                    :icon="IconSave"
                     @click="submit"
-                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                >
-                    <IconSave />
-
-                    Save Product
-                </button>
+                />
             </div>
         </template>
 
@@ -37,131 +35,88 @@
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <div class="space-y-6">
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Product Name</label
-                        >
-                        <input
-                            v-model="form.name"
-                            type="text"
-                            class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Enter product name"
-                        />
-                        <span v-if="form.errors.name">
-                            {{ form.errors.name }}
-                        </span>
-                    </div>
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Product Description</label
-                        >
-                        <textarea
-                            v-model="form.description"
-                            class="no-resize w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Enter product description"
-                        />
-                        <span v-if="form.errors.description">
-                            {{ form.errors.description }}
-                        </span>
-                    </div>
+                    <AppFormInput
+                        placeholder="Enter desired product name"
+                        name="name"
+                        label="Product Name"
+                        type="text"
+                        autocomplete="name"
+                        v-model="form.name"
+                        :error="form.errors.name"
+                        :disabled="form.processing"
+                    />
+
+                    <AppFormInput
+                        placeholder="Enter desired product description"
+                        name="description"
+                        label="Product Description"
+                        type="text"
+                        autocomplete="description"
+                        v-model="form.description"
+                        :error="form.errors.description"
+                        :disabled="form.processing"
+                    />
+
                     <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Category</label
-                            >
-                            <select
-                                v-model="form.category"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            >
-                                <option
-                                    v-for="(
-                                        category, key
-                                    ) in usePage<PageProps>().props.categories"
-                                    :key="key"
-                                    :value="category.id"
-                                >
-                                    {{ category.name }}
-                                </option>
-                            </select>
-                            <span v-if="form.errors.category">
-                                {{ form.errors.category }}
-                            </span>
-                        </div>
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Supplier</label
-                            >
-                            <select
-                                v-model="form.supplier"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            >
-                                <option
-                                    v-for="(
-                                        supplier, key
-                                    ) in usePage<PageProps>().props.suppliers"
-                                    :key="key"
-                                    :value="supplier.id"
-                                >
-                                    {{ supplier.name }}
-                                </option>
-                            </select>
+                        <AppFormSelect
+                            label="Category"
+                            name="category"
+                            :options="
+                                usePage<PageProps>().props.categories.map(
+                                    (cat: { id: number; name: string }) => ({
+                                        value: cat.id,
+                                        label: cat.name,
+                                    }),
+                                )
+                            "
+                            v-model="form.category"
+                            :error="form.errors.category"
+                        />
 
-                            <span v-if="form.errors.category">
-                                {{ form.errors.category }}
-                            </span>
-                        </div>
+                        <AppFormSelect
+                            label="Supplier"
+                            name="supplier"
+                            :options="
+                                usePage<PageProps>().props.suppliers.map(
+                                    (cat: { id: number; name: string }) => ({
+                                        value: cat.id,
+                                        label: cat.name,
+                                    }),
+                                )
+                            "
+                            v-model="form.supplier"
+                            :error="form.errors.supplier"
+                        />
 
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Price ($)</label
-                            >
-                            <input
-                                v-model.number="form.price"
-                                type="number"
-                                step="0.01"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                                placeholder="0.00"
-                            />
-                            <span v-if="form.errors.price">
-                                {{ form.errors.price }}
-                            </span>
-                        </div>
+                        <AppFormInput
+                            placeholder="0.00"
+                            name="price"
+                            label="Price ($)"
+                            type="number"
+                            step="0.01"
+                            v-model="form.price"
+                            :error="form.errors.price"
+                            :disabled="form.processing"
+                        />
 
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Stock</label
-                            >
-                            <input
-                                v-model.number="form.stock"
-                                type="number"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                                placeholder="0"
-                            />
-                            <span v-if="form.errors.stock">
-                                {{ form.errors.stock }}
-                            </span>
-                        </div>
-                        <div>
-                            <label
-                                class="block text-sm font-medium text-slate-700 mb-2"
-                                >Product Icon</label
-                            >
-                            <input
-                                type="file"
-                                @input="handleFileSelect($event)"
-                                class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                                placeholder="Click to upload an image..."
-                            />
-                            <span v-if="form.errors.image">
-                                {{ form.errors.image }}
-                            </span>
-                        </div>
+                        <AppFormInput
+                            placeholder="0"
+                            name="stock"
+                            label="Stock"
+                            type="number"
+                            step="0.01"
+                            v-model.number="form.stock"
+                            :error="form.errors.stock"
+                            :disabled="form.processing"
+                        />
+
+                        <AppFormFile
+                            name="image"
+                            label="Product Icon"
+                            @on-file-upload="handleFileSelect($event)"
+                            :error="form.errors.image"
+                            accept="image/*"
+                        />
                     </div>
 
                     <PreviewItem :item="form" :image_preview="image_preview" />
@@ -175,13 +130,17 @@ import { useForm, InertiaForm, usePage, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { type PageProps } from "@/types/inertia";
 import { index } from "@/wayfinder/routes/item";
-import { update } from "@/wayfinder/actions/App/Http/Controllers/ItemController"
+import { update } from "@/wayfinder/actions/App/Http/Controllers/ItemController";
 
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import PreviewItem from "@/pages/item/partials/PartialEdit_Preview.vue";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
+import AppFormSelect from "@/components/form/AppFormSelect.vue";
+import AppFormFile from "@/components/form/AppFormFile.vue";
 
 const props = usePage<PageProps>().props.item;
 const form: InertiaForm<{
@@ -205,10 +164,10 @@ const form: InertiaForm<{
 const submit = () => {
     form.transform((data) => ({
         ...data,
-        _method: 'PATCH',
+        _method: "PATCH",
     }));
 
-    form.submit('post', update(props.id).url, {
+    form.submit("post", update(props.id).url, {
         preserveScroll: true,
         forceFormData: true,
         onError: (error: any) => console.error(error),

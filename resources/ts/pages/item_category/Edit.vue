@@ -20,14 +20,12 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <button
+                <AppFormButton
+                    name="btn_edit_category"
+                    text="Save Category"
+                    :icon="IconSave"
                     @click="submit"
-                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center gap-2 font-medium"
-                >
-                    <IconSave />
-
-                    Save Product
-                </button>
+                />
             </div>
         </template>
 
@@ -37,35 +35,27 @@
                 class="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
             >
                 <div class="space-y-6">
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Category Name</label
-                        >
-                        <input
-                            v-model="form.name"
-                            type="text"
-                            class="w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Enter category name"
-                        />
-                        <span v-if="form.errors.name">
-                            {{ form.errors.name }}
-                        </span>
-                    </div>
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-slate-700 mb-2"
-                            >Category Description</label
-                        >
-                        <textarea
-                            v-model="form.description"
-                            class="no-resize w-full px-4 py-2 border border-slate-200 rounded-lg outline-none focus:border-blue-600 transition duration-300"
-                            placeholder="Enter category description"
-                        />
-                        <span v-if="form.errors.description">
-                            {{ form.errors.description }}
-                        </span>
-                    </div>
+                    <AppFormInput
+                        placeholder="Enter desired category name"
+                        name="name"
+                        label="Category Name"
+                        type="text"
+                        autocomplete="name"
+                        v-model="form.name"
+                        :error="form.errors.name"
+                        :disabled="form.processing"
+                    />
+
+                    <AppFormInput
+                        placeholder="Enter desired category description"
+                        name="description"
+                        label="Category Description"
+                        type="text"
+                        autocomplete="description"
+                        v-model="form.description"
+                        :error="form.errors.description"
+                        :disabled="form.processing"
+                    />
                 </div>
             </form>
         </template>
@@ -82,6 +72,8 @@ import { index, update } from "@/wayfinder/routes/category";
 
 import IconBack from "@/icons/IconBack.vue";
 import IconSave from "@/icons/IconSave.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
 
 const categoryProp: ItemCategory = usePage<PageProps>().props.category;
 

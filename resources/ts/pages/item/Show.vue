@@ -55,23 +55,18 @@
                         </div>
 
                         <div class="flex gap-3">
-                            <button
-                                @click="addToCart"
+                            <AppFormButton
+                                name="btn_add_to_cart"
                                 :disabled="item.stock === 0"
-                                :class="[
-                                    'flex-1 px-6 py-3 rounded-lg font-semibold transition-colors',
+                                :text="
                                     item.stock > 0
-                                        ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                        : 'bg-slate-200 text-slate-500 cursor-not-allowed',
-                                ]"
-                            >
-                                {{
-                                    item.stock > 0
-                                        ? "Add to Cart"
-                                        : "Out of Stock"
-                                }}
-                            </button>
-                            <button
+                                        ? 'Add to Cart'
+                                        : 'Out of Stock'
+                                "
+                                @click="addToCart"
+                            />
+
+                            <span
                                 @click="toggleFavourite"
                                 class="px-6 py-3 border-2 border-slate-200 rounded-lg hover:border-slate-300 transition-colors"
                             >
@@ -83,7 +78,7 @@
                                             : 'text-slate-400'
                                     "
                                 />
-                            </button>
+                            </span>
                         </div>
 
                         <div class="bg-blue-50 rounded-lg p-4">
@@ -133,6 +128,7 @@ import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import RelatedItemCard from "@/pages/item/partials/PartialShow_RelatedCard.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 import IconFavorites from "@/icons/IconFavorites.vue";
 import IconShipping from "@/icons/IconShipping.vue";

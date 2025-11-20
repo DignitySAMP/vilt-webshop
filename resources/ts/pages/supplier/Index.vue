@@ -10,18 +10,19 @@
                 />
                 <p class="text-sm text-slate-500 mt-1">Supplier Management</p>
             </div>
-            <Link
-                :href="create()"
-                class="min-w-40 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
-            >
-                <IconCreate />
 
-                Add Supplier
+            <Link :href="create()" class="w-50">
+                <AppFormButton
+                    class="flex"
+                    name="btn_redirect_create"
+                    text="Add Supplier"
+                    :icon="IconCreate"
+                />
             </Link>
         </template>
 
         <template v-slot:body>
-            <SupplierSearch/>
+            <SupplierSearch />
 
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
@@ -89,11 +90,7 @@
                                         class="flex items-center justify-end gap-2"
                                     >
                                         <Link
-                                            :href="
-                                                show(
-                                                    supplier.id,
-                                                )
-                                            "
+                                            :href="show(supplier.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
                                             <IconView />
@@ -126,6 +123,7 @@ import AppPagination from "@/components/AppPagination.vue";
 
 import IconView from "@/icons/IconView.vue";
 import IconCreate from "@/icons/IconCreate.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const suppliers: Supplier[] = usePage<PageProps>().props.suppliers.data;
 </script>

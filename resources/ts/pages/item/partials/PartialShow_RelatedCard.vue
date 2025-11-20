@@ -1,5 +1,7 @@
 <template>
-    <Link as="div" :href="show(product.id)"
+    <Link
+        as="div"
+        :href="show(product.id)"
         class="bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-lg transition-all group cursor-pointer"
     >
         <img
@@ -19,16 +21,16 @@
                 <span class="font-bold">{{ product.stock }}</span>
                 <span>items in stock.</span>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between gap-4">
                 <span class="text-xl font-bold text-slate-900"
                     >${{ product.price.toFixed(2) }}</span
                 >
-                <button
+
+                <AppFormButton
+                    name="btn_add_to_cart"
+                    text="Add to Cart"
                     @click.stop="addToCart()"
-                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                >
-                    Add to Cart
-                </button>
+                />
             </div>
         </div>
     </Link>
@@ -37,6 +39,7 @@
 import { Link } from "@inertiajs/vue3";
 import { useShoppingCartStore } from "@/stores/AppShoppingCart";
 import { show } from "@/wayfinder/routes/item";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 // TODO: clean this up... raw prop data
 interface RelatedItemInterface {
@@ -72,6 +75,6 @@ interface RelatedItemInterface {
 const product = defineProps<RelatedItemInterface>();
 
 const shopping_cart_store = useShoppingCartStore();
-const addToCart = async () => await shopping_cart_store.storeItemToBasket(product);
-
+const addToCart = async () =>
+    await shopping_cart_store.storeItemToBasket(product);
 </script>

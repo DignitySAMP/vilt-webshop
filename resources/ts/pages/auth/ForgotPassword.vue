@@ -1,5 +1,5 @@
 <template>
-    <AppGuestLayout>
+    <AppGuestLayout title="Forgot your password?">
         <div class="flex flex-col gap-2">
             <span
                 v-if="usePage().props.status"
@@ -13,30 +13,20 @@
             </span>
 
             <form @submit.prevent class="flex flex-col gap-2">
-                <label for="email" class="text-sm text-gray-700"
-                    >Email address</label
-                >
-                <input
-                    type="email"
+                <AppFormInput
+                    placeholder="your@email.com"
                     name="email"
-                    id="email"
-                    v-model="form.email"
+                    label="E-mail Address"
+                    type="email"
                     autocomplete="email"
-                    class="rounded border border-gray-200 px-4 py-1 shadow outline-gray-600/50 focus:outline-4"
-                />
-                <span
-                    v-if="form.errors.email"
-                    v-html="form.errors.email"
-                    class="text-sm text-red-700"
+                    v-model="form.email"
+                    :error="form.errors.email"
+                    :disabled="form.processing"
                 />
             </form>
 
             <div class="flex justify-between text-sm text-gray-600">
-                <Link
-                    :href="login()"
-                    class="hover:underline"
-                    view-transition
-                >
+                <Link :href="login()" class="hover:underline" view-transition>
                     Remember your credentials?
                 </Link>
 
@@ -50,26 +40,28 @@
             </div>
 
             <div class="flex w-full">
-                <button
+                <AppFormButton
+                    name="btn_register"
                     :disabled="form.processing"
                     type="submit"
                     @click="submit"
-                    class="w-full cursor-pointer rounded bg-blue-600 px-4 py-2 text-gray-50 outline-blue-500/50 transition duration-300 hover:bg-blue-700 focus:outline-4"
-                >
-                    Request new password
-                </button>
+                    text="Request new password"
+                />
             </div>
         </div>
     </AppGuestLayout>
 </template>
 <script setup lang="ts">
-import AppGuestLayout from "@/layout/AppGuestLayout.vue";
 import { InertiaForm, Link, useForm, usePage } from "@inertiajs/vue3";
+import { email } from "@/wayfinder/routes/password";
+import { login, register } from "@/wayfinder/routes";
 
-import { email } from '@/wayfinder/routes/password';
-import { login, register } from '@/wayfinder/routes';
+import AppGuestLayout from "@/layout/AppGuestLayout.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormInput from "@/components/form/AppFormInput.vue";
+
 const form: InertiaForm<{
-    email: string
+    email: string;
 }> = useForm({
     email: "",
 });

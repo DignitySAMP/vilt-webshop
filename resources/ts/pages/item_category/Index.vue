@@ -10,18 +10,18 @@
                 />
                 <p class="text-sm text-slate-500 mt-1">Product Management</p>
             </div>
-            <Link
-                :href="create()"
-                class="min-w-50 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
-            >
-                <IconCreate />
-
-                Add New Category
+            <Link :href="create()" class="w-50">
+                <AppFormButton
+                    class="flex"
+                    name="btn_redirect_create"
+                    text="Add Category"
+                    :icon="IconCreate"
+                />
             </Link>
         </template>
 
         <template v-slot:body>
-            <CategorySearch/>
+            <CategorySearch />
 
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
@@ -94,11 +94,7 @@
                                         class="flex items-center justify-end gap-2"
                                     >
                                         <Link
-                                            :href="
-                                                edit(
-                                                    category.id,
-                                                )
-                                            "
+                                            :href="edit(category.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
                                             <IconEdit />
@@ -133,10 +129,11 @@ import AppAdminLayout from "@/layout/AppAdminLayout.vue";
 import AppPagination from "@/components/AppPagination.vue";
 
 import CategoryDelete from "@/pages/item_category/Delete.vue";
-import CategorySearch from '@/pages/item_category/partials/PartialIndex_Search.vue'
+import CategorySearch from "@/pages/item_category/partials/PartialIndex_Search.vue";
 
 import IconEdit from "@/icons/IconEdit.vue";
 import IconCreate from "@/icons/IconCreate.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const categories: ItemCategory[] = usePage<PageProps>().props.categories.data;
 </script>

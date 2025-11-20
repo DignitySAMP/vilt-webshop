@@ -10,18 +10,18 @@
                 />
                 <p class="text-sm text-slate-500 mt-1">Product Management</p>
             </div>
-            <Link
-                :href="create()"
-                class="min-w-40 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 font-medium"
-            >
-                <IconCreate />
-
-                Add Product
+            <Link class="w-50" :href="create()">
+                <AppFormButton
+                    class="flex"
+                    name="btn_redirect_create"
+                    text="Add Product"
+                    :icon="IconCreate"
+                />
             </Link>
         </template>
 
         <template v-slot:body>
-            <ItemSearch/>
+            <ItemSearch />
 
             <div
                 class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden"
@@ -118,9 +118,7 @@
                                         class="flex items-center justify-end gap-2"
                                     >
                                         <Link
-                                            :href="
-                                                edit(product.id)
-                                            "
+                                            :href="edit(product.id)"
                                             class="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                                         >
                                             <IconEdit />
@@ -147,7 +145,7 @@
 <script setup lang="ts">
 import { usePage, Link } from "@inertiajs/vue3";
 
-import { Item,  } from "@/types";
+import { Item } from "@/types";
 import { type PageProps } from "@/types/inertia";
 import { create, edit } from "@/wayfinder/routes/item";
 import AppAdminLayout from "@/layout/AppAdminLayout.vue";
@@ -159,7 +157,7 @@ import AppPagination from "@/components/AppPagination.vue";
 
 import IconEdit from "@/icons/IconEdit.vue";
 import IconCreate from "@/icons/IconCreate.vue";
+import AppFormButton from "@/components/form/AppFormButton.vue";
 
 const products: Item[] = usePage<PageProps>().props.items.data;
-
 </script>
