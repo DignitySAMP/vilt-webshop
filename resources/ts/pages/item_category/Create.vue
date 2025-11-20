@@ -82,9 +82,9 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(store(), {
         preserveScroll: true,
-        onSuccess: () => toast.success('You have created a new item category.'),
+        onSuccess: () => toast.success("You have created a new item category."),
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
         },

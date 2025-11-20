@@ -76,7 +76,7 @@ const submit = () => {
             toast.warning(usePage().props.status);
         },
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
             console.error(error);

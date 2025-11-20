@@ -91,9 +91,10 @@ const form: InertiaForm<{
 const submit = () => {
     form.submit(update(categoryProp.id), {
         preserveScroll: true,
-        onSuccess: () => toast.success(`You have edited a ${categoryProp.name}.`),
+        onSuccess: () =>
+            toast.success(`You have updated ${categoryProp.name}.`),
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
         },

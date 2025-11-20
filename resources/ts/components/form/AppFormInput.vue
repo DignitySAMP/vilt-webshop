@@ -6,9 +6,13 @@
                 :for="props.name"
                 v-html="props.label"
                 class="block text-sm font-medium"
-                :class="props.error ? 'text-red-600': 'text-slate-700'"
+                :class="props.error ? 'text-red-600' : 'text-slate-700'"
             />
-            <span v-if="props.required" class="text-sm text-slate-500" v-html="'*'"/>
+            <span
+                v-if="props.required"
+                class="text-sm text-slate-500"
+                v-html="'*'"
+            />
         </div>
         <div class="relative">
             <input
@@ -70,7 +74,7 @@ interface Props {
     autocomplete?: string;
     disabled?: boolean;
     error?: string;
-    required?: boolean,
+    required?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

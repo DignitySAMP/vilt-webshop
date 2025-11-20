@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 use App\Models\ItemCategory;
 use App\Models\Supplier;
@@ -73,32 +74,24 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        $validate = $request->validate([
-            'name' => 'required|max:64',
-            'category' => 'required|exists:item_categories,id',
-            'supplier' => 'required|exists:suppliers,id',
-            'description' => 'required|min:8',
-            'image' => 'required|file|image|max:1500',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-        ]);
+        $validated = $request->validated();
 
-        $item_category = ItemCategory::findOrFail($validate['category']);
-        $supplier = Supplier::findOrFail($validate['supplier']);
+        $item_category = ItemCategory::findOrFail($validated['category']);
+        $supplier = Supplier::findOrFail($validated['supplier']);
 
         $item = Item::create([
-            'name' => $validate['name'],
+            'name' => $validated['name'],
             'item_category_id' => $item_category->id,
             'image' => 'placeholder.png',
             'supplier_id' => $supplier->id,
-            'description' => $validate['description'],
-            'price' => $validate['price'],
-            'stock' => $validate['stock'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'stock' => $validated['stock'],
         ]);
 
-        $extension = $request->file('image')->getClientOriginalExtension();
+        $extension = $request->file('image')->extension();
         $imagePath = $request->file('image')->storeAs(
             path: 'items/'.$item->id,
             name: 'image.'.$extension,
@@ -125,24 +118,13 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Item $item)
+    public function update(ItemRequest $request, Item $item)
     {
-        $validate = $request->validate([
-            'name' => 'required|max:64',
-            'category' => 'required|exists:item_categories,id',
-            'supplier' => 'required|exists:suppliers,id',
-            'description' => 'required|min:8',
-            'image' => 'nullable|file|image|max:1500',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-        ]);
-
-        $item_category = ItemCategory::findOrFail($validate['category']);
-        $supplier = Supplier::findOrFail($validate['supplier']);
+        $validated = $request->validated();
 
         $imagePath = $item->image_url; // store original image
         if ($request->hasFile('image')) { // replace image only if new image got passed
-            $extension = $request->file('image')->getClientOriginalExtension();
+            $extension = $request->file('image')->extension();
             $imagePath = $request->file('image')->storeAs(
                 path: 'items/'.$item->id,
                 name: 'image.'.$extension,
@@ -151,13 +133,13 @@ class ItemController extends Controller
         }
 
         $item->update([
-            'name' => $validate['name'],
-            'item_category_id' => $item_category->id,
+            'name' => $validated['name'],
+            'item_category_id' => $validated['category'],
             'image' => $imagePath,
-            'supplier_id' => $supplier->id,
-            'description' => $validate['description'],
-            'price' => $validate['price'],
-            'stock' => $validate['stock'],
+            'supplier_id' => $validated['supplier'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'stock' => $validated['stock'],
         ]);
 
         return redirect()->route('item.index')->with('message', 'Item has been updated.');

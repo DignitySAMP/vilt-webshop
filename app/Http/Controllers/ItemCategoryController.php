@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ItemCategoryRequest;
 use App\Models\ItemCategory;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ItemCategoryController extends Controller
@@ -49,12 +49,9 @@ class ItemCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ItemCategoryRequest $request)
     {
-        $validate = $request->validate([
-            'name' => 'required|min:4|max:32|unique:item_categories,name',
-            'description' => 'required|min:4|max:32',
-        ]);
+        $validate = $request->validated();
 
         ItemCategory::create([
             'name' => $validate['name'],
@@ -77,15 +74,9 @@ class ItemCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ItemCategory $category)
+    public function update(ItemCategoryRequest $request, ItemCategory $category)
     {
-        $validate = $request->validate([
-            'name' => [
-                'required', 'min:4', 'max:32',
-                Rule::unique('item_categories', 'name')->ignore($category->id), // check if name is unique, but ignore own id
-            ],
-            'description' => 'required|min:4|max:32',
-        ]);
+        $validate = $request->validated();
 
         $category->update([
             'name' => $validate['name'],

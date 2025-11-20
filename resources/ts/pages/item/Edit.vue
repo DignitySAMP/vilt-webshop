@@ -180,7 +180,7 @@ const submit = () => {
         forceFormData: true,
         onSuccess: () => toast.success(`You have updated ${props.name}`),
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
         },

@@ -38,7 +38,7 @@
                         />
                     </div>
                     <span class="text-xl font-bold text-slate-900">
-                        ${{ numberToFixed(props.item.price) }}
+                        ${{ numberToFixed(props.item.price ?? 0) }}
                     </span>
                 </div>
             </div>
@@ -56,8 +56,8 @@ interface Props {
         description: string;
         category: number;
         supplier: number;
-        price: number;
-        stock: number;
+        price: number | null;
+        stock: number | null;
         image: File | null;
     };
     image_preview: string | null;

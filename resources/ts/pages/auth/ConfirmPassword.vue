@@ -55,7 +55,7 @@ const submit = () => {
             toast.warning("You have reset your password.");
         },
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
             console.error(error);

@@ -92,10 +92,12 @@ const submit = () => {
         preserveScroll: true,
         onSuccess: () => {
             form.reset("password");
-            toast.success('You have registered and have been automatically logged in.');
+            toast.success(
+                "You have registered and have been automatically logged in.",
+            );
         },
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
             console.error(error);

@@ -7,7 +7,11 @@
                 v-html="props.label"
                 class="block text-sm font-medium text-slate-700"
             />
-            <span v-if="props.required" class="text-sm text-slate-500" v-html="'*'"/>
+            <span
+                v-if="props.required"
+                class="text-sm text-slate-500"
+                v-html="'*'"
+            />
         </div>
 
         <input
@@ -52,7 +56,7 @@ interface Props {
     accept?: string;
     disabled?: boolean;
     error?: string;
-    required?: boolean,
+    required?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {

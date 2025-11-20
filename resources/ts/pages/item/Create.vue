@@ -153,16 +153,16 @@ const form: InertiaForm<{
     description: string;
     category: number;
     supplier: number;
-    price: number;
-    stock: number;
+    price: number | null;
+    stock: number | null;
     image: File | null;
 }> = useForm({
     name: "",
     description: "",
     category: usePage<PageProps>().props.categories[0].id ?? 1,
     supplier: usePage<PageProps>().props.suppliers[0].id ?? 1,
-    price: 0,
-    stock: 0,
+    price: null,
+    stock: null,
     image: null,
 });
 
@@ -170,9 +170,9 @@ const submit = () => {
     form.submit(store(), {
         preserveScroll: true,
         forceFormData: true,
-        onSuccess: () => toast.success('You have created a new product.'),
+        onSuccess: () => toast.success("You have created a new product."),
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
         },

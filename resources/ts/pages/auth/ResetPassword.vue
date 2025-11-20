@@ -78,10 +78,10 @@ const submit = () => {
         preserveScroll: true,
         onSuccess: () => {
             form.reset("password");
-            toast.warning('Your password has been reset.');
+            toast.warning("Your password has been reset.");
         },
         onError: (error) => {
-            for(const key in error) {
+            for (const key in error) {
                 toast.error(error[key]);
             }
             console.error(error);

@@ -7,7 +7,11 @@
                 v-html="props.label"
                 class="block text-sm font-medium text-slate-700"
             />
-            <span v-if="props.required" class="text-sm text-slate-500" v-html="'*'"/>
+            <span
+                v-if="props.required"
+                class="text-sm text-slate-500"
+                v-html="'*'"
+            />
         </div>
         <select
             :id="getElementId"
@@ -46,7 +50,7 @@ interface Props {
     label?: string;
     options: Option[];
     error?: string;
-    required?: boolean,
+    required?: boolean;
 }
 
 const props = defineProps<Props>();
