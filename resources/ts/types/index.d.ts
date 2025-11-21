@@ -178,9 +178,9 @@ interface ShoppingCart {
 
 interface ShoppingCartItem {
     id: number;
-    user_cart_id: number;
+    shopping_cart_id: number;
     item_id: number;
-    amount: number;
+    quantity: number;
     created_at: string;
     updated_at: string;
     item: Item;

@@ -22,10 +22,8 @@
                 <h2 class="text-lg font-semibold text-slate-900 mb-4">
                     Shopping Cart
                 </h2>
-
                 <div
                     v-if="
-                        !shopping_cart_store.shoppingBasket &&
                         (!shopping_cart_store.shoppingBasketItems ||
                             shopping_cart_store.shoppingBasketItems.length ===
                                 0)
@@ -40,7 +38,6 @@
 
                 <div
                     v-if="
-                        shopping_cart_store.shoppingBasket &&
                         shopping_cart_store.shoppingBasketItems &&
                         shopping_cart_store.shoppingBasketItems.length > 0
                     "
@@ -78,25 +75,26 @@
                                         :background="true"
                                         @click="
                                             shopping_cart_store.updateItemInBasket(
-                                                product.id,
+                                                product.shopping_cart_id,
                                                 product.item,
-                                                product?.amount - 1,
+                                                product?.quantity - 1,
                                             )
                                         "
                                     />
                                     <span
                                         class="text-sm font-medium text-slate-700 w-8 text-center"
-                                        >{{ product?.amount }}</span
+                                        >{{ product?.quantity }}</span
                                     >
+                                    
                                     <AppFormIconButton
                                         name="btn_shopping_cart_plus"
                                         :icon="IconPlus"
                                         :background="true"
                                         @click="
                                             shopping_cart_store.updateItemInBasket(
-                                                product.id,
+                                                product.shopping_cart_id,
                                                 product.item,
-                                                product?.amount + 1,
+                                                product?.quantity + 1,
                                             )
                                         "
                                     />
@@ -203,7 +201,7 @@ const cartTotal = computed<number>(() => {
 
     return shopping_cart_store.shoppingBasketItems?.reduce(
         (total, cartItem) => {
-            return total + (cartItem.item?.price ?? 0) * (cartItem.amount ?? 1);
+            return total + (cartItem.item?.price ?? 0) * (cartItem.quantity ?? 1);
         },
         0,
     );

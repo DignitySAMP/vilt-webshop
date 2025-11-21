@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 import { Item, ShoppingCart, ShoppingCartItem } from "@/types";
 import axios from "axios";
-import { index, store, update } from "@/wayfinder/routes/cart";
+import { index, store, update, clear } from "@/wayfinder/routes/cart";
 import { toast } from "vue3-toastify";
 
 export const useShoppingCartStore = defineStore("shopping_cart", () => {
@@ -82,14 +82,13 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
     const updateItemInBasket = async (
         cart: number,
         item: Item,
-        amount: number,
+        quantity: number,
     ): Promise<AxiosResponse> => {
         try {
             const options = {
                 query: {
-                    cart: cart,
-                    item_id: item.id,
-                    amount: amount,
+                    item: item.id,
+                    quantity: quantity,
                 },
             };
             const response = await axios.patch(update(cart, options).url);
@@ -108,6 +107,8 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
             };
         }
     };
+
+    // TODO:clearShoppingCart
 
     return {
         shoppingBasket,

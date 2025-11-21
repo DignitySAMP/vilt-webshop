@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -24,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'cart_uuid'
     ];
 
     /**
@@ -49,6 +51,18 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    // generate UUID on creation
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (empty($user->cart_uuid)) {
+                $user->cart_uuid = (string) Str::uuid();
+            }
+        });
+    }
+
     public function contacts(): HasMany
     {
         return $this->hasMany(UserContact::class);
@@ -72,5 +86,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function cart(): HasOne
     {
         return $this->hasOne(UserCart::class);
+    }
+
+    public function getCartUuid(): string
+    {
+        return $this->cart_uuid;
     }
 }

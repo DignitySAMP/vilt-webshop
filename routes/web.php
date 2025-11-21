@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemCategoryController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserCartController;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,6 @@ Route::get('item/{item}', [ItemController::class, 'show'])->name('item.show');
 
 Route::resource('category', ItemCategoryController::class)->except(['show']);
 Route::resource('supplier', SupplierController::class);
-Route::resource('cart', UserCartController::class)->except('show', 'edit', 'create', 'destroy');
+
+Route::resource('cart', ShoppingCartController::class)->except(['show', 'edit', 'create', 'destroy']);
+Route::delete('cart/clear', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
