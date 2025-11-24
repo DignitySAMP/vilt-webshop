@@ -19,6 +19,7 @@ class HomeController extends Controller
             'categories' => ItemCategory::all(),
             'filter' => [
                 // TODO: cache the _price's
+                // https://laravel.com/docs/12.x/cache
                 'min_price' => round(Item::min('price'), 2),
                 'avg_price' => round(Item::avg('price'), 2),
                 'max_price' => round(Item::max('price'), 2),

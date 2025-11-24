@@ -79,19 +79,19 @@ class ShoppingCartController extends Controller
         // fetch item collection
         $cartItem = ShoppingCartItem::where('item_id', $validated['item'])->where('shopping_cart_id', $cart->id)->firstOrFail();
 
-        // update quantity
-        $cartItem->update([
-            'quantity' => $validated['quantity']
-        ]);
-        $message = 'Item quantity updated';
 
         // remove item if quantity is below 1
         if ($validated['quantity'] < 1) {
             $cartItem->delete();
             $message = 'Item removed from cart';
-        } else {
-            $cartItem->update(['quantity' => $validated['quantity']]);
+        }
+        else {
+            // update quantity
+            $cartItem->update([
+                'quantity' => $validated['quantity']
+            ]);
             $message = 'Item quantity updated';
+            $cartItem->save();
         }
         
         // check if cart is empty, fallback after deleting an item
