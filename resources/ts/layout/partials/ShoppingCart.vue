@@ -149,11 +149,19 @@
                         </div>
                     </div>
 
-                    <AppFormButton
-                        name="btn_checkout"
-                        theme="primary"
-                        text="Checkout"
-                    />
+                    <div class="flex gap-4">
+                        <AppFormButton
+                            name="btn_checkout"
+                            theme="primary"
+                            text="Checkout"
+                        />
+                        <AppFormButton
+                            name="btn_clear"
+                            theme="error"
+                            text="Empty"
+                            @click="shopping_cart_store.clearShoppingBasket()"
+                        />
+                    </div>
                 </div>
             </div>
         </aside>
@@ -196,8 +204,9 @@ const cartTotal = computed<number>(() => {
     if (
         !shopping_cart_store.shoppingBasketItems ||
         shopping_cart_store.shoppingBasketItems?.length === 0
-    )
+    ) {
         return 0;
+    }
 
     return shopping_cart_store.shoppingBasketItems?.reduce(
         (total, cartItem) => {
