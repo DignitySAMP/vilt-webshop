@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\ShoppingCart;
 use App\Models\ShoppingCartItem;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +16,13 @@ class ShoppingCartController extends Controller
     {
         $uuid = $this->getCartUuid($request);
         $cart = $this->getOrCreateCart($uuid);
-        
+
         $cart->load(['items.item']);
 
         return response()->json([
             'cart' => $cart,
             'items' => $cart->items,
-            'total' => $cart->items->sum(fn($item) => $item->quantity * $item->item->price),
+            'total' => $cart->items->sum(fn ($item) => $item->quantity * $item->item->price),
             'total_items' => $cart->items->sum('quantity'),
         ]);
     }
@@ -57,7 +56,7 @@ class ShoppingCartController extends Controller
             'message' => 'Item added to cart',
             'cart' => $cart,
             'items' => $cart->items,
-            'total' => $cart->items->sum(fn($item) => $item->quantity * $item->item->price),
+            'total' => $cart->items->sum(fn ($item) => $item->quantity * $item->item->price),
             'total_items' => $cart->items->sum('quantity'),
         ], 201);
     }
@@ -70,7 +69,7 @@ class ShoppingCartController extends Controller
         ]);
 
         $uuid = $this->getCartUuid($request);
-  
+
         // does cart belong to uuid?
         if ($cart->uuid !== $uuid) {
             return response()->json(['message' => 'Unauthorized'], 403);
@@ -79,24 +78,23 @@ class ShoppingCartController extends Controller
         // fetch item collection
         $cartItem = ShoppingCartItem::where('item_id', $validated['item'])->where('shopping_cart_id', $cart->id)->firstOrFail();
 
-
         // remove item if quantity is below 1
         if ($validated['quantity'] < 1) {
             $cartItem->delete();
             $message = 'Item removed from cart';
-        }
-        else {
+        } else {
             // update quantity
             $cartItem->update([
-                'quantity' => $validated['quantity']
+                'quantity' => $validated['quantity'],
             ]);
             $message = 'Item quantity updated';
             $cartItem->save();
         }
-        
+
         // check if cart is empty, fallback after deleting an item
         if ($cart->items()->count() === 0) {
             $cart->delete();
+
             return response()->json([
                 'message' => 'Cart is now empty',
                 'cart' => null,
@@ -113,7 +111,7 @@ class ShoppingCartController extends Controller
             'message' => $message,
             'cart' => $cart,
             'items' => $cart->items,
-            'total' => $cart->items->sum(fn($item) => $item->quantity * $item->item->price),
+            'total' => $cart->items->sum(fn ($item) => $item->quantity * $item->item->price),
             'total_items' => $cart->items->sum('quantity'),
         ]);
     }
@@ -143,8 +141,8 @@ class ShoppingCartController extends Controller
         }
 
         $cookieUuid = $request->cookie('cart_uuid');
-        
-        if (!$cookieUuid) {
+
+        if (! $cookieUuid) {
             $cookieUuid = (string) Str::uuid();
             Cookie::queue('cart_uuid', $cookieUuid, 60 * 24 * 21); // 21 days
         }

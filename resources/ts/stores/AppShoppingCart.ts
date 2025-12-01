@@ -25,7 +25,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
         try {
             const response = await axios.delete(destroy().url);
 
-            if(response.data) {
+            if (response.data) {
                 shoppingBasket.value = null;
                 shoppingBasketItems.value = null;
             }
@@ -34,8 +34,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
                 message: "OK",
                 data: response.data, // { shopping_cart: {...} }
             };
-        }
-        catch(error: any) {
+        } catch (error: any) {
             console.error(error);
             return {
                 status: error.response?.status ?? 500,
@@ -43,7 +42,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
                 data: null,
             };
         }
-    }
+    };
 
     const getShoppingBasket = async (): Promise<AxiosResponse> => {
         try {
@@ -53,7 +52,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
             if (response.data) {
                 shoppingBasket.value = response.data;
                 shoppingBasketItems.value =
-                shoppingBasket.value?.cart.items ?? null;
+                    shoppingBasket.value?.cart.items ?? null;
             } else {
                 shoppingBasket.value = null;
                 shoppingBasketItems.value = null;

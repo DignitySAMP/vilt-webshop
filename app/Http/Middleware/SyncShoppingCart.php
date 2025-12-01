@@ -17,24 +17,25 @@ class SyncShoppingCart
         $user = Auth::user();
 
         // no guest cart -> continue
-        if (!$uuid) {
+        if (! $uuid) {
             return $next($request);
         }
 
         // load guest cart with items
         $guestCart = ShoppingCart::with('items')->where('uuid', $uuid)->first();
-        if (!$guestCart) { // no cart, continue
+        if (! $guestCart) { // no cart, continue
             return $next($request);
         }
 
         // user is not logged in -> nothing to sync
-        if (!$user) {
+        if (! $user) {
             return $next($request);
         }
 
         // user cart is SAME as guest cart -> dont sync
         if ($guestCart->uuid === $user->getCartUuid()) {
             Cookie::expire('cart_uuid'); // reset old guest cart
+
             return $next($request);
         }
 

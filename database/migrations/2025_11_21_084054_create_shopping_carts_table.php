@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid'); // authenticated users have their own 'stuck' uuid, 
+            $table->string('uuid'); // authenticated users have their own 'stuck' uuid,
             // guests have a cookie based one that lasts 1 week
 
             // this also secures the stock count for 1 week

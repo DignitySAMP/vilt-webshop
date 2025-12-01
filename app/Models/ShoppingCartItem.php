@@ -13,6 +13,7 @@ class ShoppingCartItem extends Model
     {
         return $this->belongsTo(ShoppingCart::class);
     }
+
     public function item(): BelongsTo
     {
         return $this->belongsTo(Item::class);

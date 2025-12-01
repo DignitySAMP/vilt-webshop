@@ -6,7 +6,10 @@
             @click="showShoppingCart = !showShoppingCart"
         />
         <span
-            v-if="shopping_cart_store.shoppingBasket && shopping_cart_store.shoppingBasket.total_items > 0"
+            v-if="
+                shopping_cart_store.shoppingBasket &&
+                shopping_cart_store.shoppingBasket.total_items > 0
+            "
             class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs size-5 rounded-full flex items-center justify-center font-medium"
         >
             {{ shopping_cart_store.shoppingBasket.total_items }}
@@ -24,9 +27,8 @@
                 </h2>
                 <div
                     v-if="
-                        (!shopping_cart_store.shoppingBasketItems ||
-                            shopping_cart_store.shoppingBasketItems.length ===
-                                0)
+                        !shopping_cart_store.shoppingBasketItems ||
+                        shopping_cart_store.shoppingBasketItems.length === 0
                     "
                     class="text-center py-8"
                 >
@@ -85,7 +87,7 @@
                                         class="text-sm font-medium text-slate-700 w-8 text-center"
                                         >{{ product?.quantity }}</span
                                     >
-                                    
+
                                     <AppFormIconButton
                                         name="btn_shopping_cart_plus"
                                         :icon="IconPlus"
@@ -133,7 +135,13 @@
                             class="flex justify-between text-sm text-slate-600"
                         >
                             <span>Subtotal</span>
-                            <span>${{ shopping_cart_store?.shoppingBasket?.total.toFixed(2) }}</span>
+                            <span
+                                >${{
+                                    shopping_cart_store?.shoppingBasket?.total.toFixed(
+                                        2,
+                                    )
+                                }}</span
+                            >
                         </div>
                         <div
                             class="flex justify-between text-sm text-slate-600"
@@ -145,7 +153,13 @@
                             class="flex justify-between text-lg font-bold text-slate-900 pt-2 border-t border-slate-200"
                         >
                             <span>Total</span>
-                            <span>${{ shopping_cart_store?.shoppingBasket?.total.toFixed(2) }}</span>
+                            <span
+                                >${{
+                                    shopping_cart_store?.shoppingBasket?.total.toFixed(
+                                        2,
+                                    )
+                                }}</span
+                            >
                         </div>
                     </div>
 
