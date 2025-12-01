@@ -6,10 +6,10 @@
             @click="showShoppingCart = !showShoppingCart"
         />
         <span
-            v-if="cartItemCount > 0"
+            v-if="shopping_cart_store.shoppingBasket && shopping_cart_store.shoppingBasket.total_items > 0"
             class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs size-5 rounded-full flex items-center justify-center font-medium"
         >
-            {{ cartItemCount }}
+            {{ shopping_cart_store.shoppingBasket.total_items }}
         </span>
 
         <aside
@@ -133,7 +133,7 @@
                             class="flex justify-between text-sm text-slate-600"
                         >
                             <span>Subtotal</span>
-                            <span>${{ cartTotal.toFixed(2) }}</span>
+                            <span>${{ shopping_cart_store?.shoppingBasket?.total.toFixed(2) }}</span>
                         </div>
                         <div
                             class="flex justify-between text-sm text-slate-600"
@@ -145,7 +145,7 @@
                             class="flex justify-between text-lg font-bold text-slate-900 pt-2 border-t border-slate-200"
                         >
                             <span>Total</span>
-                            <span>${{ cartTotal.toFixed(2) }}</span>
+                            <span>${{ shopping_cart_store?.shoppingBasket?.total.toFixed(2) }}</span>
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@
 </template>
 <script setup lang="ts">
 import IconShoppingCart from "@/icons/shop/IconShoppingCart.vue";
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const showShoppingCart = ref<boolean>(false);
 
@@ -196,23 +196,4 @@ const handleClickOutside = (event: MouseEvent) => {
         showShoppingCart.value = false;
     }
 };
-
-const cartItemCount = computed<number>(
-    () => shopping_cart_store.shoppingBasketItems?.length ?? 0,
-);
-const cartTotal = computed<number>(() => {
-    if (
-        !shopping_cart_store.shoppingBasketItems ||
-        shopping_cart_store.shoppingBasketItems?.length === 0
-    ) {
-        return 0;
-    }
-
-    return shopping_cart_store.shoppingBasketItems?.reduce(
-        (total, cartItem) => {
-            return total + (cartItem.item?.price ?? 0) * (cartItem.quantity ?? 1);
-        },
-        0,
-    );
-});
 </script>

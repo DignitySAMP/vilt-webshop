@@ -8,6 +8,8 @@ import { toast } from "vue3-toastify";
 export const useShoppingCartStore = defineStore("shopping_cart", () => {
     interface ShoppingCartResponse {
         cart: ShoppingCart;
+        total_items: number;
+        total: number;
     }
 
     interface AxiosResponse {
@@ -51,7 +53,7 @@ export const useShoppingCartStore = defineStore("shopping_cart", () => {
             if (response.data) {
                 shoppingBasket.value = response.data;
                 shoppingBasketItems.value =
-                    shoppingBasket.value?.cart.items ?? null;
+                shoppingBasket.value?.cart.items ?? null;
             } else {
                 shoppingBasket.value = null;
                 shoppingBasketItems.value = null;
