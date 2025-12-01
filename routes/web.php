@@ -30,3 +30,9 @@ Route::resource('supplier', SupplierController::class);
 
 Route::resource('cart', ShoppingCartController::class)->except(['show', 'edit', 'create', 'destroy']);
 Route::delete('cart/clear', [ShoppingCartController::class, 'destroy'])->name('cart.destroy');
+
+Route::get('/payment', function () {
+
+    return Inertia::render('payment/Index');
+
+})->name('payment');
