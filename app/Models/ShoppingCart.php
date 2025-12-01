@@ -42,7 +42,4 @@ class ShoppingCart extends Model
             }
         }
     }
-    
-
-    // TODO: Total items, total price, ... [remove the front end dependency]
 }

@@ -118,7 +118,6 @@ class ShoppingCartController extends Controller
         ]);
     }
 
-    // TODO: implement cart clearing
     public function destroy(Request $request): JsonResponse
     {
         $uuid = $this->getCartUuid($request);
@@ -137,7 +136,6 @@ class ShoppingCartController extends Controller
         ]);
     }
 
-    // TODO: implement syncing of guest carts with auth carts
     private function getCartUuid(Request $request): string
     {
         if (Auth::check()) {
