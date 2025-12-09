@@ -28,6 +28,7 @@
         "@vitejs/plugin-vue": "^6.0.2",
         "axios": "^1.13.2",
         "concurrently": "^9.2.1",
+        "country-list-with-dial-code-and-flag": "^5.1.1",
         "laravel-vite-plugin": "^2.0.1",
         "pinia": "^3.0.4",
         "tailwindcss": "^4.1.14",
