@@ -158,7 +158,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { markRaw, ref } from "vue";
 
 import AppLayout from "@/layout/AppLayout.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
@@ -204,13 +204,13 @@ const total = ref(subtotal.value); // shipping is free, make it so there is a dr
 
 // tmp - must be made dynamic
 const paymentMethods = ref([
-    { id: "paypal", name: "PayPal", icon: IconPaypal, link: "#" },
-    { id: "visa", name: "Visa", icon: IconVISA, link: "#" },
-    { id: "mastercard", name: "Mastercard", icon: IconMasterCard, link: "#" },
+    { id: "paypal", name: "PayPal", icon: markRaw(IconPaypal), link: "#" },
+    { id: "visa", name: "Visa", icon: markRaw(IconVISA), link: "#" },
+    { id: "mastercard", name: "Mastercard", icon: markRaw(IconMasterCard), link: "#" },
     {
         id: "amex",
         name: "American Express",
-        icon: IconAmericanExpress,
+        icon: markRaw(IconAmericanExpress),
         link: "#",
     },
 ]);
