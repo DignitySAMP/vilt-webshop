@@ -44,7 +44,7 @@
                                 name="postal_code"
                                 placeholder="Postal Code"
                             />
-                            <AppFormInput
+                            <AppFormSelectCountry
                                 name="country"
                                 placeholder="Country"
                             />
@@ -163,6 +163,7 @@ import { markRaw, ref } from "vue";
 import AppLayout from "@/layout/AppLayout.vue";
 import AppFormInput from "@/components/form/AppFormInput.vue";
 import AppFormButton from "@/components/form/AppFormButton.vue";
+import AppFormSelectCountry from "@/components/form/AppFormSelectCountry.vue";
 
 import IconVISA from "@/icons/logo/IconVISA.vue";
 import IconMasterCard from "@/icons/logo/IconMasterCard.vue";
