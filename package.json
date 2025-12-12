@@ -23,14 +23,14 @@
         "vue-tsc": "^3.1"
     },
     "dependencies": {
-        "@inertiajs/vue3": "^2.2.21",
+        "@inertiajs/vue3": "^2.3.0",
         "@tailwindcss/vite": "^4.1.18",
         "@vitejs/plugin-vue": "^6.0.2",
         "axios": "^1.13.2",
         "concurrently": "^9.2.1",
         "laravel-vite-plugin": "^2.0.1",
         "pinia": "^3.0.4",
-        "tailwindcss": "^4.1.14",
+        "tailwindcss": "^4.1.18",
         "typescript": "^5.2.2",
         "vite": "^7.2.7",
         "vue": "^3.5.25",
